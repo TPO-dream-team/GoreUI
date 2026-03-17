@@ -8,6 +8,7 @@ interface decodedDataType {
   id: string;
   username: string;
   role: string;
+  token_expire: number // Miliseconds. Same as JS date
 }
 
 export const loginUser = createAsyncThunk(
@@ -16,11 +17,13 @@ export const loginUser = createAsyncThunk(
     try {
       const response = await api.post('/user/login', credentials);
       const decodedData : any = jwtDecode(response.data.token); 
+      console.log(decodedData)
       const responseData : decodedDataType = {
         token : response.data.token,
-        id: decodedData.Id,
-        username : decodedData.Username,
-        role : decodedData.Role
+        id: decodedData["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"],
+        username : decodedData["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"],
+        role : decodedData["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"],
+        token_expire:  decodedData.exp * 1000
       }
       return responseData; 
     } catch (err: any) {
@@ -61,29 +64,28 @@ const authSlice = createSlice({
     token: null as string | null,
     username: null as string | null, // null until you login, also will be saved
     role: null as string | null, 
-    loading: false,
   },
   reducers: {
     logout: (state) => {
       state.token = null;
       state.username = null;
       state.role = null;
-      state.loading = false;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.pending, (state) => {
-        state.loading = true;      })
+        //state.loading = true;      
+      })
       .addCase(loginUser.fulfilled, (state, action) => {
-        state.loading = false;
+        //state.loading = false;
         state.token = action.payload.token; // Save the JWT
         state.username = action.payload.username;
         state.role = action.payload.role;
       })
       .addCase(loginUser.rejected, (state, _) => {
-        state.loading = false;
-      });
+        //state.loading = false;
+      })
   },
 });
 

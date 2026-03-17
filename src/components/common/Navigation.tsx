@@ -27,16 +27,19 @@ import { Outlet, Link } from "react-router-dom";
 
 export function Navigation() {
   const dispatch = useDispatch<AppDispatch>();
-  const { username, role, loading } = useSelector((state: RootState) => state.auth);
+  const { username, role } = useSelector((state: RootState) => state.auth);
 
   const [loginusernamefield, setLoginUsername] = useState("");
   const [loginpasswordfield, setLoginPassword] = useState("");
   const [loginDialogOpen, setLoginDialogOpen] = useState(false);
+  const [loginLoading, setLoginLoading] = useState(false);
+
 
   const [signupusernamefield, setSignupUsername] = useState("");
   const [signuppasswordfield1, setSignupPassword1] = useState("");
   const [signuppasswordfield2, setSignupPassword2] = useState("");
   const [signUpDialogOpen, setSignUpDialogOpen] = useState(false);
+  const [signUpLoading, setSignUpLoading] = useState(false);
 
   const [loginInfoText, setLoginInfoText] = useState("");
   const [signupInfoText, setSignupInfoText] = useState("");
@@ -53,7 +56,7 @@ export function Navigation() {
 
   const handleLogin = async (e: React.SubmitEvent) => {
     e.preventDefault();
-    console.log(loginusernamefield + " " + loginpasswordfield)
+    setLoginLoading(true);
     const result = await dispatch(loginUser({ Username: loginusernamefield, Password: loginpasswordfield }));
     if (loginUser.fulfilled.match(result)) {
       setLoginDialogOpen(false);
@@ -62,20 +65,22 @@ export function Navigation() {
       const errorMessage = (result.payload as any)?.message || "An error occurred";
       setLoginInfoText(errorMessage);
     }
+    setLoginLoading(false);
   };
 
    const handleSignUp = async (e: React.SubmitEvent) => { 
     e.preventDefault();
+    setSignUpLoading(true);
     const result = await dispatch(signUpUser({ Username: signupusernamefield, Password: signuppasswordfield1, RepeatPassword: signuppasswordfield2}));
     if (signUpUser.fulfilled.match(result)) {
       setSignUpDialogOpen(false);
       setLoginDialogOpen(true);
       setLoginInfoText("Registration successfull");
-      console.log("Test");
     }else if (signUpUser.rejected.match(result)){
       const errorMessage = (result.payload as any)?.message || "An error occurred";
       setSignupInfoText(errorMessage);
     }
+    setSignUpLoading(false);
   };
 
   const handleLogoutBtn = () => {
@@ -154,7 +159,7 @@ export function Navigation() {
                   <div className="grid gap-3">
                     <Label htmlFor="passwordInput">Password</Label>
                     <Input id="passwordInput" type="password" required onChange={(e) => setLoginPassword(e.target.value)} />
-                    <Button disabled={loading}>{loading ? "Logging in..." : "Login"}</Button>
+                    <Button disabled={loginLoading}>{loginLoading ? "Logging in..." : "Login"}</Button>
                     {(loginInfoText)! && <span className="text-red-500 text-sm text-center">{loginInfoText}</span>}
                   </div>
                 </div>
@@ -194,7 +199,7 @@ export function Navigation() {
                     <Input id="passwordInput" type="password" required onChange={(e) => setSignupPassword1(e.target.value)} />
                     <Label htmlFor="passwordInput">Confirm password </Label>
                     <Input id="passwordInput" type="password" required onChange={(e) => setSignupPassword2(e.target.value)} />
-                    <Button disabled={loading}>{loading ? "Signing up..." : "Sign in"}</Button>
+                    <Button disabled={signUpLoading}>{signUpLoading ? "Signing up..." : "Sign in"}</Button>
                     {(signupInfoText)! && <span className="text-red-500 text-sm text-center">{signupInfoText}</span>}
                   </div>
                 </div>
