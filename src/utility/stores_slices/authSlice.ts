@@ -64,6 +64,7 @@ const authSlice = createSlice({
     token: null as string | null,
     username: null as string | null, // null until you login, also will be saved
     role: null as string | null, 
+    token_expire: null as number | null
   },
   reducers: {
     logout: (state) => {
@@ -82,6 +83,7 @@ const authSlice = createSlice({
         state.token = action.payload.token; // Save the JWT
         state.username = action.payload.username;
         state.role = action.payload.role;
+        state.token_expire = action.payload.token_expire
       })
       .addCase(loginUser.rejected, (state, _) => {
         //state.loading = false;
