@@ -1,23 +1,28 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { MapPin, Nfc, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import api from '@/utility/axios';
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "@/utility/store";
+import type { Gora } from "@/utility/stores_slices/goreSlice";
 
 export default function ScannerPage() {
-  const [gpsData, setGpsData] = useState<{ lat: number; lng: number } | null>(null);
-  const [nfcData, setNfcData] = useState<string | null>(null);
-  const [loading, setLoading] = useState<{ gps: boolean; nfc: boolean }>({ gps: false, nfc: false });
-  const [error, setError] = useState<string | null>(null);
+  const dispatch = useDispatch<AppDispatch>();
+  const { gore } = useSelector((state: RootState) => state.mountain);
+  
+  const [gpsData, setGpsData] = useState<{ lat: number; lon: number } | null>(null);
+  const [gpsLoading, setGpsLoading] = useState(false);
+  const [gpsGoraText, setGpsGoraText] = useState<string|null>(null);
+  const [gpsError, setGpsError] = useState<string|null>(null);
 
   const scanGps = () => {
-    setLoading((prev) => ({ ...prev, gps: true }));
-    setError(null);
+    setGpsLoading(true);
+    setGpsError(null);
 
     if (!navigator.geolocation) {
-      setError("Geolocation is not supported by your browser.");
-      setLoading((prev) => ({ ...prev, gps: false }));
+      setGpsError("Geolocation is not supported by your browser.");
+      setGpsLoading(false);
       return;
     }
 
@@ -25,13 +30,16 @@ export default function ScannerPage() {
       (position) => {
         setGpsData({
           lat: position.coords.latitude,
-          lng: position.coords.longitude,
+          lon: position.coords.longitude,
         });
-        setLoading((prev) => ({ ...prev, gps: false }));
+        setGpsLoading(false);
+        let nearGora = findNearestMountain(position.coords.latitude, position.coords.longitude, gore);
+        let nearGoraName = nearGora?.name || "Neznana lokacija";
+        setGpsGoraText(nearGoraName);
       },
       (err) => {
-        setError(err.message);
-        setLoading((prev) => ({ ...prev, gps: false }));
+        setGpsError(err.message);
+        setGpsLoading(false);
       }
     );
   };
@@ -47,80 +55,65 @@ export default function ScannerPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-slate-50 dark:bg-slate-950">
-      <div className="w-full max-w-md space-y-6">
-        <div className="text-center space-y-2">
-          <h1 className="text-3xl font-bold tracking-tight">Scanner Hub</h1>
-          <p className="text-muted-foreground">Access device hardware sensors via Web APIs.</p>
-        </div>
-
-        {error && (
-          <div className="p-3 text-sm border border-destructive/50 bg-destructive/10 text-destructive rounded-lg flex items-center gap-2">
-            <AlertCircle className="h-4 w-4" />
-            {error}
-          </div>
-        )}
-
-        <div className="grid gap-4">
-          {/* GPS Card */}
-          <Card>
-            <CardHeader className="pb-3">
-              <CardTitle className="text-lg flex items-center gap-2">
-                <MapPin className="h-5 w-5 text-blue-500" /> Geolocation
-              </CardTitle>
-              <CardDescription>Fetch current latitude and longitude.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {gpsData ? (
-                <div className="bg-slate-100 dark:bg-slate-900 p-3 rounded-md font-mono text-sm">
+    <div className="flex items-center justify-center pt-10 pb-10">
+      <div className="flex flex-col md:flex-row gap-6"> 
+        {/* Gps card */}
+        <Card className="min-w-3xs h-50">
+          <CardHeader>
+            <CardTitle className="text-center">GPS <MapPin className="inline"/></CardTitle>
+          </CardHeader>
+          <CardContent className="text-center">
+            <Button className="" onClick={scanGps}>
+              {gpsLoading ? "Skeniram..." : "Skeniraj"}
+            </Button>
+            <br></br>
+              {gpsLoading ? (
+                <p>Iščem..</p>
+              ) : gpsData ? (
+                <>
                   <p>Lat: {gpsData.lat.toFixed(4)}</p>
-                  <p>Lng: {gpsData.lng.toFixed(4)}</p>
-                </div>
-              ) : (
-                <div className="h-[60px] flex items-center justify-center border-2 border-dashed rounded-md text-muted-foreground text-sm">
-                  No GPS data acquired
-                </div>
-              )}
-              <Button onClick={scanGps} disabled={loading.gps} className="w-full">
-                {loading.gps ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Scan Location"}
-              </Button>
-            </CardContent>
-          </Card>
+                  <p>Lon: {gpsData.lon.toFixed(4)}</p>
+                  <b>{ gpsGoraText }</b>
+                </>
+              ) : null}
+              <p className="text-red-500 pt-1">{gpsError}</p>
+          </CardContent>
+        </Card>
 
-          {/* NFC Card */}
-          <Card>
-            <CardHeader className="pb-3">
-              <CardTitle className="text-lg flex items-center gap-2">
-                <Nfc className="h-5 w-5 text-emerald-500" /> NFC Reader
-              </CardTitle>
-              <CardDescription>Scan physical NFC tags or cards.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center justify-between">
-                <Badge variant={nfcData ? "default" : "secondary"}>
-                  {nfcData ? "Tag Detected" : "Waiting..."}
-                </Badge>
-                {nfcData && <CheckCircle2 className="h-5 w-5 text-emerald-500" />}
-              </div>
-              
-              {nfcData && (
-                <div className="bg-slate-100 dark:bg-slate-900 p-3 rounded-md font-mono text-sm break-all">
-                  {nfcData}
-                </div>
-              )}
+        {/* NFC card */}
+        <Card className="min-w-3xs h-50">
+          <CardHeader>
+            <CardTitle className="text-center">NFC<Nfc className="inline"/></CardTitle>
+          </CardHeader>
+          <CardContent className="text-center">
+            <Button className="mb-10">Skeniraj</Button>
+            <p>Skenirano</p>
+          </CardContent>
+        </Card>
 
-              <Button 
-                onClick={scanNfc} 
-                variant="outline" 
-                disabled={loading.nfc} 
-                className="w-full border-emerald-200 hover:bg-emerald-50 dark:hover:bg-emerald-950"
-              >
-                {loading.nfc ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Start NFC Scan"}
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
+        {/* Send card */}
+        <Card className="min-w-3xs h-50">
+          <CardHeader>
+            <CardTitle className="text-center"> <CheckCircle2 className="mx-auto"/> </CardTitle>
+          </CardHeader>
+          <CardContent className="text-center">
+            <Button className="mb-10">Pošlji</Button>
+
+          </CardContent>
+        </Card>
       </div>
+
     </div>
   );
 }
+
+const findNearestMountain = (userLat: number, userLon: number, gore: Gora[] | null) => {
+  if (!gore || gore.length === 0) return null;
+
+  return gore.reduce((prev, curr) => {
+    const distPrev = Math.pow(prev.lat - userLat, 2) + Math.pow(prev.lon - userLon, 2);
+    const distCurr = Math.pow(curr.lat - userLat, 2) + Math.pow(curr.lon - userLon, 2);
+    
+    return distCurr < distPrev ? curr : prev;
+  });
+};

@@ -1,6 +1,7 @@
 //Glavni REDUX store
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import authReducer from '@/utility/stores_slices/authSlice';
+import goreReducer from '@/utility/stores_slices/goreSlice';
 import {
   persistStore,
   persistReducer,
@@ -16,11 +17,12 @@ import storage from 'redux-persist/lib/storage';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['auth']
+  whitelist: ['auth', 'mountain']
 };
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  mountain: goreReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
