@@ -3,12 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { MapPin, Nfc, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import api from '@/utility/axios';
-import { useDispatch, useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "@/utility/store";
+import { useSelector } from "react-redux";
+import type { RootState } from "@/utility/store";
 import type { Gora } from "@/utility/stores_slices/goreSlice";
 
 export default function ScannerPage() {
-  const dispatch = useDispatch<AppDispatch>();
   const { gore } = useSelector((state: RootState) => state.mountain);
   
   const [gpsData, setGpsData] = useState<{ lat: number; lon: number } | null>(null);
