@@ -27,7 +27,7 @@ import { Outlet, Link } from "react-router-dom";
 
 export function Navigation() {
   const dispatch = useDispatch<AppDispatch>();
-  const { username, role } = useSelector((state: RootState) => state.auth);
+  const { username, role } = useSelector((state: RootState) => state!.auth);
 
   const [loginusernamefield, setLoginUsername] = useState("");
   const [loginpasswordfield, setLoginPassword] = useState("");
