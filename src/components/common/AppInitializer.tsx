@@ -13,24 +13,28 @@ export default function AppInitializer({ children }: { children: React.ReactNode
   useEffect(() => {
     if (!isRehydrated) return;
 
-    if (!gore && !loading) {
-      dispatch(fetchGore());
-    }
-
-    const retryInterval = setInterval(() => {
+    const attemptFetch = () => {
       if (!gore && !loading) {
-        console.log("Retrying fetch...");
+        console.log("Attempting to fetch...");
         dispatch(fetchGore());
       }
+    };
+
+    attemptFetch();
+
+    const retryInterval = setInterval(() => {
+      attemptFetch();
     }, 5000);
 
     return () => clearInterval(retryInterval);
-  }, [dispatch, gore, loading, isRehydrated]);
+  }, [dispatch, isRehydrated, gore]);
 
-  if (!isRehydrated || loading || !gore) {
+  if (!isRehydrated || !gore) {
     return (
-      <div className='text-center'>
-        Že dolgo se nisi prijavil v spletno stran. Prosim prijavi se z internetno povezavo. 
+      <div className='flex items-center justify-center min-h-screen text-center p-4'>
+        <div className="space-y-4">
+          <p>Že dolgo se nisi prijavil v spletno stran. Prosim prijavi se z internetno povezavo.</p>
+        </div>
       </div>
     );
   }
