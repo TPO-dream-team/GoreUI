@@ -25,6 +25,7 @@ type BackendBoard = {
   mountainId: string
   tourTime: number
   difficulty: number
+  description: string
 }
 
 
@@ -269,7 +270,7 @@ function BoardPage() {
               </div>
 
             
-              {/* TODO
+              
               <div className="space-y-2">
                 <Label htmlFor="description">Opis</Label>
                 <Textarea
@@ -284,7 +285,7 @@ function BoardPage() {
                   </span>
                 </div>
               </div>
-              */}
+              
 
               {formError && <p className="text-sm text-red-500">{formError}</p>}
 
@@ -323,7 +324,7 @@ function BoardPage() {
                 date={post.expiryDate}
                 duration={String(post.tourTime)}
                 organizer={post.username}
-                description={post.description} //TODO
+                description={post.description} 
                 onChatClick={() => console.log("Chat za pohod:", post.boardId)}
               />
             )
