@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Calendar, Clock3 } from "lucide-react"
+import { Calendar, Clock3, Gauge } from "lucide-react"
 
 type BoardCardProps = {
   mountainName: string
@@ -9,6 +9,7 @@ type BoardCardProps = {
   duration: string
   organizer: string
   description: string
+  difficulty: number
   onChatClick?: () => void
 }
 
@@ -19,6 +20,7 @@ function BoardCard({
   duration,
   organizer,
   description,
+  difficulty,
   onChatClick,
 }: BoardCardProps) {
   return (
@@ -50,17 +52,25 @@ function BoardCard({
           </div>
         </div>
 
-        <div className="mt-6 flex items-center justify-center gap-5">
+        <div className="mt-6 flex items-start justify-center gap-23">
+  
+        <div className="flex flex-col items-start gap-2">
           <div className="flex items-center gap-2 rounded-full bg-zinc-300 px-3 py-2 font-medium">
             <Calendar className="h-5 w-5" />
             <span>{date}</span>
           </div>
 
-          <div className="flex items-center gap-2 rounded-full bg-zinc-300 px-3 py-2 text-base font-medium">
-            <Clock3 className="h-5 w-5" />
-            <span>{duration}h</span>
+          <div className="rounded-full bg-zinc-300 px-3 py-2 text-base font-medium">
+            Težavnost: {difficulty}
           </div>
         </div>
+
+        <div className="flex items-center gap-2 rounded-full bg-zinc-300 px-3 py-2 text-base font-medium">
+          <Clock3 className="h-5 w-5" />
+          <span>{duration}h</span>
+        </div>
+      </div>
+        
       </CardContent>
     </Card>
   )

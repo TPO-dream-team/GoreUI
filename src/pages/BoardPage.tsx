@@ -23,9 +23,9 @@ type BackendBoard = {
   username: string
   userId: string
   mountainId: string
+  description: string
   tourTime: number
   difficulty: number
-  description: string
 }
 
 
@@ -135,7 +135,11 @@ function BoardPage() {
       return "Izberi goro iz seznama."
     }
 
-    if (!date || !duration.trim() || !difficulty.trim()) {
+    if(Number(difficulty) > 5 || Number(difficulty) < 1) {
+      return "Izberi veljavno vrednost težavnosti."
+    }
+
+    if (!description.trim() || !date || !duration.trim() || !difficulty.trim()) {
       return "Izpolni vsa obvezna polja."
     }
     return null
@@ -228,7 +232,7 @@ function BoardPage() {
                     <span className="font-medium">Ime gore:</span> {selectedMountain.name}
                   </p>
                   <p>
-                    <span className="font-medium">Višina:</span> {selectedMountain.height} m
+                    <span className="font-medium">Višina:</span> {selectedMountain.height}
                   </p>
                 </div>
               )}
@@ -325,6 +329,7 @@ function BoardPage() {
                 duration={String(post.tourTime)}
                 organizer={post.username}
                 description={post.description} 
+                difficulty={post.difficulty}
                 onChatClick={() => console.log("Chat za pohod:", post.boardId)}
               />
             )
