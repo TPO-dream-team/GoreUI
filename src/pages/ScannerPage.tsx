@@ -81,13 +81,13 @@ export default function ScannerPage() {
       ndef.onreading = (event: NDEFReadingEvent) => {
         const { message, serialNumber } = event;
         setNfcSerialNumber(serialNumber);
-        console.log("NFC skeniran")
+        console.log("NFC scanned")
         console.log(serialNumber)
         if (serialNumber != "") {
-          setNfcText("NFC tag uspešno skeniran");
+          setNfcText("NFC tag scanned successfully");
           setNfcLoading(false);
         } else {
-          setNfcError("NFC tag ne uspešno skeniran");
+          setNfcError("NFC tag not scanned successfully");
           setNfcLoading(false);
         }
       };
@@ -112,18 +112,18 @@ export default function ScannerPage() {
 
       try {
         if (response.status === 201 || response.status === 200) {
-          setScanText("Uspešno shranjeno!");
+          setScanText("Successfully saved!");
           setScanLoading(false)
         }
       } catch (err: any) {
-        const errorMessage = err.response?.data?.message || "Napaka pri shranjevanju";
+        const errorMessage = err.response?.data?.message || "Error occured while scanning";
         setScanError(errorMessage);
       } finally {
         setScanLoading(false)
       }
     } else { 
         dispatch(enqueueScan(msg));
-        setScanText("Shranjeno bo ko se vzpostavi internet");
+        setScanText("Save will happen when internet gets connected");
     }
   };
 
@@ -137,7 +137,7 @@ export default function ScannerPage() {
           </CardHeader>
           <CardContent className="text-center">
             <Button className="" onClick={scanGps} disabled={gpsLoading}>
-              {gpsLoading ? "Skeniram..." : "Skeniraj"}
+              {gpsLoading ? "Scanning..." : "Scanned"}
             </Button>
             <br></br>
             {gpsLoading ? (
@@ -160,11 +160,11 @@ export default function ScannerPage() {
           </CardHeader>
           <CardContent className="text-center">
             <Button className="mb-1" onClick={scanNfc} disabled={(nfcLoading || gpsData === null)}>
-              {nfcLoading ? "Skeniram..." : "Skeniraj"}
+              {nfcLoading ? "Scanning..." : "Scanned"}
             </Button>
             <div className="flex flex-col gap-2">
               {nfcLoading ? (
-                <p>Iščem..</p>
+                <p>Searching...</p>
               ) : nfcText ? (
                 <p className="font-bold">{nfcText}</p>
               ) : null}
@@ -182,10 +182,10 @@ export default function ScannerPage() {
             <CardTitle className="text-center"> <CheckCircle2 className="mx-auto" /> </CardTitle>
           </CardHeader>
           <CardContent className="text-center">
-            <Button className="mb-10" onClick={saveScan} disabled={nfcSerialNumber === ""}>Pošlji</Button>
+            <Button className="mb-10" onClick={saveScan} disabled={nfcSerialNumber === ""}>Send</Button>
             <div className="flex flex-col gap-2">
               {scanLoading ? (
-                <p>Shranjujem..</p>
+                <p>Saving...</p>
               ) : scanText ? (
                 <p className="font-bold">{scanText}</p>
               ) : null}
