@@ -137,7 +137,7 @@ export default function ScannerPage() {
           </CardHeader>
           <CardContent className="text-center">
             <Button className="" onClick={scanGps} disabled={gpsLoading}>
-              {gpsLoading ? "Scanning..." : "Scanned"}
+              {gpsLoading ? "Scanning..." : "Scan"}
             </Button>
             <br></br>
             {gpsLoading ? (
@@ -160,7 +160,7 @@ export default function ScannerPage() {
           </CardHeader>
           <CardContent className="text-center">
             <Button className="mb-1" onClick={scanNfc} disabled={(nfcLoading || gpsData === null)}>
-              {nfcLoading ? "Scanning..." : "Scanned"}
+              {nfcLoading ? "Scanning..." : "Scan"}
             </Button>
             <div className="flex flex-col gap-2">
               {nfcLoading ? (

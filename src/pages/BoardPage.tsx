@@ -71,7 +71,7 @@ function BoardPage() {
       setBoards(response.data ?? [])
     } catch (err: any) {
       setBoardsError(
-        err.response?.data?.message || "Napaka pri nalaganju pohodov."
+        err.response?.data?.message || "Error while loading tours."
       )
     } finally {
       setBoardsLoading(false)
@@ -132,15 +132,15 @@ function BoardPage() {
 
   const validateForm = () => {
     if (!selectedMountainId) {
-      return "Izberi goro iz seznama."
+      return "Select moutain from the list."
     }
 
     if(Number(difficulty) > 5 || Number(difficulty) < 1) {
-      return "Izberi veljavno vrednost težavnosti."
+      return "Select appropriate difficulty."
     }
 
     if (!description.trim() || !date || !duration.trim() || !difficulty.trim()) {
-      return "Izpolni vsa obvezna polja."
+      return "Please fill the whole form."
     }
     return null
   }
@@ -170,7 +170,7 @@ function BoardPage() {
       setOpen(false)
     } catch (err: any) {
       setFormError(
-        err.response?.data?.message || "Napaka pri ustvarjanju pohoda."
+        err.response?.data?.message || "Error while saving the board."
       )
     } finally {
       setCreatingBoard(false)
@@ -180,21 +180,21 @@ function BoardPage() {
   return (
     <div className="px-4 py-8">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4">
-        <h1 className="text-2xl font-bold">Pohodi</h1>
+        <h1 className="text-2xl font-bold">Tours</h1>
 
         <Dialog open={open} onOpenChange={handleDialogChange}>
           <DialogTrigger asChild>
-            <Button>Ustvari nov pohod</Button>
+            <Button>Create new tour</Button>
           </DialogTrigger>
 
           <DialogContent className="sm:max-w-[520px]">
             <DialogHeader>
-              <DialogTitle>Ustvari nov pohod</DialogTitle>
+              <DialogTitle>Create new tour</DialogTitle>
             </DialogHeader>
 
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="mountain-search">Gora</Label>
+                <Label htmlFor="mountain-search">Moutain</Label>
 
                 <div className="relative">
                   <Input
@@ -229,16 +229,16 @@ function BoardPage() {
               {selectedMountain && (
                 <div className="rounded-lg border bg-muted/30 p-3 text-sm">
                   <p>
-                    <span className="font-medium">Ime gore:</span> {selectedMountain.name}
+                    <span className="font-medium">Name of the moutain:</span> {selectedMountain.name}
                   </p>
                   <p>
-                    <span className="font-medium">Višina:</span> {selectedMountain.height}
+                    <span className="font-medium">Height:</span> {selectedMountain.height}
                   </p>
                 </div>
               )}
 
               <div className="space-y-2">
-                <Label htmlFor="date">Dan pohoda</Label>
+                <Label htmlFor="date">Day of the tour</Label>
                 <Input
                   id="date"
                   type="date"
@@ -249,7 +249,7 @@ function BoardPage() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="duration">Predvideno trajanje (v urah)</Label>
+                <Label htmlFor="duration">Expected tour time in hours</Label>
                 <Input
                   id="duration"
                   type="number"
@@ -261,7 +261,7 @@ function BoardPage() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="difficulty">Težavnost (1 - najlažja pot; 5 - najtežja pot)</Label>
+                <Label htmlFor="difficulty">Difficulty (1 - easy tour; 5 - hard tour)</Label>
                 <Input
                   id="difficulty"
                   type="number"
@@ -276,10 +276,10 @@ function BoardPage() {
             
               
               <div className="space-y-2">
-                <Label htmlFor="description">Opis</Label>
+                <Label htmlFor="description">Description</Label>
                 <Textarea
                   id="description"
-                  placeholder="Dodaj opis pohoda ..."
+                  placeholder="Add the tour description ..."
                   value={description}
                   onChange={(e) => handleDescriptionChange(e.target.value)}
                 />
@@ -295,7 +295,7 @@ function BoardPage() {
 
               <div className="flex justify-end">
                 <Button onClick={handleCreatePost} disabled={creatingBoard}>
-                  {creatingBoard ? "Ustvarjam..." : "Ustvari pohod"}
+                  {creatingBoard ? "Creating..." : "Create a tour"}
                 </Button>
               </div>
             </div>
@@ -305,12 +305,12 @@ function BoardPage() {
 
       <div className="mx-auto mt-8 w-full max-w-6xl">
         {boardsError && !boardsLoading && (
-          <p className="text-center text-red-500">Napaka pri pohodih: {boardsError}</p>
+          <p className="text-center text-red-500">Tour error: {boardsError}</p>
         )}
 
         {!boardsLoading && !boardsError && boards.length === 0 && (
           <p className="text-center text-muted-foreground">
-            Trenutno ni objavljenih pohodov.
+            There are currently no tours.
           </p>
         )}
 
@@ -323,14 +323,14 @@ function BoardPage() {
             return (
               <BoardCard
                 key={post.boardId}
-                mountainName={mountain?.name ?? "Neznana gora"}
+                mountainName={mountain?.name ?? "Unknown moutain"}
                 mountainHeight={mountain?.height ?? 0}
                 date={post.expiryDate}
                 duration={String(post.tourTime)}
                 organizer={post.username}
                 description={post.description} 
                 difficulty={post.difficulty}
-                onChatClick={() => console.log("Chat za pohod:", post.boardId)}
+                onChatClick={() => console.log("Chat for tour:", post.boardId)}
               />
             )
           })}

@@ -32,11 +32,11 @@ function BoardCard({
               <div className="text-base font-semibold text-black">
                 <p>Organizator:</p>
                 <p>
-                  {organizer} <span className="text-sm text-zinc-500">• 12 vrhov</span>
+                  {organizer} <span className="text-sm text-zinc-500">• 12 peaks</span>
                 </p>
               </div>
 
-              <Button onClick={onChatClick}>Komentiraj</Button>
+              <Button onClick={onChatClick}>Comment</Button>
             </div>
 
             <p className="break-words text-base italic font-bold text-zinc-700">
@@ -61,7 +61,7 @@ function BoardCard({
           </div>
 
           <div className="rounded-full bg-zinc-300 px-3 py-2 text-base font-medium">
-            Težavnost: {difficulty}
+            Difficulty: {difficulty}
           </div>
         </div>
 
