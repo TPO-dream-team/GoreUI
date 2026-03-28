@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import type { RootState, AppDispatch } from "@/utility/store"
 import { fetchGore, type Gora } from "@/utility/stores_slices/goreSlice"
 import api from "@/utility/axios"
+import { useNavigate } from "react-router-dom"
 
 import BoardCard from "@/components/common/BoardCard"
 import { Button } from "@/components/ui/button"
@@ -31,6 +32,8 @@ type BackendBoard = {
 
 function BoardPage() {
   const dispatch = useDispatch<AppDispatch>()
+  const navigate = useNavigate()
+
 
   const { gore, loading: mountainsLoading, error: mountainsError } = useSelector(
     (state: RootState) => state.mountain
@@ -176,6 +179,7 @@ function BoardPage() {
       setCreatingBoard(false)
     }
   }
+
 
   return (
     <div className="px-4 py-8">
@@ -330,7 +334,13 @@ function BoardPage() {
                 organizer={post.username}
                 description={post.description} 
                 difficulty={post.difficulty}
-                onChatClick={() => console.log("Chat for tour:", post.boardId)}
+                onChatClick={() =>
+                  navigate(`/board/${post.boardId}`, {
+                    state: {
+                      organizer: post.username,
+                    },
+                  })
+                }
               />
             )
           })}

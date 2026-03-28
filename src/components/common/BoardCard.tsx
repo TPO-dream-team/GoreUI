@@ -11,6 +11,7 @@ type BoardCardProps = {
   description: string
   difficulty: number
   onChatClick?: () => void
+  hideCommentButton?: boolean
 }
 
 function BoardCard({
@@ -22,6 +23,7 @@ function BoardCard({
   description,
   difficulty,
   onChatClick,
+  hideCommentButton
 }: BoardCardProps) {
   return (
     <Card className="w-[350px] bg-cyan-900">
@@ -36,7 +38,9 @@ function BoardCard({
                 </p>
               </div>
 
-              <Button onClick={onChatClick}>Comment</Button>
+              {!hideCommentButton && onChatClick && (
+                <Button onClick={onChatClick}>Comment</Button>
+              )}
             </div>
 
             <p className="break-words text-base italic font-bold text-zinc-700">

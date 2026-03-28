@@ -5,6 +5,7 @@ import AppPage from './pages/AppPage';
 import ScannerPage from './pages/ScannerPage';
 import ChatPage from './pages/ChatPage';
 import BoardPage from './pages/BoardPage';
+import BoardChatPage from './pages/BoardChatPage';
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: "board",
         element: <ProtectedRoute><BoardPage /></ProtectedRoute> 
+      },
+      {
+        path: "board/:id",
+        element: <ProtectedRoute><BoardChatPage /></ProtectedRoute> 
       }
     ],
   },
