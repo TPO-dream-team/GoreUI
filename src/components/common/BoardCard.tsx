@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Calendar, Clock3, Gauge } from "lucide-react"
+import { Calendar, Clock3} from "lucide-react"
 
 type BoardCardProps = {
   mountainName: string
