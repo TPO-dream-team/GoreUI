@@ -51,7 +51,7 @@ function ChatPage() {
                 <label className="text-sm font-medium">Moutain</label>
                 <Input
                   id="mountain-search"
-                  placeholder="Moutain name"
+                  placeholder="Moutain is optional"
                   autoComplete="off"
                   />
                 </div>
@@ -66,6 +66,7 @@ function ChatPage() {
         </header>
 
         <section className="flex-1 p-4 overflow-y-auto">
+          <ChatDisplay />
           <ChatDisplay />
           <ChatDisplay />
           <ChatDisplay />
