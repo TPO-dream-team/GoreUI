@@ -5,7 +5,7 @@ import AppPage from './pages/AppPage';
 import ScannerPage from './pages/ScannerPage';
 import ChatPage from './pages/ChatPage';
 import BoardPage from './pages/BoardPage';
-import BoardChatPage from './pages/BoardChatPage';
+import BoardChatPage from './pages/ChatPage';
 
 export const router = createBrowserRouter([
   {
