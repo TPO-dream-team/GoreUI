@@ -6,6 +6,9 @@ import ScannerPage from './pages/ScannerPage';
 import ChatPage from './pages/ChatPage';
 import BoardPage from './pages/BoardPage';
 import BoardChatPage from './pages/BoardChatPage';
+import ChatCommentPage from './pages/ChatCommentPage';
+import ModeratorPage from './pages/ModeratorPage';
+import AdminRoute from './components/common/AdminRoute';
 
 export const router = createBrowserRouter([
   {
@@ -26,12 +29,20 @@ export const router = createBrowserRouter([
         element: <ProtectedRoute><ChatPage /></ProtectedRoute> 
       },
       {
+        path: "chat/:id",
+        element: <ProtectedRoute><ChatCommentPage /></ProtectedRoute> 
+      },
+      {
         path: "board",
         element: <ProtectedRoute><BoardPage /></ProtectedRoute> 
       },
       {
         path: "board/:id",
         element: <ProtectedRoute><BoardChatPage /></ProtectedRoute> 
+      },
+      {
+        path: "moderation",
+        element: <AdminRoute><ModeratorPage /></AdminRoute> 
       }
     ],
   },

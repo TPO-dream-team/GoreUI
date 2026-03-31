@@ -27,7 +27,7 @@ import { Outlet, Link } from "react-router-dom";
 
 export function Navigation() {
   const dispatch = useDispatch<AppDispatch>();
-  const { username, role } = useSelector((state: RootState) => state!.auth!);
+  const { username, role } = useSelector((state: any) => state.auth);
 
   const [loginusernamefield, setLoginUsername] = useState("");
   const [loginpasswordfield, setLoginPassword] = useState("");
@@ -82,7 +82,6 @@ export function Navigation() {
     }
     setSignUpLoading(false);
   };
-
   const handleLogoutBtn = () => {
     dispatch(logout());
   };
@@ -110,6 +109,7 @@ export function Navigation() {
                 <SheetClose asChild><Link to={role ? "/scanner" : "#"} className={`text-lg font-medium mr-3 pt-1 pb-1 pl-3 rounded-full ${role ? "hover:hover:bg-secondary" : "text-gray-400 cursor-not-allowed pointer-events-none"}`}>Scan</Link></SheetClose>
                 <SheetClose asChild><Link to={role ? "/board" : "#"} className={`text-lg font-medium mr-3 pt-1 pb-1 pl-3 rounded-full ${role ? "hover:hover:bg-secondary" : "text-gray-400 cursor-not-allowed pointer-events-none"}`}>Board</Link></SheetClose>
                 <SheetClose asChild><Link to={role ? "/chat" : "#"} className={`text-lg font-medium mr-3 pt-1 pb-1 pl-3 rounded-full ${role ? "hover:hover:bg-secondary" : "text-gray-400 cursor-not-allowed pointer-events-none"}`}>Chat</Link></SheetClose>
+                {role === "admin" && (<SheetClose asChild><Link to="/moderation" className="text-lg font-medium mr-3 pt-1 pb-1 pl-3 rounded-full hover:bg-secondary">Moderation</Link></SheetClose>)}
               </div>
               <SheetFooter>
                 {username ?
@@ -212,4 +212,7 @@ export function Navigation() {
     </div>
   );
 }
+
+
+
 

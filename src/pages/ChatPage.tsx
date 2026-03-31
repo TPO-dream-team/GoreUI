@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -10,8 +11,8 @@ import { Input } from "@/components/ui/input";
 
 function ChatPage() {
   return (
-    <div className="flex flex-col items-center min-h-screen bg-gray-50">
-      <main className="w-full md:max-w-2xl flex flex-col min-h-screen bg-white shadow-md">
+    <div className="flex flex-col items-center min-h-scree ">
+      <main className="w-full md:max-w-2xl flex flex-col min-h-screen bg-cyan-900 shadow-md">
 
         <header className="p-4 border-b flex items-center justify-between bg-white sticky top-0 z-10">
           <h1 className="text-xl font-bold text-gray-800">Add a post</h1>
@@ -19,9 +20,9 @@ function ChatPage() {
           {/* --- SHADCN DIALOG START --- */}
           <Dialog>
             <DialogTrigger asChild>
-              <button className="bg-blue-600 text-white px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-blue-700 transition-colors shadow-sm">
+              <Button className=" text-white px-4 py-1.5 rounded-full text-sm font-semibold transition-colors shadow-sm">
                 Post
-              </button>
+              </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-125 w-[95vw] rounded-xl">
               <DialogHeader className="border-gray-200 border-b-2 pb-2">
@@ -108,7 +109,7 @@ function ChatDisplay() {
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo error alias doloribus consectetur animi, harum architecto...
       </p>
       <div className="flex justify-end mt-4">
-        <a href="#" className="text-blue-600 text-sm font-medium hover:underline">
+        <a href="chat/1" className="text-blue-600 text-sm font-medium hover:underline">
           View Comments
         </a>
       </div>
