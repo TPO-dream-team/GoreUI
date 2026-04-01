@@ -9,6 +9,7 @@ import BoardChatPage from './pages/BoardChatPage';
 import ChatCommentPage from './pages/ChatCommentPage';
 import ModeratorPage from './pages/ModeratorPage';
 import AdminRoute from './components/common/AdminRoute';
+import HelpPage from './pages/HelpPage';
 
 export const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
       {
         path: "moderation",
         element: <AdminRoute><ModeratorPage /></AdminRoute> 
+      },
+      {
+        path: "help",
+        element: <AdminRoute><HelpPage /></AdminRoute> 
       }
     ],
   },
