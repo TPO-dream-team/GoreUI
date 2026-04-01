@@ -19,7 +19,7 @@ export const router = createBrowserRouter([
       { 
         // Path ./  
         index: true,
-        element: <AppPage />  //TODO naredi dejanski index page
+        element: <AppPage />
       },
       { 
         path: "scanner", 
@@ -47,7 +47,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "help",
-        element: <AdminRoute><HelpPage /></AdminRoute> 
+        element: <ProtectedRoute><HelpPage /></ProtectedRoute> 
       }
     ],
   },
