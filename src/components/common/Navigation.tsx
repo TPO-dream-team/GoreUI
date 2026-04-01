@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/dialog"
 import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import type { AppDispatch, RootState } from "@/utility/store";
+import type { AppDispatch } from "@/utility/store";
 import { loginUser, signUpUser } from "@/utility/stores_slices/authSlice";
 import { logout } from "@/utility/stores_slices/authSlice";
 import { Outlet, Link, useNavigate } from "react-router-dom";
@@ -103,7 +103,6 @@ export function Navigation() {
             <div className="cursor-pointer font-bold text-xl ml-2 select-none" onClick={() => navigate("/")}>PeakProof</div>
 
             {/* Sidebar */}
-
             <SheetContent side="left" className="w-75"> {/* Make shawty lefty */}
               <div className="flex flex-col gap-4 mt-8 pl-5">
                 <SheetClose asChild><Link to="/" className="text-lg font-medium hover:bg-secondary mr-3 pt-1 pb-1 pl-3 rounded-full">Home</Link></SheetClose>

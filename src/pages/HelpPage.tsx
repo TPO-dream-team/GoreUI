@@ -1,4 +1,4 @@
-import { ArrowLeft, MessageCircle, Mail, BookOpen } from "lucide-react"
+import { ArrowLeft, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   Accordion,
@@ -6,7 +6,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 function HelpPage() {
   return (
