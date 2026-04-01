@@ -22,10 +22,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { AppDispatch, RootState } from "@/utility/store";
 import { loginUser, signUpUser } from "@/utility/stores_slices/authSlice";
 import { logout } from "@/utility/stores_slices/authSlice";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 
 
 export function Navigation() {
+  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const { username, role } = useSelector((state: any) => state.auth);
 
@@ -99,7 +100,7 @@ export function Navigation() {
             </SheetTrigger>
 
             {/* Title */}
-            <div className="font-bold text-xl ml-2 select-none">PeakProof</div>
+            <div className="cursor-pointer font-bold text-xl ml-2 select-none" onClick={() => navigate("/")}>PeakProof</div>
 
             {/* Sidebar */}
 
