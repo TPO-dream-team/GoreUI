@@ -26,7 +26,7 @@ function BoardCard({
   hideCommentButton
 }: BoardCardProps) {
   return (
-    <Card className="w-[350px] bg-cyan-900">
+    <Card className="w-[350px] bg-gradient-to-br from-slate-950 via-cyan-950 to-cyan-900">
       <CardContent className="px-6 pb-3 pt-3">
         <div className="flex min-h-[350px] flex-col justify-between rounded-2xl bg-white p-6">
           <div>

@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 function ChatPage() {
   return (
     <div className="flex flex-col items-center min-h-scree ">
-      <main className="w-full md:max-w-2xl flex flex-col min-h-screen bg-cyan-900 shadow-md">
+      <main className="w-full md:max-w-2xl flex flex-col min-h-screen bg-gradient-to-br from-slate-950 via-cyan-950 to-cyan-900">
 
         <header className="p-4 border-b flex items-center justify-between bg-white sticky top-0 z-10">
           <h1 className="text-xl font-bold text-gray-800">Add a post</h1>
