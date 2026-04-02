@@ -19,13 +19,14 @@ import {
 } from "@/components/ui/dialog"
 import { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import type { AppDispatch, RootState } from "@/utility/store";
+import type { AppDispatch } from "@/utility/store";
 import { loginUser, signUpUser } from "@/utility/stores_slices/authSlice";
 import { logout } from "@/utility/stores_slices/authSlice";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 
 
 export function Navigation() {
+  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const { username, role } = useSelector((state: any) => state.auth);
 
@@ -86,8 +87,8 @@ export function Navigation() {
     dispatch(logout());
   };
   return (
-    <div>
-      <nav className="flex items-center justify-between p-4 border-b bg-background">
+    <div className="relative min-h-screen">
+      <nav className="sticky top-0 z-50 w-full flex items-center justify-between p-4 border-b bg-background/95 backdrop-blur">
         {/* Hamburger Menu & Sidebar */}
         <div className="flex items-center justify-between">
           {/* Left side menu */}
@@ -99,11 +100,10 @@ export function Navigation() {
             </SheetTrigger>
 
             {/* Title */}
-            <div className="font-bold text-xl ml-2 select-none">PeakProof</div>
+            <div className="cursor-pointer font-bold text-xl ml-2 select-none" onClick={() => navigate("/")}>PeakProof</div>
 
             {/* Sidebar */}
-
-            <SheetContent side="left" className="w-75"> {/* Make sidebar lefty */}
+            <SheetContent side="left" className="w-75"> {/* Make shawty lefty */}
               <div className="flex flex-col gap-4 mt-8 pl-5">
                 <SheetClose asChild><Link to="/" className="text-lg font-medium hover:bg-secondary mr-3 pt-1 pb-1 pl-3 rounded-full">Home</Link></SheetClose>
                 <SheetClose asChild><Link to={role ? "/scanner" : "#"} className={`text-lg font-medium mr-3 pt-1 pb-1 pl-3 rounded-full ${role ? "hover:hover:bg-secondary" : "text-gray-400 cursor-not-allowed pointer-events-none"}`}>Scan</Link></SheetClose>
@@ -134,7 +134,7 @@ export function Navigation() {
               <div>
                 <DialogTrigger asChild>
                   {/* Logic: If username exists, show it. Otherwise show Login button. */}
-                  <Button className="p-2 hover:bg-accent rounded-md" variant="outline">
+                  <Button className="p-2 border-black hover:bg-accent rounded-md" variant="outline">
                     Login
                   </Button>
                 </DialogTrigger>
@@ -174,8 +174,8 @@ export function Navigation() {
               <div>
                 <DialogTrigger asChild>
                   {/* Logic: If username exists, show it. Otherwise show Login button. */}
-                  <Button className="p-2 ml-2 hover:bg-white bg-gray-200 rounded-md" variant="outline">
-                    Sign up
+                  <Button className="p-2 ml-2 hover:bg-gray-300 border-black bg-gray-200 rounded-md" variant="outline">
+                    Register
                   </Button>
                 </DialogTrigger>
               </div>

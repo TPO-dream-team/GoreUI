@@ -14,7 +14,7 @@ export default function AppInitializer({ children }: { children: React.ReactNode
     if (!isRehydrated) return;
 
     const attemptFetch = () => {
-      if (!gore && !loading) {
+      if (!gore) {
         console.log("Attempting to fetch...");
         dispatch(fetchGore());
       }
