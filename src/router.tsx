@@ -8,6 +8,7 @@ import BoardPage from './pages/BoardPage';
 import BoardChatPage from './pages/BoardChatPage';
 import ChatCommentPage from './pages/ChatCommentPage';
 import ModeratorPage from './pages/ModeratorPage';
+import UserProfilePage from './pages/UserProfilePage';
 import AdminRoute from './components/common/AdminRoute';
 
 export const router = createBrowserRouter([
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
       {
         path: "moderation",
         element: <AdminRoute><ModeratorPage /></AdminRoute> 
+      },
+     {
+        path: "profile/:id",
+        element: <ProtectedRoute><UserProfilePage /></ProtectedRoute>
       }
     ],
   },
