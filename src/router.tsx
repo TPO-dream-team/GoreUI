@@ -49,6 +49,10 @@ export const router = createBrowserRouter([
       {
         path: "help",
         element: <ProtectedRoute><HelpPage /></ProtectedRoute> 
+      },
+      {
+        path: "profile/:id",
+        element: <ProtectedRoute><UserProfilePage /></ProtectedRoute> 
       }
     ],
   },
