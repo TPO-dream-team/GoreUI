@@ -47,7 +47,7 @@ function AppPage() {
             {/* Admin Only Button */}
             {role === "admin" && (
               <Button
-                onClick={() => navigate("/admin/moderate")}
+                onClick={() => navigate("/moderation")}
                 variant="destructive"
                 className="h-24 w-full text-xl font-semibold shadow-lg transition-transform active:scale-95"
               >
