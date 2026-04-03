@@ -36,14 +36,14 @@ function ChatPage() {
                 <div className="flex flex-col gap-2">
                   <label className="text-sm font-medium">Post title</label>
                   <input
-                    className="flex h-10 w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="flex h-10 w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400"
                     placeholder="My amazing weekend..."
                   />
                 </div>
                 <div className="flex flex-col gap-2">
                   <label className="text-sm font-medium">Content</label>
                   <textarea
-                    className="flex min-h-30 w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="flex min-h-30 w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400"
                     placeholder="How are you feeling?"
                     maxLength={300}
                   />
@@ -54,9 +54,10 @@ function ChatPage() {
                   id="mountain-search"
                   placeholder="Moutain is optional"
                   autoComplete="off"
+                  className="focus:ring-2 focus:ring-gray-400"
                   />
                 </div>
-                <button className="mt-5 w-full bg-blue-600 text-white p-3 rounded-lg font-bold hover:bg-blue-700 transition-all active:scale-[0.98]">
+                <button className="mt-5 w-full bg-gradient-to-br from-slate-950 via-cyan-950 to-cyan-900 text-white p-3 rounded-lg font-bold hover:text-blue-200 transition-all active:scale-[0.98]">
                   Post now
                 </button>
               </div>

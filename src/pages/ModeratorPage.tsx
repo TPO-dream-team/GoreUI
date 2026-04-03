@@ -10,7 +10,7 @@ function ModeratorPage() {
                     <div className="bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-cyan-800/20">
 
                         {/* Header Meta */}
-                        <div className="p-2 border-b text-center shrink-0 bg-cyan-900">
+                        <div className="p-2 border-b text-center shrink-0 bg-gradient-to-br from-slate-950 via-cyan-950 to-cyan-900">
                             <span className="text-[10px] font-bold text-white uppercase tracking-widest">
                                 Pending Review
                             </span>
@@ -46,8 +46,17 @@ function ModeratorPage() {
                             </p>
                         </div>
 
+                        {/* Zadnje metrike */}
+                        <div className="p-2 bg-white flex items-center justify-center gap-2 border-b shrink-0">
+                            <div className="flex gap-3 text-[10px] text-gray-500 uppercase tracking-wider">
+                                <span>F1: <span className="font-bold text-blue-600">0.82</span></span>
+                                <span>Precision: <span className="font-bold text-blue-600">0.85</span></span>
+                                <span>Recall: <span className="font-bold text-blue-600">0.79</span></span>
+                            </div>
+                        </div>
+
                         {/* Integrated Action Buttons */}
-                        <div className="p-4 grid grid-cols-2 gap-3 shrink-0 bg-cyan-900">
+                        <div className="p-4 grid grid-cols-2 gap-3 shrink-0 bg-gradient-to-br from-slate-950 via-cyan-950 to-cyan-900">
                             <Button
                                 variant="destructive"
                                 className="h-12 text-sm font-bold bg-red-500 hover:bg-red-600 rounded-lg flex gap-2 shadow-sm active:scale-95 transition-transform"
