@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
       },
       { 
         path: "scanner", 
-        element: <ScannerPage /> 
+        element: <ProtectedRoute><ScannerPage /></ProtectedRoute>
       },
       { 
         path: "chat", 

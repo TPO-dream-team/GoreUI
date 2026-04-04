@@ -1,4 +1,4 @@
-import LockedPage from '@/pages/LockedPage';
+import AppPage from '@/pages/AppPage';
 import type { JSX } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -9,7 +9,7 @@ const AdminRoute = ({ children }: { children: JSX.Element }) => {
   const isAdmin = role === 'admin';
 
   if (!isLoggedIn || !isAdmin) {
-    return <LockedPage />;
+    return <AppPage />;
   }
 
   return children;
