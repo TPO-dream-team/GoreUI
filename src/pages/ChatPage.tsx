@@ -17,6 +17,12 @@ import { useNavigate } from "react-router-dom";
 
 const LIMIT = 5;
 
+const formatDate = (dateString: string) => {
+  if (!dateString) return "";
+  const date = new Date(dateString);
+  return date.toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' });
+};
+
 function ChatPage() {
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate()
@@ -35,7 +41,6 @@ function ChatPage() {
   const [content, setContent] = useState("");
   const [validationError, setValidationError] = useState("");
   
-  // State to control Dialog visibility
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const { gore, loading: mountainsLoading, error: mountainsError } = useSelector(
@@ -275,14 +280,15 @@ function ChatPage() {
 }
 
 function ChatDisplay({ data }: { data: any }) {
-  const { username, mountainName, tagline, id, commentCount, startMsg } = data;
+  const { username, mountainName, tagline, id, commentCount, startMsg, timeStamp } = data;
+  
   return (
     <div className="max-w-xl mx-auto p-4 border rounded-lg shadow-sm bg-white mb-5">
       <div className="flex justify-between items-center mb-3">
         <span className="flex items-center gap-3">
           <span className="font-bold text-gray-900">@{username}</span>
         </span>
-        <span className="text-sm text-gray-500">Oct 24, 2023</span>
+        <span className="text-sm text-gray-500">{formatDate(timeStamp)}</span>
       </div>
 
       <header className="mb-2 flex flex-col items-start gap-1">
