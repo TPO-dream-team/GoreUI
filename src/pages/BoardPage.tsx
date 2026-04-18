@@ -145,6 +145,7 @@ function BoardPage() {
     if (!description.trim() || !date || !duration.trim() || !difficulty.trim()) {
       return "Please fill the whole form."
     }
+    
     return null
   }
 

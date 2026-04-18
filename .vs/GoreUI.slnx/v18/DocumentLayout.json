@@ -1,0 +1,242 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\src\\components\\ui\\button.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\components\\ui\\button.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\src\\pages\\AppPage.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\pages\\AppPage.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\src\\pages\\ScannerPage.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\pages\\ScannerPage.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\src\\pages\\ModeratorPage.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\pages\\ModeratorPage.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\src\\pages\\LockedPage.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\pages\\LockedPage.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\src\\pages\\BoardChatPage.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\pages\\BoardChatPage.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\Dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\public\\mask-icon.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:public\\mask-icon.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\public\\icon_512.png||{177559E0-D141-11D0-92DF-00A0C9138C45}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:public\\icon_512.png||{177559E0-D141-11D0-92DF-00A0C9138C45}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\public\\icon_192.png||{177559E0-D141-11D0-92DF-00A0C9138C45}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:public\\icon_192.png||{177559E0-D141-11D0-92DF-00A0C9138C45}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\public\\favicon.ico||{177559E0-D141-11D0-92DF-00A0C9138C45}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:public\\favicon.ico||{177559E0-D141-11D0-92DF-00A0C9138C45}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\public\\apple-touch-icon.png||{177559E0-D141-11D0-92DF-00A0C9138C45}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:public\\apple-touch-icon.png||{177559E0-D141-11D0-92DF-00A0C9138C45}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "button.tsx",
+              "DocumentMoniker": "C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\src\\components\\ui\\button.tsx",
+              "RelativeDocumentMoniker": "src\\components\\ui\\button.tsx",
+              "ToolTip": "C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\src\\components\\ui\\button.tsx",
+              "RelativeToolTip": "src\\components\\ui\\button.tsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2026-03-31T16:10:14.225Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ScannerPage.tsx",
+              "DocumentMoniker": "C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\src\\pages\\ScannerPage.tsx",
+              "RelativeDocumentMoniker": "src\\pages\\ScannerPage.tsx",
+              "ToolTip": "C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\src\\pages\\ScannerPage.tsx",
+              "RelativeToolTip": "src\\pages\\ScannerPage.tsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2026-03-31T16:08:38.106Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ModeratorPage.tsx",
+              "DocumentMoniker": "C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\src\\pages\\ModeratorPage.tsx",
+              "RelativeDocumentMoniker": "src\\pages\\ModeratorPage.tsx",
+              "ToolTip": "C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\src\\pages\\ModeratorPage.tsx",
+              "RelativeToolTip": "src\\pages\\ModeratorPage.tsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2026-03-31T16:08:11.686Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "LockedPage.tsx",
+              "DocumentMoniker": "C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\src\\pages\\LockedPage.tsx",
+              "RelativeDocumentMoniker": "src\\pages\\LockedPage.tsx",
+              "ToolTip": "C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\src\\pages\\LockedPage.tsx",
+              "RelativeToolTip": "src\\pages\\LockedPage.tsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2026-03-31T16:06:35.302Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "BoardChatPage.tsx",
+              "DocumentMoniker": "C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\src\\pages\\BoardChatPage.tsx",
+              "RelativeDocumentMoniker": "src\\pages\\BoardChatPage.tsx",
+              "ToolTip": "C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\src\\pages\\BoardChatPage.tsx",
+              "RelativeToolTip": "src\\pages\\BoardChatPage.tsx",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2026-03-31T16:06:25.191Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AppPage.tsx",
+              "DocumentMoniker": "C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\src\\pages\\AppPage.tsx",
+              "RelativeDocumentMoniker": "src\\pages\\AppPage.tsx",
+              "ToolTip": "C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\src\\pages\\AppPage.tsx",
+              "RelativeToolTip": "src\\pages\\AppPage.tsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2026-03-31T16:06:03.779Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\Dockerfile",
+              "RelativeDocumentMoniker": "Dockerfile",
+              "ToolTip": "C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\Dockerfile",
+              "RelativeToolTip": "Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-03-31T15:52:47.726Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "mask-icon.svg",
+              "DocumentMoniker": "C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\public\\mask-icon.svg",
+              "RelativeDocumentMoniker": "public\\mask-icon.svg",
+              "ToolTip": "C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\public\\mask-icon.svg",
+              "RelativeToolTip": "public\\mask-icon.svg",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAO6SURBVDhPfZTLb1tFGMV/c\u002Bfa14/YSXzzkhqE0kRyFahAqdQFrVr6iKCbrsKiRC2kUiX4B\u002BgfgBDiH4jEgg3suoIdhAShIiGSFCEBbeo0lWMntWPn4dhObN/nsOBGuhipZzWaOd\u002BZM5/mfJKX402hRT6SRuoLfP8tlDoA9gCnmwiAUkp074VwxUj23z7z\u002Brnpa9M3etc3X7RXf/n\u002BcXV742vl2Q\u002BAVncBgOzeAOLA\u002BagRv3vt\u002BvT1uQ/vjL47fSV6JjuRdPyIWas3\u002B\u002Bu1PYXyngJed3G3YAo4q\u002Bv63KXLb9\u002BYnb116p3pqwxk0pi9PSTSGaNlq8Hq7v7AcWP/AOVXACssEBaMAWdjsdj74\u002BPjc/fvf9J38cIF4fmKUrnKTrXGyFA/ybRpNDticHurMOk47TV87yAsGhZ8Q0p5e3x8/N78/LwxOTnJwUFNbDzPU6nsUXyxQ7G0RyoVZ\u002Bz0WKTSig/slfOvOZ3jTVD5k\u002BefCJ4D7maz2ZszMzOZqakpsbCwIJaXVyiXyxwe1tksviBfLLO2UaRcrYvsxGmt6Rq9rWZj2GrVbZSfA3wJTAD3MpnMjdHR0Vd7enrE6uoqi4uLVCoVWu0WhcImfz/JUdgqUSztsl87wojFRSJlRh1fNzvtdtppHdqgnkrgA03T7oyMjIyl02lRLpdZWlqiUCgAYFkWz9bXyW/mqdWbHLcsWh2HeqPN4KCJFuuNW54YbB8d9npW85EEPjcM41QymYxKKTXHcYSmadi2jeM4NBoNqtUKvmsjAKFJpCbxlUABUjdAM4yWrSKdg/yWBMqu68pms9lbr9dTjuPopmkSjUYBcF2XSCSCbdtoQtGXTjE8PMzgQIa2ZbNXLbG7nTs6rq4/8e3jrwTQD4wCrwghrkSj0VnTNIeUUlosFiORSCClpNPp/OvaU7i\u002BxBPSszp2ybGtR67d/s1zWsvKc34PR\u002B8iMCuEmDEMo1/TNC0ej5NIJNB1Hdd1sW2bjmX5nY5dclzvR99zn6C8HJADNrsz/h7wAHgcDAAL8AFfSumfrIOiP4BbQJ\u002BU8qymaZeALF0few1YAcpAD2AG6dGUUiEaAjCC84eJRGJO1/U5x3H6gJ\u002B6s\u002BwF7hYDseGgx92cLeA74FfXdf90XfcH4GegqYWIl4GPgZvALhAJnITxHPgG\u002BBT4Fmjouj6k67oB7ACEBQVgA7WgTyvBrbkQZwd4GLjLAbZSqq2UagP/6QtAMhhfJxDAFPBZUPwX8CVwNcT5H142sU8wCpwHisAzoN5NCOMfHLiqI9cTM68AAAAASUVORK5CYII=",
+              "WhenOpened": "2026-03-31T15:52:42.883Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "icon_512.png - PNG [512x512, 32 bit, PNG]",
+              "DocumentMoniker": "C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\public\\icon_512.png",
+              "RelativeDocumentMoniker": "public\\icon_512.png",
+              "ToolTip": "C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\public\\icon_512.png - PNG [512x512, 32 bit, PNG]",
+              "RelativeToolTip": "public\\icon_512.png - PNG [512x512, 32 bit, PNG]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
+              "WhenOpened": "2026-03-31T15:52:41.031Z",
+              "EditorCaption": " - PNG [512x512, 32 bit, PNG]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "icon_192.png - PNG [192x192, 32 bit, PNG]",
+              "DocumentMoniker": "C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\public\\icon_192.png",
+              "RelativeDocumentMoniker": "public\\icon_192.png",
+              "ToolTip": "C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\public\\icon_192.png - PNG [192x192, 32 bit, PNG]",
+              "RelativeToolTip": "public\\icon_192.png - PNG [192x192, 32 bit, PNG]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
+              "WhenOpened": "2026-03-31T15:52:39.88Z",
+              "EditorCaption": " - PNG [192x192, 32 bit, PNG]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "favicon.ico - Icon [32x32, 32 bit, BMP]",
+              "DocumentMoniker": "C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\public\\favicon.ico",
+              "RelativeDocumentMoniker": "public\\favicon.ico",
+              "ToolTip": "C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\public\\favicon.ico - Icon [32x32, 32 bit, BMP]",
+              "RelativeToolTip": "public\\favicon.ico - Icon [32x32, 32 bit, BMP]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001525|",
+              "WhenOpened": "2026-03-31T15:52:37.811Z",
+              "EditorCaption": " - Icon [32x32, 32 bit, BMP]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "apple-touch-icon.png - PNG [512x512, 32 bit, PNG]",
+              "DocumentMoniker": "C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\public\\apple-touch-icon.png",
+              "RelativeDocumentMoniker": "public\\apple-touch-icon.png",
+              "ToolTip": "C:\\Users\\katja\\Desktop\\TPO_Project\\GoreUI\\public\\apple-touch-icon.png - PNG [512x512, 32 bit, PNG]",
+              "RelativeToolTip": "public\\apple-touch-icon.png - PNG [512x512, 32 bit, PNG]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
+              "WhenOpened": "2026-03-31T15:52:34.309Z",
+              "EditorCaption": " - PNG [512x512, 32 bit, PNG]"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 301,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

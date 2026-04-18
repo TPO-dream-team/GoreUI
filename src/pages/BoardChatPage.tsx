@@ -45,7 +45,9 @@ function BoardChatPage() {
   const [loadingBoard, setLoadingBoard] = useState(true)
   const [loadingMessages, setLoadingMessages] = useState(true)
   const [sending, setSending] = useState(false)
-  const [error, setError] = useState("")
+  //const [error, setError] = useState("")
+  const [boardError, setBoardError] = useState("")
+  const [commentError, setCommentError] = useState("")
 
   const mountain = gore?.find(
   (gora) => String(gora.id) === String(board?.mountainId)
@@ -65,7 +67,7 @@ function BoardChatPage() {
       const response = await api.get(`/boards/${id}`)
       setBoard(response.data)
     } catch (err: any) {
-      setError(err.response?.data?.message || "Error while loading board.")
+      setBoardError(err.response?.data?.message || "Error while loading board.")
     } finally {
       setLoadingBoard(false)
     }
@@ -79,7 +81,7 @@ function BoardChatPage() {
       const response = await api.get(`/boards/${id}/chats`)
       setMessages(response.data ?? [])
     } catch (err: any) {
-      setError(err.response?.data?.message || "Error while loading comments.")
+      setCommentError(err.response?.data?.message || "Error while loading comments.")
     } finally {
       setLoadingMessages(false)
     }
@@ -94,10 +96,14 @@ function BoardChatPage() {
     if (!id) return
 
     const trimmed = message.trim()
-    if (!trimmed) return
+    if (!trimmed) {
+      setCommentError("Write the comment first.")
+      return
+    }
+    
     try {
       setSending(true)
-      setError("")
+      setCommentError("")
 
       await api.post(`/boards/${id}/chats`, {
         Message: trimmed,
@@ -106,7 +112,7 @@ function BoardChatPage() {
       setMessage("")
       await loadMessages()
     } catch (err: any) {
-      setError(err.response?.data?.message || "Error while sending message.")
+      setCommentError(err.response?.data?.message || "Error while sending message.")
     } finally {
       setSending(false)
     }
@@ -124,7 +130,7 @@ function BoardChatPage() {
             </Button>
         </div>
 
-        {error && <p className="text-red-500">{error}</p>}
+        {boardError && <p className="text-red-500">{boardError}</p>}
 
         {board && (
     <div className="flex justify-center">
@@ -179,6 +185,8 @@ function BoardChatPage() {
               }
             }}
           />
+
+          {commentError && <p className="text-red-500">{commentError}</p>}
 
           <div className="flex justify-end">
             <Button onClick={handleSendMessage} disabled={sending}>
