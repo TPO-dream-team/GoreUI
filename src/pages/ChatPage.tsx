@@ -40,6 +40,7 @@ function ChatPage() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [validationError, setValidationError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -108,9 +109,10 @@ function ChatPage() {
 
   const handlePostSubmit = async () => {
     setValidationError("");
+    setSuccessMessage("");
 
     if (!title.trim() || !content.trim()) {
-      setValidationError("Title and Content are required.");
+      setValidationError("Post title and Content are required.");
       return;
     }
 
@@ -134,6 +136,8 @@ function ChatPage() {
 
       await api.post("/post/new", payload);
 
+      setSuccessMessage("Your post was successfully posted.");
+
       setTitle("");
       setContent("");
       setMountainQuery("");
@@ -154,7 +158,15 @@ function ChatPage() {
         <header className="p-4 border-b flex items-center justify-between bg-white sticky top-0 z-10">
           <h1 className="text-xl font-bold text-gray-800">Add a post</h1>
 
-          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+          {successMessage && <p className="text-red-400 text-center">{successMessage}</p>}
+
+          <Dialog open={isDialogOpen} onOpenChange={(open) => {
+            setIsDialogOpen(open);
+            if (open) setSuccessMessage(""); // Clear success message when opening to post again
+            }}>
+
+            
+
             <DialogTrigger asChild>
               <Button className=" text-white px-4 py-1.5 rounded-full text-sm font-semibold transition-colors shadow-sm">
                 Post
