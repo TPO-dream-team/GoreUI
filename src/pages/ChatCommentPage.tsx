@@ -41,6 +41,7 @@ function ChatCommentPage() {
     const [loading, setLoading] = useState(true);
     const [commentText, setCommentText] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
 
     const canSubmit = commentText.trim().length > 0 && !isSubmitting;
 
@@ -71,6 +72,10 @@ function ChatCommentPage() {
             setIsSubmitting(true);
             await api.post(`/post/${id}/comments`, { message: commentText });
             setCommentText(""); 
+
+            setShowSuccess(true);
+            setTimeout(() => setShowSuccess(false), 3000);
+
             const response = await api.get(`/post/${id}/comments`);
             setComments(response.data);
         } catch (err) {
@@ -170,6 +175,7 @@ function ChatCommentPage() {
                             )}
                         </Button>
                     </div>
+                    {showSuccess && <p className="text-red-500">Your comment was successfully posted.</p>}
                 </footer>
             </main>
         </div>
