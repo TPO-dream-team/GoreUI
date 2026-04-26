@@ -1,4 +1,4 @@
-import type { scansMsg } from "@/pages/ScannerPage";
+import type { scansMsg } from "@/pages/ScannerPage/ScannerPage";
 import { createSlice, type AnyAction, type Middleware, type PayloadAction, type UnknownAction } from "@reduxjs/toolkit";
 import api from "../axios";
 import type { RootState } from "../store";
