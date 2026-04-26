@@ -3,6 +3,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { useChatPage, LIMIT } from "./useChatPage";
 import { useDispatch, useSelector } from "react-redux";
 import api from "@/utility/axios";
+import type { Gora } from "@/utility/stores_slices/goreSlice";
 
 // Mock dependencies
 vi.mock("react-redux", () => ({
@@ -19,10 +20,31 @@ vi.mock("@/utility/axios", () => ({
 
 describe("useChatPage", () => {
   const mockDispatch = vi.fn();
-  const mockGore = [
-    { id: 1, name: "Triglav", height: 2864 },
-    { id: 2, name: "Everest", height: 8848 },
-    { id: 3, name: "K2", height: 8611 },
+  const mockGore: Gora[] = [
+    { 
+      id: "1", 
+      name: "Triglav", 
+      height: 2864, 
+      regionId: 10, 
+      lat: 46.3783, 
+      lon: 13.8366 
+    },
+    { 
+      id: "2", 
+      name: "Everest", 
+      height: 8848, 
+      regionId: 20, 
+      lat: 27.9881, 
+      lon: 86.9250 
+    },
+    { 
+      id: "3", 
+      name: "K2", 
+      height: 8611, 
+      regionId: 30, 
+      lat: 35.8808, 
+      lon: 76.5092 
+    },
   ];
 
   beforeEach(() => {
