@@ -1,16 +1,16 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { Navigation } from './components/common/Navigation';
 import ProtectedRoute from './components/common/ProtectedRoute';
-import AppPage from './pages/AppPage';
-import ScannerPage from './pages/ScannerPage';
-import ChatPage from './pages/ChatPage';
-import BoardPage from './pages/BoardPage';
-import BoardChatPage from './pages/BoardChatPage';
-import ChatCommentPage from './pages/ChatCommentPage';
-import ModeratorPage from './pages/ModeratorPage';
-import UserProfilePage from './pages/UserProfilePage';
+import AppPage from './pages/AppPage/AppPage';
+import ScannerPage from './pages/ScannerPage/ScannerPage';
+import ChatPage from './pages/ChatPage/ChatPage';
+import BoardPage from './pages/BoardPage/BoardPage';
+import BoardChatPage from './pages/BoardChatPage/BoardChatPage';
+import ChatCommentPage from './pages/ChatCommentPage/ChatCommentPage';
+import ModeratorPage from './pages/ModeratorPage/ModeratorPage';
+import UserProfilePage from './pages/UserProfilePage/UserProfilePage';
 import AdminRoute from './components/common/AdminRoute';
-import HelpPage from './pages/HelpPage';
+import HelpPage from './pages/HelpPage/HelpPage';
 
 export const router = createBrowserRouter([
   {
