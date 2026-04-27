@@ -25,7 +25,7 @@ const backendPath = path.resolve(__dirname, './../../GoreBackend/src');
 
 export const test = base.extend<MyTestFixtures, MyWorkerFixtures>({
     backendContainer: [async ({}, use) => {
-    const container = await new PostgreSqlContainer("postgres:15-alpine")
+    const container = await new PostgreSqlContainer("postgres:17-alpine")
       .withDatabase("testdb")
       .withUsername("user")
       .withPassword("password")

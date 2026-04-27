@@ -3,7 +3,6 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import ChatPage from "./ChatPage";
 import { useChatPage } from "./useChatPage";
 
-// Mock the custom hook
 vi.mock("./useChatPage", () => ({
   useChatPage: vi.fn(),
   LIMIT: 10,
@@ -113,7 +112,6 @@ describe("ChatPage Component", () => {
   });
 
   it("calls handleNext when Next button is clicked", () => {
-    // Mock 10 items (assuming LIMIT is 10) so Next is enabled
     const fullBoards = Array(10).fill(defaultState.boards[0]);
     (useChatPage as any).mockReturnValue({ 
       state: { ...defaultState, boards: fullBoards }, 

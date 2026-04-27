@@ -45,7 +45,7 @@ export default function ScannerPage() {
           <CardContent className="text-center space-y-2">
             <Button 
               onClick={actions.scanNfc} 
-              disabled={state.nfcLoading || !state.gpsData}
+              disabled={state.nfcLoading || state.nfcButtonDisable}
             >
               {state.nfcLoading ? <Loader2 className="animate-spin mr-2 h-4 w-4" /> : null}
               {state.nfcLoading ? "Searching..." : "Scan Tag"}

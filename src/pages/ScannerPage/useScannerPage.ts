@@ -26,6 +26,7 @@ export const useScannerPage = () => {
   const [nfcLoading, setNfcLoading] = useState(false);
   const [nfcText, setNfcText] = useState<string | null>(null);
   const [nfcSerialNumber, setNfcSerialNumber] = useState('');
+  const [nfcButtonDisable, setNfcButtonDisable] = useState(true)
 
   // Global Scan/Save State
   const [scanText, setScanText] = useState<string | null>(null);
@@ -34,11 +35,29 @@ export const useScannerPage = () => {
 
   const findNearestMountain = (userLat: number, userLon: number, mountains: Gora[] | null) => {
     if (!mountains || mountains.length === 0) return null;
-    return mountains.reduce((prev, curr) => {
-      const distPrev = Math.pow(prev.lat - userLat, 2) + Math.pow(prev.lon - userLon, 2);
-      const distCurr = Math.pow(curr.lat - userLat, 2) + Math.pow(curr.lon - userLon, 2);
+
+    const distanceLimit = parseFloat(import.meta.env.VITE_DISTANCE_LIMIT || '1');
+
+    const getDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
+      const R = 6371;
+      const dLat = (lat2 - lat1) * (Math.PI / 180);
+      const dLon = (lon2 - lon1) * (Math.PI / 180);
+      const a = 
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      return R * c;
+    };
+
+    const nearest = mountains.reduce((prev, curr) => {
+      const distPrev = getDistance(userLat, userLon, prev.lat, prev.lon);
+      const distCurr = getDistance(userLat, userLon, curr.lat, curr.lon);
       return distCurr < distPrev ? curr : prev;
     });
+
+    const finalDist = getDistance(userLat, userLon, nearest.lat, nearest.lon);
+    
+    return finalDist <= distanceLimit ? nearest : null;
   };
 
   const scanGps = () => {
@@ -48,6 +67,7 @@ export const useScannerPage = () => {
     if (!navigator.geolocation) {
       setGpsError("Geolocation is not supported by your browser.");
       setGpsLoading(false);
+      setNfcButtonDisable(true)
       return;
     }
 
@@ -58,11 +78,18 @@ export const useScannerPage = () => {
         setGpsLoading(false);
         
         const nearGora = findNearestMountain(latitude, longitude, gore);
-        setGpsGoraText(nearGora?.name || "Neznana lokacija");
+        if(nearGora?.name){
+          setGpsGoraText(nearGora?.name);
+          setNfcButtonDisable(false)
+        }else{
+          setGpsGoraText("You are not on a known mountain.")
+          setNfcButtonDisable(true)
+        }
       },
       (err) => {
         setGpsError(err.message);
         setGpsLoading(false);
+        setNfcButtonDisable(true)
       }
     );
   };
@@ -80,7 +107,7 @@ export const useScannerPage = () => {
       await ndef.scan();
 
       ndef.onreadingerror = () => {
-        setNfcError("Cannot read data from the NFC tag. Try another one.");
+        setNfcError("NFC tag not recognised.");
         setNfcLoading(false);
       };
 
@@ -88,7 +115,7 @@ export const useScannerPage = () => {
         const { serialNumber } = event;
         setNfcSerialNumber(serialNumber);
         if (serialNumber) {
-          setNfcText("NFC tag scanned successfully");
+          setNfcText("NFC tag was scanned successfully");
           setNfcLoading(false);
         } else {
           setNfcError("NFC tag not scanned successfully");
@@ -119,13 +146,13 @@ export const useScannerPage = () => {
           setScanText("Successfully saved!");
         }
       } catch (err: any) {
-        setScanError(err.response?.data?.message || "Error occurred while scanning");
+        setScanError(err.response?.data?.message || err.response?.data || "Error occurred while scanning");
       } finally {
         setScanLoading(false);
       }
     } else {
       dispatch(enqueueScan(msg));
-      setScanText("Saved locally. Will sync when online.");
+      setScanText("You are currently offline. We will verify your achievement when you are online.");
     }
   };
 
@@ -133,7 +160,7 @@ export const useScannerPage = () => {
     state: {
       gpsData, gpsLoading, gpsGoraText, gpsError,
       nfcError, nfcLoading, nfcText, nfcSerialNumber,
-      scanText, scanLoading, scanError
+      scanText, scanLoading, scanError, nfcButtonDisable
     },
     actions: { scanGps, scanNfc, saveScan }
   };
