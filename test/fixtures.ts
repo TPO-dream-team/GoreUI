@@ -19,29 +19,30 @@ type MyTestFixtures = {
   backendUrl: string;
 };
 
-const initSqlPath = path.resolve(__dirname, './../../GoreBackend/deployment/db.sql');
-const initSql = fs.readFileSync(initSqlPath, 'utf8');
-const backendPath = path.resolve(__dirname, './../../GoreBackend/src');
-
 export const test = base.extend<MyTestFixtures, MyWorkerFixtures>({
-    backendContainer: [async ({}, use) => {
+    backendContainer: [async ({}, use, testInfo) => {
+    const initSqlPath = path.resolve(__dirname, './../../GoreBackend/deployment/db.sql');
+    const initSql = fs.readFileSync(initSqlPath, 'utf8');
+    const backendPath = path.resolve(__dirname, './../../GoreBackend/src');
+    
     const container = await new PostgreSqlContainer("postgres:17-alpine")
-      .withDatabase("testdb")
-      .withUsername("user")
-      .withPassword("password")
+      .withDatabase("Goredb")
+      .withUsername("postgres")
+      .withPassword("admin")
       .start();
 
     const connectionUri = container.getConnectionUri();
-
+    
     const client = new Client({ connectionString: connectionUri });
     await client.connect();
     await client.query(initSql);
     await client.end();
 
-    const backendPort = 9000 + test.info().workerIndex;
-    const backendUrl = `http://127.0.0.1:${backendPort}`;
+    const backendPort = 9000 + testInfo.workerIndex;
+    const backendUrl = `http://0.0.0.0:${backendPort}`;
 
     // 4. Spawn C# Process
+    const npgsqlConnectionString = `Host=${container.getHost()};Port=${container.getMappedPort(5432)};Database=${container.getDatabase()};Username=${container.getUsername()};Password=${container.getPassword()}`;
     const backend = spawn('dotnet', [
       'run', 
       '--project', backendPath,
@@ -50,15 +51,15 @@ export const test = base.extend<MyTestFixtures, MyWorkerFixtures>({
     ], {
       env: { 
         ...process.env, 
-        "ConnectionStrings__DefaultConnection": connectionUri,
+        "ConnectionStrings__Default": npgsqlConnectionString,
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      stdio: 'ignore', //Tu lahko daš inherent za debugging
+      stdio: 'inherit',
     });
 
-    console.log(`[Worker ${test.info().workerIndex}] Waiting for Backend at ${backendUrl}...`);
+    console.log(`[Worker ${testInfo.workerIndex}] Waiting for Backend at ${backendUrl}...`);
     let isReady = false;
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 60; i++) {
       try {
         const response = await fetch(`${backendUrl}/mountain`);
         if (response.ok || response.status === 401) {
@@ -83,8 +84,8 @@ export const test = base.extend<MyTestFixtures, MyWorkerFixtures>({
     await container.stop();
   }, { scope: 'worker' }],
 
-  backendUrl: async ({ backendContainer }, use) => { // Url je live šele ko backendContainer prižgan
-    const backendPort = 9000 + test.info().workerIndex;
+  backendUrl: async ({ backendContainer }, use, testInfo) => {
+    const backendPort = 9000 + testInfo.workerIndex;
     await use(`http://127.0.0.1:${backendPort}`);
   },
 
@@ -103,6 +104,15 @@ export const test = base.extend<MyTestFixtures, MyWorkerFixtures>({
 
     await use(client);
     await client.end();
+  },
+  page: async ({ page, backendUrl }, use) => { //Spremeni localhost:xyz na taprav backend url
+    await page.route('**/localhost:5148/**', (route) => {
+      const newUrl = route.request().url().replace('http://localhost:5148', backendUrl);
+      console.log(`Redirecting API call: ${route.request().url()} -> ${newUrl}`);
+      route.continue({ url: newUrl });
+    });
+
+    await use(page);
   },
 });
 

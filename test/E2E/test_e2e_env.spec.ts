@@ -1,5 +1,4 @@
-import { test } from '../fixtures';
-import { expect } from '@playwright/test';
+import { test, expect } from '../fixtures.js';
 
 test('Database should be initialized with mountains', async ({ dbClient }) => {
   const result = await dbClient.query('SELECT COUNT(*) FROM MOUNTAIN');
@@ -22,7 +21,7 @@ test.describe('Mountain API', () => {
     expect(response.ok()).toBeTruthy();
     
     const mountains = await response.json();
-    //console.log(`Fetched ${mountains.length} mountains from API`);
+    console.log(`Fetched ${mountains.length} mountains from API`);
 
     expect(Array.isArray(mountains)).toBe(true);
     expect(mountains.length).toBeGreaterThan(0);
@@ -32,6 +31,7 @@ test.describe('Mountain API', () => {
     expect(firstMountain).toHaveProperty('height');
     
     const triglav = mountains.find((m: any) => m.name === 'Triglav');
+    console.log(firstMountain)
     expect(triglav).toBeDefined();
     expect(Number(triglav.height)).toBe(2864);
   });
