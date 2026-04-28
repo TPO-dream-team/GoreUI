@@ -19,8 +19,15 @@ test('test board page: PU-01, PU-02, PU-05, PU-06, PU-07, PU-08', async ({ page,
   await page.getByRole('button', { name: 'Sign in' }).click();
 
   // Login
-  await page.locator('#usernameInput').fill('testuser1');
-  await page.getByRole('textbox', { name: 'Password' }).fill('testuser1');
+  const usernameInput = page.locator('#usernameInput');
+  await usernameInput.waitFor({ state: 'visible', timeout: 5000 });
+  await page.waitForTimeout(2000);
+  await page.getByLabel('Username').click();
+  await page.getByLabel('Username').fill('testuser1');
+  await page.waitForTimeout(1000);
+  await page.getByLabel('Password').click();
+  await page.getByLabel('Password').fill('testuser1');
+  await page.waitForTimeout(1000);
   await page.getByRole('button', { name: 'Login' }).click();
 
   // Navigation & Action
