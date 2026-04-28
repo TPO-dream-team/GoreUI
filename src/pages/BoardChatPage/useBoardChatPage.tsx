@@ -57,7 +57,7 @@ export const useBoardChatPage = () => {
       const response = await api.get(`/boards/${id}`);
       setBoard(response.data);
     } catch (err: any) {
-      setBoardError(err.response?.data?.message || "Error while loading board.");
+      setBoardError(err.response?.data?.message || err.response?.data || "Error while loading board.");
     } finally {
       setLoadingBoard(false);
     }
@@ -70,7 +70,7 @@ export const useBoardChatPage = () => {
       const response = await api.get(`/boards/${id}/chats`);
       setMessages(response.data ?? []);
     } catch (err: any) {
-      setCommentError(err.response?.data?.message || "Error while loading comments.");
+      setCommentError(err.response?.data?.message || err.response?.data || "Error while loading comments.");
     } finally {
       setLoadingMessages(false);
     }
@@ -99,7 +99,7 @@ export const useBoardChatPage = () => {
       setMessage("");
       await loadMessages();
     } catch (err: any) {
-      setCommentError(err.response?.data?.message || "Error while sending message.");
+      setCommentError(err.response?.data?.message || err.response?.data || "Error while sending message.");
     } finally {
       setSending(false);
     }

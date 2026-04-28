@@ -52,7 +52,7 @@ export const useBoardPage = () => {
       const response = await api.get("/boards");
       setBoards(response.data ?? []);
     } catch (err: any) {
-      setBoardsError(err.response?.data?.message || "Error while loading tours.");
+      setBoardsError(err.response?.data?.message || err.response?.data || "Error while loading tours.");
     } finally {
       setBoardsLoading(false);
     }
@@ -135,7 +135,7 @@ export const useBoardPage = () => {
       resetForm();
       setOpen(false);
     } catch (err: any) {
-      setFormError(err.response?.data?.message || "Error while saving the board.");
+      setFormError(err.response?.data?.message || err.response?.data || "Error while saving the board.");
     } finally {
       setCreatingBoard(false);
     }

@@ -60,7 +60,7 @@ export const useChatPage = () => {
       });
       setBoards(response.data ?? []);
     } catch (err: any) {
-      setBoardsError(err.response?.data?.message || "Error while loading posts.");
+      setBoardsError(err.response?.data?.message || err.response?.data || "Error while loading posts.");
     } finally {
       setBoardsLoading(false);
     }
@@ -132,7 +132,7 @@ export const useChatPage = () => {
       setIsDialogOpen(false);
       loadBoards();
     } catch (err: any) {
-      const errorMsg = err.response?.data?.message || "Failed to create post. Try again.";
+      const errorMsg = err.response?.data?.message || err.response?.data  || "Failed to create post. Try again.";
       setValidationError(errorMsg);
     }
   };
