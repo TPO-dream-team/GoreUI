@@ -54,7 +54,7 @@ export const test = base.extend<MyTestFixtures, MyWorkerFixtures>({
         "ConnectionStrings__Default": npgsqlConnectionString,
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      stdio: 'inherit',
+      stdio: "inherit",
     });
 
     console.log(`[Worker ${testInfo.workerIndex}] Waiting for Backend at ${backendUrl}...`);
@@ -95,7 +95,7 @@ export const test = base.extend<MyTestFixtures, MyWorkerFixtures>({
     
     // RESET DATA BEFORE each test
     await client.query(`
-      TRUNCATE TABLE POST_COMMENT, POST, BOARD_CHAT, BOARD, SCAN, "users" 
+      TRUNCATE TABLE POST_COMMENT, POST, BOARD_CHAT, BOARD, SCAN, "users", MESSAGE
       RESTART IDENTITY CASCADE;
       INSERT INTO "users" (id, username, password_hash, role) 
       VALUES ('7a1268fd-484f-4719-8ec2-58b8c8f494f7', 'admin', '$2a$11$FKH5edK1umKbi9v.qFCc6O4zpZ/Dd.KKeMceegHjlfYVAw0TeoQfm', 'admin')

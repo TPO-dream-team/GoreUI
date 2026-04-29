@@ -153,12 +153,12 @@ export function Navigation() {
               <form onSubmit={handleLogin} className="space-y-6">
                 <div className="grid flex-1 auto-rows-min gap-6 px-4">
                   <div className="grid gap-3">
-                    <Label htmlFor="usernameInput">Username</Label>
-                    <Input id="usernameInput" defaultValue="" placeholder="VelikiTiger123" required onChange={(e) => setLoginUsername(e.target.value)} />
+                    <Label htmlFor="loginUsername">Username</Label>
+                    <Input id="loginUsername" defaultValue="" placeholder="VelikiTiger123" required onChange={(e) => setLoginUsername(e.target.value)} />
                   </div>
                   <div className="grid gap-3">
-                    <Label htmlFor="passwordInput">Password</Label>
-                    <Input id="passwordInput" type="password" required onChange={(e) => setLoginPassword(e.target.value)} />
+                    <Label htmlFor="loginPassword">Password</Label>
+                    <Input id="loginPassword" type="password" required onChange={(e) => setLoginPassword(e.target.value)} />
                     <Button disabled={loginLoading}>{loginLoading ? "Logging in..." : "Login"}</Button>
                     {(loginInfoText)! && <span className="text-red-500 text-sm text-center">{loginInfoText}</span>}
                   </div>
@@ -193,12 +193,12 @@ export function Navigation() {
               <form onSubmit={handleSignUp} className="space-y-6">
                 <div className="grid flex-1 auto-rows-min gap-6 px-4">
                   <div className="grid gap-3">
-                    <Label htmlFor="usernameInput">Username</Label>
-                    <Input id="usernameInput" defaultValue="" placeholder="VelikiTiger123" required onChange={(e) => setSignupUsername(e.target.value)} />
-                    <Label htmlFor="passwordInput">Password</Label>
-                    <Input id="passwordInput" type="password" required onChange={(e) => setSignupPassword1(e.target.value)} />
-                    <Label htmlFor="passwordInput">Confirm password </Label>
-                    <Input id="passwordInput" type="password" required onChange={(e) => setSignupPassword2(e.target.value)} />
+                    <Label htmlFor="registerUsername">Username</Label>
+                    <Input id="registerUsername" defaultValue="" placeholder="VelikiTiger123" required onChange={(e) => setSignupUsername(e.target.value)} />
+                    <Label htmlFor="registerPassword">Password</Label>
+                    <Input id="registerPassword" type="password" required onChange={(e) => setSignupPassword1(e.target.value)} />
+                    <Label htmlFor="registerConfirm">Confirm password </Label>
+                    <Input id="registerConfirm" type="password" required onChange={(e) => setSignupPassword2(e.target.value)} />
                     <Button disabled={signUpLoading}>{signUpLoading ? "Signing up..." : "Sign in"}</Button>
                     {(signupInfoText)! && <span className="text-red-500 text-sm text-center">{signupInfoText}</span>}
                   </div>

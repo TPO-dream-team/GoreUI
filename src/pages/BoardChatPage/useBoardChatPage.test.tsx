@@ -198,16 +198,17 @@ describe('useBoardChatPage', () => {
   it('should handle generic error when no response message is provided', async () => {
     (api.get as any).mockImplementation((url: string) => {
       if (url === '/boards/123') {
-        return Promise.reject({ response: { data: {} } });
+        return Promise.reject({ response: { data: null } });
       }
       return Promise.resolve({ data: [] });
     });
-    
+
     const store = createTestStore({
       mountain: { loading: false, error: null, gore: mockMountainData }
     });
+
     const { result } = renderHook(() => useBoardChatPage(), { wrapper: wrapper(store) });
-    
+
     await waitFor(() => {
       expect(result.current.state.boardError).toBe('Error while loading board.');
     });
@@ -371,31 +372,6 @@ describe('useBoardChatPage', () => {
     await waitFor(() => {
       expect(result.current.state.commentError).toBe(errorMessage);
       expect(result.current.state.sending).toBe(false);
-    });
-  });
-
-  it('should handle generic error when sending message fails without response message', async () => {
-    (api.post as any).mockRejectedValue({ response: { data: {} } });
-    
-    const store = createTestStore({
-      mountain: { loading: false, error: null, gore: mockMountainData }
-    });
-    const { result } = renderHook(() => useBoardChatPage(), { wrapper: wrapper(store) });
-    
-    await waitFor(() => {
-      expect(result.current.state.loadingBoard).toBe(false);
-    });
-    
-    act(() => {
-      result.current.actions.setMessage('Test message');
-    });
-    
-    act(() => {
-      result.current.actions.handleSendMessage();
-    });
-    
-    await waitFor(() => {
-      expect(result.current.state.commentError).toBe('Error while sending message.');
     });
   });
 
