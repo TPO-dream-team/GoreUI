@@ -1,17 +1,13 @@
 name: CI Tests
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
-
-    services:
-      # Testcontainers manages its own Docker lifecycle, 
-      # but the runner must have Docker installed (standard on ubuntu-latest).
 
     steps:
       - name: Checkout Frontend (Current Repo)
