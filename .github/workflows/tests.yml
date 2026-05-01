@@ -1,7 +1,7 @@
 name: CI Tests
 on:
   push:
-    branches: [ main ]
+    branches: [ willBeMain ]
   pull_request:
     branches: [ main ]
 
