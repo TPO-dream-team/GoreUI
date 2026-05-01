@@ -1,0 +1,65 @@
+name: CI Tests
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      # Testcontainers manages its own Docker lifecycle, 
+      # but the runner must have Docker installed (standard on ubuntu-latest).
+
+    steps:
+      - name: Checkout Frontend (Current Repo)
+        uses: actions/checkout@v4
+        with:
+          path: GoreFrontend # Checks out into a subfolder
+
+      - name: Checkout Backend Repo
+        uses: actions/checkout@v4
+        with:
+          repository: TPO-dream-team/GoreBackend
+          path: GoreBackend # Checks out side-by-side
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: GoreFrontend/package-lock.json
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Install Frontend Dependencies
+        run: npm ci
+        working-directory: GoreFrontend
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+        working-directory: GoreFrontend
+
+      - name: Run Unit Tests
+        run: npm run test
+        working-directory: GoreFrontend
+
+      - name: Run E2E Tests
+        run: npm run E2E
+        working-directory: GoreFrontend
+        env:
+          # Ensure Docker is accessible for Testcontainers
+          TESTCONTAINERS_RYUK_DISABLED: false 
+
+      - name: Upload Playwright Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: GoreFrontend/playwright-report/
+          retention-days: 30
