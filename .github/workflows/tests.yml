@@ -45,6 +45,9 @@ jobs:
         run: npm run test
         working-directory: GoreFrontend
 
+      - name: Pre-pull Postgres Image
+        run: docker pull postgres:17-alpine
+
       - name: Run E2E Tests
         run: npm run E2E
         working-directory: GoreFrontend
