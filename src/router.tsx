@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { Navigation } from './components/common/Navigation';
+import { Navigation } from './components/common/Navigation/Navigation';
 import ProtectedRoute from './components/common/ProtectedRoute';
 import AppPage from './pages/AppPage/AppPage';
 import ScannerPage from './pages/ScannerPage/ScannerPage';
