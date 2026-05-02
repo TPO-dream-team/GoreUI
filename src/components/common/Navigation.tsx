@@ -62,6 +62,7 @@ export function Navigation() {
     if (loginUser.fulfilled.match(result)) {
       setLoginDialogOpen(false);
       setLoginInfoText("");
+      navigate("/")
     }else if(loginUser.rejected.match(result)){
       const errorMessage = (result.payload as any)?.message || "An error occurred";
       setLoginInfoText(errorMessage);
@@ -85,6 +86,7 @@ export function Navigation() {
   };
   const handleLogoutBtn = () => {
     dispatch(logout());
+    navigate("/")
   };
   return (
     <div className="relative min-h-screen">
