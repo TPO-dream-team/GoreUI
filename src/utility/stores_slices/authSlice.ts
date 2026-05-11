@@ -62,6 +62,7 @@ const authSlice = createSlice({
   name: 'auth',
   initialState: {
     token: null as string | null,
+    id: null as string | null,
     username: null as string | null, // null until you login, also will be saved
     role: null as string | null, 
     token_expire: null as number | null
@@ -71,6 +72,7 @@ const authSlice = createSlice({
       state.token = null;
       state.username = null;
       state.role = null;
+      state.id = null;
     },
   },
   extraReducers: (builder) => {
@@ -82,6 +84,7 @@ const authSlice = createSlice({
         //state.loading = false;
         state.token = action.payload.token; // Save the JWT
         state.username = action.payload.username;
+        state.id = action.payload.id;
         state.role = action.payload.role;
         state.token_expire = action.payload.token_expire
       })

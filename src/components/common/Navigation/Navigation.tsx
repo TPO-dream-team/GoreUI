@@ -23,7 +23,7 @@ import { useState, useEffect } from "react";
 
 export function Navigation() {
   const {
-    username, role, navigate,
+    username, role, id, navigate,
     loginLoading, loginDialogOpen, loginInfoText, setLoginUsername, setLoginPassword, handleLoginDialogOpen, handleLogin,
     signUpLoading, signUpDialogOpen, signupInfoText, setSignupUsername, setSignupPassword1, setSignupPassword2, handleSignupDialogOpen, handleSignUp,
     handleLogoutBtn
@@ -66,8 +66,8 @@ export function Navigation() {
                         <Mountain className="h-5 w-5 text-white" />
                       </div>
                       <div>
-                        <div className="font-bold text-[#17231b]">Planinski vrhovi</div>
-                        <div className="text-xs text-[#647067]">Preverjeni vzponi</div>
+                        <div className="font-bold text-[#17231b]">PeakProof</div>
+                        <div className="text-xs text-[#647067]">Verified ascents</div>
                       </div>
                     </div>
                     
@@ -75,39 +75,39 @@ export function Navigation() {
                       <SheetClose asChild>
                         <Link to="/" className="flex items-center gap-3 px-3 py-2 text-[#344255] hover:bg-[#f0f4ea] rounded-lg transition-colors">
                           <Home className="h-5 w-5" />
-                          <span className="text-base font-medium">Domov</span>
+                          <span className="text-base font-medium">Home</span>
                         </Link>
                       </SheetClose>
                       <SheetClose asChild>
                         <Link to={role ? "/scanner" : "#"} className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${role ? "text-[#344255] hover:bg-[#f0f4ea]" : "text-gray-400 cursor-not-allowed pointer-events-none"}`}>
                           <Scan className="h-5 w-5" />
-                          <span className="text-base font-medium">Skeniranje</span>
+                          <span className="text-base font-medium">Scan</span>
                         </Link>
                       </SheetClose>
                       <SheetClose asChild>
                         <Link to={role ? "/board" : "#"} className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${role ? "text-[#344255] hover:bg-[#f0f4ea]" : "text-gray-400 cursor-not-allowed pointer-events-none"}`}>
                           <Map className="h-5 w-5" />
-                          <span className="text-base font-medium">Ture</span>
+                          <span className="text-base font-medium">Tours</span>
                         </Link>
                       </SheetClose>
                       <SheetClose asChild>
                         <Link to={role ? "/chat" : "#"} className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${role ? "text-[#344255] hover:bg-[#f0f4ea]" : "text-gray-400 cursor-not-allowed pointer-events-none"}`}>
                           <MessageSquare className="h-5 w-5" />
-                          <span className="text-base font-medium">Objave</span>
+                          <span className="text-base font-medium">Posts</span>
                         </Link>
                       </SheetClose>
                       {role === "admin" && (
                         <SheetClose asChild>
                           <Link to="/moderation" className="flex items-center gap-3 px-3 py-2 text-[#b2473e] hover:bg-[#fff4f2] rounded-lg transition-colors">
                             <ShieldCheck className="h-5 w-5" />
-                            <span className="text-base font-medium">Moderacija</span>
+                            <span className="text-base font-medium">Moderation</span>
                           </Link>
                         </SheetClose>
                       )}
                       <SheetClose asChild>
                         <Link to="/help" className="flex items-center gap-3 px-3 py-2 text-[#647067] hover:bg-[#f0f4ea] rounded-lg transition-colors">
                           <HelpCircle className="h-5 w-5" />
-                          <span className="text-base font-medium">Pomoč</span>
+                          <span className="text-base font-medium">Help</span>
                         </Link>
                       </SheetClose>
                     </div>
@@ -116,7 +116,7 @@ export function Navigation() {
                     {username && (
                       <Button onClick={handleLogoutBtn} variant="ghost" className="w-full justify-start gap-3 text-[#b2473e] hover:bg-[#fff4f2] hover:text-[#b2473e]">
                         <LogOut className="h-5 w-5" />
-                        Odjava
+                        Logout
                       </Button>
                     )}
                   </SheetFooter>
@@ -128,7 +128,7 @@ export function Navigation() {
                   <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#2f6b4f] to-[#316f8f] flex items-center justify-center shadow-md">
                     <Mountain className="h-4 w-4 text-white" />
                   </div>
-                  <span className="font-bold text-xl text-[#17231b] hidden sm:inline">Planinski vrhovi</span>
+                  <span className="font-bold text-xl text-[#17231b] hidden sm:inline">PeakProof</span>
                 </div>
               </div>
             </div>
@@ -137,24 +137,26 @@ export function Navigation() {
             <div className="flex items-center gap-2">
               <Dialog open={loginDialogOpen} onOpenChange={handleLoginDialogOpen}>
                 {username ? (
-                  <div className="flex items-center gap-3">
+                  <Link to={`/profile/${id}`} className="flex items-center gap-3 hover:opacity-80">
                     <div className="w-8 h-8 rounded-full bg-[#dbe8d5] flex items-center justify-center">
                       <span className="text-sm font-bold text-[#214b39]">{username.charAt(0).toUpperCase()}</span>
                     </div>
-                    <span className="text-sm font-medium text-[#17231b] hidden sm:inline">{username}</span>
-                  </div>
+                    <span className="text-sm font-medium text-[#17231b] hidden sm:inline hover:underline">
+                      {username}
+                    </span>
+                  </Link>
                 ) : (
                   <DialogTrigger asChild>
                     <Button className="bg-[#2f6b4f] hover:bg-[#214b39] text-white border-none rounded-lg px-4 py-2">
-                      Prijava
+                      Login
                     </Button>
                   </DialogTrigger>
                 )}
 
                 <DialogContent className="w-[400px] rounded-xl border-[#dce3d7]">
                   <VisuallyHidden.Root>
-                    <DialogTitle>Prijava</DialogTitle>
-                    <DialogDescription>Vnesite svoje podatke za prijavo.</DialogDescription>
+                    <DialogTitle>Login</DialogTitle>
+                    <DialogDescription>Enter your login details.</DialogDescription>
                   </VisuallyHidden.Root>
 
                   <form onSubmit={handleLogin} className="space-y-6">
@@ -162,33 +164,33 @@ export function Navigation() {
                       <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-gradient-to-br from-[#2f6b4f] to-[#316f8f] flex items-center justify-center">
                         <Mountain className="h-6 w-6 text-white" />
                       </div>
-                      <h3 className="text-xl font-bold text-[#17231b]">Dobrodošli nazaj</h3>
-                      <p className="text-sm text-[#647067] mt-1">Prijavite se za dostop do funkcij</p>
+                      <h3 className="text-xl font-bold text-[#17231b]">Welcome back</h3>
+                      <p className="text-sm text-[#647067] mt-1">Log in to access your features</p>
                     </div>
                     
                     <div className="grid gap-5 px-2">
                       <div className="grid gap-2">
-                        <Label htmlFor="loginUsername" className="text-[#17231b] font-medium">Uporabniško ime</Label>
+                        <Label htmlFor="loginUsername" className="text-[#17231b] font-medium">Username</Label>
                         <Input 
                           id="loginUsername" 
-                          placeholder="Vnesite uporabniško ime" 
+                          placeholder="Enter your username" 
                           className="border-[#dce3d7] focus:border-[#2f6b4f] focus:ring-[#2f6b4f]/20 rounded-lg"
                           required 
                           onChange={(e) => setLoginUsername(e.target.value)} 
                         />
                       </div>
                       <div className="grid gap-2">
-                        <Label htmlFor="loginPassword" className="text-[#17231b] font-medium">Geslo</Label>
+                        <Label htmlFor="loginPassword" className="text-[#17231b] font-medium">Password</Label>
                         <Input 
                           id="loginPassword" 
                           type="password" 
-                          placeholder="Vnesite geslo"
+                          placeholder="Enter your password"
                           className="border-[#dce3d7] focus:border-[#2f6b4f] focus:ring-[#2f6b4f]/20 rounded-lg"
                           required 
                           onChange={(e) => setLoginPassword(e.target.value)} 
                         />
                         <Button disabled={loginLoading} className="bg-[#2f6b4f] hover:bg-[#214b39] mt-2">
-                          {loginLoading ? "Prijavljanje..." : "Prijava"}
+                          {loginLoading ? "Logging in..." : "Login"}
                         </Button>
                         {loginInfoText && <span className="text-red-500 text-sm text-center">{loginInfoText}</span>}
                       </div>
@@ -201,14 +203,14 @@ export function Navigation() {
                 <Dialog open={signUpDialogOpen} onOpenChange={handleSignupDialogOpen}>
                   <DialogTrigger asChild>
                     <Button variant="outline" className="border-[#dce3d7] text-[#2f6b4f] hover:bg-[#f0f4ea] hover:border-[#2f6b4f] rounded-lg">
-                      Registracija
+                      Registration
                     </Button>
                   </DialogTrigger>
 
                   <DialogContent className="w-[450px] rounded-xl border-[#dce3d7]">
                     <VisuallyHidden.Root>
-                      <DialogTitle>Registracija</DialogTitle>
-                      <DialogDescription>Ustvarite nov račun.</DialogDescription>
+                      <DialogTitle>Registration</DialogTitle>
+                      <DialogDescription>Create a new account.</DialogDescription>
                     </VisuallyHidden.Root>
 
                     <form onSubmit={handleSignUp} className="space-y-6">
@@ -216,16 +218,16 @@ export function Navigation() {
                         <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-gradient-to-br from-[#2f6b4f] to-[#316f8f] flex items-center justify-center">
                           <User className="h-6 w-6 text-white" />
                         </div>
-                        <h3 className="text-xl font-bold text-[#17231b]">Ustvari račun</h3>
-                        <p className="text-sm text-[#647067] mt-1">Pridružite se planinski skupnosti</p>
+                        <h3 className="text-xl font-bold text-[#17231b]">Create Account</h3>
+                        <p className="text-sm text-[#647067] mt-1">Join the mountain community</p>
                       </div>
                       
                       <div className="grid gap-4 px-2">
                         <div className="grid gap-2">
-                          <Label htmlFor="registerUsername" className="text-[#17231b] font-medium">Uporabniško ime</Label>
+                          <Label htmlFor="registerUsername" className="text-[#17231b] font-medium">Username</Label>
                           <Input 
                             id="registerUsername" 
-                            placeholder="Izberite uporabniško ime"
+                            placeholder="Choose a username"
                             className="border-[#dce3d7] focus:border-[#2f6b4f] focus:ring-[#2f6b4f]/20 rounded-lg"
                             required 
                             onChange={(e) => setSignupUsername(e.target.value)} 
@@ -236,7 +238,7 @@ export function Navigation() {
                           <Input 
                             id="registerPassword" 
                             type="password" 
-                            placeholder="Vnesite geslo"
+                            placeholder="Enter your password"
                             className="border-[#dce3d7] focus:border-[#2f6b4f] focus:ring-[#2f6b4f]/20 rounded-lg"
                             required 
                             onChange={(e) => setSignupPassword1(e.target.value)} 
@@ -247,13 +249,13 @@ export function Navigation() {
                           <Input 
                             id="registerConfirm" 
                             type="password" 
-                            placeholder="Ponovite geslo"
+                            placeholder="Repeat password"
                             className="border-[#dce3d7] focus:border-[#2f6b4f] focus:ring-[#2f6b4f]/20 rounded-lg"
                             required 
                             onChange={(e) => setSignupPassword2(e.target.value)} 
                           />
                           <Button disabled={signUpLoading} className="bg-[#2f6b4f] hover:bg-[#214b39] mt-2">
-                            {signUpLoading ? "Registracija..." : "Registracija"}
+                            {signUpLoading ? "Signing up..." : "Registered"}
                           </Button>
                           {signupInfoText && <span className="text-red-500 text-sm text-center">{signupInfoText}</span>}
                         </div>
@@ -270,10 +272,10 @@ export function Navigation() {
         <button
           onClick={toggleStyle}
           className="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-white border border-[#dce3d7] shadow-lg hover:shadow-xl transition-all hover:scale-105 group"
-          title="Preklopi na klasični slog"
+          title="Toggle style"
         >
           <Palette className="h-5 w-5 text-[#2f6b4f] group-hover:rotate-12 transition-transform" />
-          <span className="sr-only">Preklopi slog</span>
+          <span className="sr-only">Switch to classic style</span>
         </button>
 
         <Outlet context={{ useNewStyle }} />
@@ -301,8 +303,8 @@ export function Navigation() {
               <div className="flex flex-col gap-4 mt-8 pl-5">
                 <SheetClose asChild><Link to="/" className="text-lg font-medium hover:bg-secondary mr-3 pt-1 pb-1 pl-3 rounded-full">Home</Link></SheetClose>
                 <SheetClose asChild><Link to={role ? "/scanner" : "#"} className={`text-lg font-medium mr-3 pt-1 pb-1 pl-3 rounded-full ${role ? "hover:bg-secondary" : "text-gray-400 cursor-not-allowed pointer-events-none"}`}>Scan</Link></SheetClose>
-                <SheetClose asChild><Link to={role ? "/board" : "#"} className={`text-lg font-medium mr-3 pt-1 pb-1 pl-3 rounded-full ${role ? "hover:bg-secondary" : "text-gray-400 cursor-not-allowed pointer-events-none"}`}>Board</Link></SheetClose>
-                <SheetClose asChild><Link to={role ? "/chat" : "#"} className={`text-lg font-medium mr-3 pt-1 pb-1 pl-3 rounded-full ${role ? "hover:bg-secondary" : "text-gray-400 cursor-not-allowed pointer-events-none"}`}>Chat</Link></SheetClose>
+                <SheetClose asChild><Link to={role ? "/board" : "#"} className={`text-lg font-medium mr-3 pt-1 pb-1 pl-3 rounded-full ${role ? "hover:bg-secondary" : "text-gray-400 cursor-not-allowed pointer-events-none"}`}>Tours</Link></SheetClose>
+                <SheetClose asChild><Link to={role ? "/chat" : "#"} className={`text-lg font-medium mr-3 pt-1 pb-1 pl-3 rounded-full ${role ? "hover:bg-secondary" : "text-gray-400 cursor-not-allowed pointer-events-none"}`}>Posts</Link></SheetClose>
                 {role === "admin" && (
                   <SheetClose asChild><Link to="/moderation" className="text-lg font-medium mr-3 pt-1 pb-1 pl-3 rounded-full hover:bg-secondary">Moderation</Link></SheetClose>
                 )}
@@ -318,7 +320,9 @@ export function Navigation() {
           {/* Login Dialog */}
           <Dialog open={loginDialogOpen} onOpenChange={handleLoginDialogOpen}>
             {username ? (
-              <span className="text-lg font-semibold select-none mr-3">{username}</span>
+              <Link to={`/profile/${id}`} className="text-lg font-semibold select-none mr-3 hover:underline">
+                {username}
+              </Link>
             ) : (
               <DialogTrigger asChild>
                 <Button className="p-2 border-black hover:bg-accent rounded-md" variant="outline">Login</Button>
@@ -370,7 +374,7 @@ export function Navigation() {
                       <Input id="registerPassword" type="password" required onChange={(e) => setSignupPassword1(e.target.value)} />
                       <Label htmlFor="registerConfirm">Confirm password</Label>
                       <Input id="registerConfirm" type="password" required onChange={(e) => setSignupPassword2(e.target.value)} />
-                      <Button disabled={signUpLoading}>{signUpLoading ? "Signing up..." : "Sign in"}</Button>
+                      <Button disabled={signUpLoading}>{signUpLoading ? "Signing up..." : "Registered"}</Button>
                       {signupInfoText && <span className="text-red-500 text-sm text-center">{signupInfoText}</span>}
                     </div>
                   </div>

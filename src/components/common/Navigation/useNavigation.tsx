@@ -7,7 +7,7 @@ import { loginUser, signUpUser, logout } from "@/utility/stores_slices/authSlice
 export const useNavigation = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const { username, role } = useSelector((state: any) => state.auth);
+  const { username, role, id } = useSelector((state: any) => state.auth);
 
   // Login State
   const [loginusernamefield, setLoginUsername] = useState("");
@@ -79,6 +79,7 @@ export const useNavigation = () => {
     // Auth Data
     username,
     role,
+    id,
     navigate,
     // Login
     loginLoading,
