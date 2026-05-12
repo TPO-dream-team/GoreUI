@@ -134,7 +134,7 @@ function ChatCommentPage() {
             <div className="flex items-center gap-2 pt-2 pb-1">
               <MessageSquare className="w-4 h-4 text-[#2f6b4f]" />
               <h3 className="text-sm font-semibold text-[#17231b] uppercase tracking-wider">
-                Komentarji ({state.comments.length})
+                Comments ({state.comments.length})
               </h3>
             </div>
 
@@ -166,7 +166,7 @@ function ChatCommentPage() {
           <footer className="sticky bottom-0 bg-white/90 backdrop-blur-md border-t border-[#dce3d7] p-4">
             <div className="flex gap-2 items-center">
               <Input
-                placeholder="Napišite komentar..."
+                placeholder="Write a comment..."
                 value={state.commentText}
                 onChange={(e) => actions.setCommentText(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && actions.handlePostComment()}

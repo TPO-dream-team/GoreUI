@@ -54,8 +54,8 @@ function HelpPage() {
                 <HelpCircle className="h-5 w-5 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl md:text-3xl font-bold text-[#17231b]">Pomoč</h1>
-                <p className="text-sm text-[#647067]">Odgovori na pogosta vprašanja</p>
+                <h1 className="text-2xl md:text-3xl font-bold text-[#17231b]">Help</h1>
+                <p className="text-sm text-[#647067]">Answers to frequently asked questions</p>
               </div>
             </div>
           </div>
@@ -66,22 +66,22 @@ function HelpPage() {
               <div className="bg-white border border-[#dce3d7] rounded-lg p-3 text-center">
                 <Scan className="w-5 h-5 text-[#316f8f] mx-auto mb-2" />
                 <div className="text-sm font-semibold text-[#17231b]">GPS + NFC</div>
-                <div className="text-xs text-[#647067]">Dvojna verifikacija</div>
+                <div className="text-xs text-[#647067]">Double verification</div>
               </div>
               <div className="bg-white border border-[#dce3d7] rounded-lg p-3 text-center">
                 <Wifi className="w-5 h-5 text-[#c7792b] mx-auto mb-2" />
-                <div className="text-sm font-semibold text-[#17231b]">Offline način</div>
-                <div className="text-xs text-[#647067]">Shranjevanje skenov</div>
+                <div className="text-sm font-semibold text-[#17231b]">Offline mode</div>
+                <div className="text-xs text-[#647067]">Saving scans</div>
               </div>
               <div className="bg-white border border-[#dce3d7] rounded-lg p-3 text-center">
                 <ShieldCheck className="w-5 h-5 text-[#2f6b4f] mx-auto mb-2" />
-                <div className="text-sm font-semibold text-[#17231b]">AI moderacija</div>
-                <div className="text-xs text-[#647067]">Varna skupnost</div>
+                <div className="text-sm font-semibold text-[#17231b]">AI moderation</div>
+                <div className="text-xs text-[#647067]">Safe community</div>
               </div>
               <div className="bg-white border border-[#dce3d7] rounded-lg p-3 text-center">
                 <MessageSquare className="w-5 h-5 text-[#c7792b] mx-auto mb-2" />
-                <div className="text-sm font-semibold text-[#17231b]">Skupnost</div>
-                <div className="text-xs text-[#647067]">Izmenjava izkušenj</div>
+                <div className="text-sm font-semibold text-[#17231b]">Community</div>
+                <div className="text-xs text-[#647067]">Sharing experiences</div>
               </div>
             </div>
 
@@ -89,46 +89,65 @@ function HelpPage() {
             <section>
               <div className="flex items-center gap-2 mb-4">
                 <MessageSquare className="w-5 h-5 text-[#2f6b4f]" />
-                <h2 className="text-lg font-semibold text-[#17231b]">Pogosta vprašanja</h2>
+                <h2 className="text-lg font-semibold text-[#17231b]">Frequently Asked Questions</h2>
               </div>
               
               <div className="bg-white rounded-xl border border-[#dce3d7] shadow-sm overflow-hidden">
                 <Accordion type="single" collapsible className="w-full">
                   <AccordionItem value="item-1" className="border-b border-[#e5eadf]">
                     <AccordionTrigger className="px-5 py-4 text-[#17231b] hover:text-[#2f6b4f] hover:no-underline">
-                      Kako začnem s skeniranjem?
+                      How do I start scanning?
                     </AccordionTrigger>
                     <AccordionContent className="px-5 pb-4 text-[#647067] leading-relaxed">
-                      Pritisnite gumb "Skeniranje" na začetni strani. Aplikacija bo najprej preverila vašo GPS lokacijo, nato pa vas prosila, da približate telefon NFC oznaki na vrhu. Oba koraka sta potrebna za uspešno verifikacijo.
+                      Press the "Scan" button on the home page. The app will first check your GPS location, then ask you to bring your phone close to the NFC tag at the summit. Both steps are required for successful verification.
                     </AccordionContent>
                   </AccordionItem>
 
                   <AccordionItem value="item-2" className="border-b border-[#e5eadf]">
                     <AccordionTrigger className="px-5 py-4 text-[#17231b] hover:text-[#2f6b4f] hover:no-underline">
-                      Ali lahko shranjujem ture brez internetne povezave?
+                      Can I save tours without an internet connection?
                     </AccordionTrigger>
                     <AccordionContent className="px-5 pb-4 text-[#647067] leading-relaxed">
-                      Da! Vse skenirane vrhove in komentarje aplikacija shrani lokalno na vašo napravo. Ko znova vzpostavite internetno povezavo, se podatki samodejno sinhronizirajo s strežnikom.
+                      Yes! All scanned peaks and comments are saved locally on your device. When you reconnect to the internet, the data is automatically synchronized with the server.
                     </AccordionContent>
                   </AccordionItem>
 
                   <AccordionItem value="item-3" className="border-b border-[#e5eadf]">
                     <AccordionTrigger className="px-5 py-4 text-[#17231b] hover:text-[#2f6b4f] hover:no-underline">
-                      Kako uredim svoj profil?
+                      Why does the app require both GPS and NFC verification?
                     </AccordionTrigger>
                     <AccordionContent className="px-5 pb-4 text-[#647067] leading-relaxed">
-                      Kliknite na "Profil" v stranskem meniju. Tam lahko spremenite svoje ime, kraj in osebni opis. Vse spremembe se samodejno shranijo in so vidne drugim uporabnikom.
+                      GPS confirms that you are near the summit, while NFC confirms that you physically reached the marked checkpoint. Using both methods helps prevent fake check-ins and improves reliability.
                     </AccordionContent>
                   </AccordionItem>
 
                   <AccordionItem value="item-4">
                     <AccordionTrigger className="px-5 py-4 text-[#17231b] hover:text-[#2f6b4f] hover:no-underline">
-                      Zakaj je moja objava zadržana pri moderaciji?
+                      Why is my post held for moderation?
                     </AccordionTrigger>
                     <AccordionContent className="px-5 pb-4 text-[#647067] leading-relaxed">
-                      Naš AI moderator samodejno preverja vse objave in komentarje. Če sistem zazna morebitno neprimerno vsebino (žaljivke, prazne komentarje ali nejasne opise), objavo začasno zadrži. Moderator bo vsebino pregledal v najkrajšem možnem času.
+                      Our AI moderator automatically checks all posts and comments. If the system detects potentially inappropriate content, empty comments, or unclear descriptions, the post is temporarily held. A moderator will review it as soon as possible.
                     </AccordionContent>
                   </AccordionItem>
+
+                  <AccordionItem value="item-5">
+                    <AccordionTrigger className="px-5 py-4 text-[#17231b] hover:text-[#2f6b4f] hover:no-underline">
+                      How do I join a tour?
+                    </AccordionTrigger>
+                    <AccordionContent className="px-5 pb-4 text-[#647067] leading-relaxed">
+                      Open the Tours page and browse available hikes. You can view details such as difficulty, duration, organizer, and discussion comments before commenting on the tour.
+                    </AccordionContent>
+                  </AccordionItem>
+
+                  <AccordionItem value="item-6" className="border-b border-[#e5eadf]">
+                    <AccordionTrigger className="px-5 py-4 text-[#17231b] hover:text-[#2f6b4f] hover:no-underline">
+                      Can other users see my completed peaks?
+                    </AccordionTrigger>
+                    <AccordionContent className="px-5 pb-4 text-[#647067] leading-relaxed">
+                      Yes. Your scanned peaks are displayed on your profile so other hikers can view your progress and achievements.
+                    </AccordionContent>
+                  </AccordionItem>
+
                 </Accordion>
               </div>
             </section>
@@ -140,21 +159,15 @@ function HelpPage() {
                   <Mail className="h-6 w-6 text-white" />
                 </div>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Še vedno potrebujete pomoč?</h3>
+              <h3 className="text-xl font-semibold text-white mb-2">Still need help?</h3>
               <p className="text-white/80 text-sm mb-5 max-w-md mx-auto">
-                Naša ekipa vam je na voljo vsak delovnik. Pišite nam na e-pošto in odgovorili vam bomo v najkrajšem možnem času.
+                Our team is available every weekday. Send us an email and we will reply as soon as possible.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Button asChild className="bg-white hover:bg-gray-100 text-[#2f6b4f] rounded-full gap-2">
                   <a href="mailto:support@peakproof.com?subject=Support Request">
                     <Mail className="h-4 w-4" />
                     support@peakproof.com
-                  </a>
-                </Button>
-                <Button asChild variant="outline" className="border-white/30 text-white hover:bg-white/10 rounded-full gap-2">
-                  <a href="tel:+38612345678">
-                    <Phone className="h-4 w-4" />
-                    +386 1 234 5678
                   </a>
                 </Button>
               </div>
@@ -164,32 +177,32 @@ function HelpPage() {
             <section className="bg-[#f0f4ea] rounded-xl p-5 border border-[#dce3d7]">
               <div className="flex items-center gap-2 mb-3">
                 <Mountain className="w-5 h-5 text-[#2f6b4f]" />
-                <h3 className="font-semibold text-[#17231b]">Hitri nasveti</h3>
+                <h3 className="font-semibold text-[#17231b]">Quick tips</h3>
               </div>
               <div className="grid md:grid-cols-2 gap-3 text-sm">
                 <div className="flex items-start gap-2">
                   <div className="w-5 h-5 rounded-full bg-[#edf8ee] flex items-center justify-center mt-0.5">
                     <span className="text-xs text-[#2f6b4f] font-bold">1</span>
                   </div>
-                  <span className="text-[#344255]">Za natančnejši GPS poskusite stati na odprtem prostoru</span>
+                  <span className="text-[#344255]">For more accurate GPS, try standing in an open area</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <div className="w-5 h-5 rounded-full bg-[#edf8ee] flex items-center justify-center mt-0.5">
                     <span className="text-xs text-[#2f6b4f] font-bold">2</span>
                   </div>
-                  <span className="text-[#344255]">NFC oznake so običajno na informacijskih tablah ali vpisnih knjigah</span>
+                  <span className="text-[#344255]">NFC tags are usually placed on information boards or summit registers</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <div className="w-5 h-5 rounded-full bg-[#edf8ee] flex items-center justify-center mt-0.5">
                     <span className="text-xs text-[#2f6b4f] font-bold">3</span>
                   </div>
-                  <span className="text-[#344255]">Offline skeni se samodejno sinhronizirajo ob ponovni povezavi</span>
+                  <span className="text-[#344255]">Offline scans are automatically synchronized when you reconnect</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <div className="w-5 h-5 rounded-full bg-[#edf8ee] flex items-center justify-center mt-0.5">
                     <span className="text-xs text-[#2f6b4f] font-bold">4</span>
                   </div>
-                  <span className="text-[#344255]">Sodelujte v skupnosti z objavami in komentarji</span>
+                  <span className="text-[#344255]">Take part in the community through posts and comments</span>
                 </div>
               </div>
             </section>
@@ -222,19 +235,34 @@ function HelpPage() {
               </AccordionContent>
             </AccordionItem>
 
-            <AccordionItem value="item-2">
+          <AccordionItem value="item-2">
+            <AccordionTrigger>Why does the app require both GPS and NFC verification?</AccordionTrigger>
+            <AccordionContent>
+              GPS confirms that you are near the summit, while NFC confirms that you physically reached the marked checkpoint. Using both methods helps prevent fake check-ins and improves reliability.
+            </AccordionContent>
+          </AccordionItem>
+
+            <AccordionItem value="item-3">
               <AccordionTrigger>Can I save my tours offline?</AccordionTrigger>
               <AccordionContent>
                 Yes! Tap the download icon next to any tour title to save it for offline use.
               </AccordionContent>
             </AccordionItem>
 
-            <AccordionItem value="item-3">
-              <AccordionTrigger>How do I change my profile settings?</AccordionTrigger>
+            <AccordionItem value="item-4">
+              <AccordionTrigger>How do I join a tour?</AccordionTrigger>
               <AccordionContent>
-                Go to the "Posts" tab and tap your avatar in the top right corner to access settings.
+                Open the Tours page and browse available hikes. You can view details such as difficulty, duration, organizer, and discussion comments before commenting on the tour.
               </AccordionContent>
             </AccordionItem>
+
+            <AccordionItem value="item-5">
+              <AccordionTrigger>Can other users see my completed peaks?</AccordionTrigger>
+              <AccordionContent>
+                Yes. Your scanned peaks are displayed on your profile so other hikers can view your progress and achievements.
+              </AccordionContent>
+            </AccordionItem>
+
           </Accordion>
         </section>
 
@@ -242,7 +270,7 @@ function HelpPage() {
         <section className="rounded-lg bg-secondary p-6 text-center">
           <h3 className="mb-2 font-semibold">Still need help?</h3>
           <p className="mb-4 text-sm text-muted-foreground">
-            Our team is available for a chat Monday through Friday. Just shot us an email. 
+            Our team is available for a chat Monday through Friday. Just shoot us an email. 
           </p>
           <Button asChild className="w-full sm:w-auto">
             <a href="mailto:support@example.com?subject=Support Request">

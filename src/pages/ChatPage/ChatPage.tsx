@@ -23,7 +23,6 @@ import {
   Calendar,
   AlertCircle,
   Loader2,
-  X,
   CheckCircle2
 } from "lucide-react";
 
@@ -34,9 +33,9 @@ const formatDate = (dateString: string) => {
   const diffMs = now.getTime() - date.getTime();
   const diffDays = Math.floor(diffMs / 86400000);
   
-  if (diffDays === 0) return "Danes";
-  if (diffDays === 1) return "Včeraj";
-  if (diffDays < 7) return `Pred ${diffDays} dnevi`;
+  if (diffDays === 0) return "Today";
+  if (diffDays === 1) return "Yesterday";
+  if (diffDays < 7) return `${diffDays} days ago`;
   return date.toLocaleDateString("sl-SI", { month: 'short', day: 'numeric', year: 'numeric' });
 };
 
@@ -78,8 +77,8 @@ function ChatPage() {
                   <MessageSquare className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-lg font-bold text-[#17231b]">Objave</h1>
-                  <p className="text-xs text-[#647067]">Razmere, dogovori in novice</p>
+                  <h1 className="text-lg font-bold text-[#17231b]">Posts</h1>
+                  <p className="text-xs text-[#647067]">Community discussions and experiences </p>
                 </div>
               </div>
               
@@ -87,7 +86,7 @@ function ChatPage() {
                 <DialogTrigger asChild>
                   <Button className="bg-[#2f6b4f] hover:bg-[#214b39] text-white rounded-full gap-2 shadow-sm">
                     <Send className="w-4 h-4" />
-                    Nova objava
+                    New post
                   </Button>
                 </DialogTrigger>
                 
@@ -97,37 +96,37 @@ function ChatPage() {
                       <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#2f6b4f] to-[#316f8f] flex items-center justify-center">
                         <MessageSquare className="w-4 h-4 text-white" />
                       </div>
-                      <DialogTitle className="text-xl text-[#17231b]">Nova objava</DialogTitle>
+                      <DialogTitle className="text-xl text-[#17231b]">New post</DialogTitle>
                     </div>
                     <DialogDescription className="text-[#647067]">
-                      Delite svojo izkušnjo ali obvestilo s planinsko skupnostjo.
+                      Share your experiences with the hiking community.
                     </DialogDescription>
                   </DialogHeader>
 
                   {state.showSuccess && (
                     <div className="flex items-center gap-2 text-[#2f6b4f] bg-[#edf8ee] p-3 rounded-lg border border-[#bcd8c2]">
                       <CheckCircle2 className="w-4 h-4" />
-                      <span className="text-sm">Vaša objava je bila uspešno objavljena.</span>
+                      <span className="text-sm">Your post was successfully posted.</span>
                     </div>
                   )}
 
                   <div className="grid gap-5 mt-2">
                     <div className="flex flex-col gap-2">
-                      <label className="text-sm font-medium text-[#17231b]">Naslov objave</label>
+                      <label className="text-sm font-medium text-[#17231b]">Post title</label>
                       <input
                         value={state.title}
                         className="flex h-10 w-full rounded-lg border border-[#dce3d7] bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2f6b4f]/20 focus:border-[#2f6b4f]"
-                        placeholder="Moja izkušnja na Triglavu..."
+                        placeholder="My experience on Triglav..."
                         onChange={(e) => actions.setTitle(e.target.value)}
                       />
                     </div>
                     
                     <div className="flex flex-col gap-2">
-                      <label className="text-sm font-medium text-[#17231b]">Vsebina</label>
+                      <label className="text-sm font-medium text-[#17231b]">Content</label>
                       <textarea
                         value={state.content}
                         className="flex min-h-[120px] w-full rounded-lg border border-[#dce3d7] bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2f6b4f]/20 focus:border-[#2f6b4f] resize-none"
-                        placeholder="Kako je bilo? Delite podrobnosti..."
+                        placeholder="How was it? Share the details..."
                         maxLength={300}
                         onChange={(e) => actions.setContent(e.target.value)}
                       />
@@ -137,12 +136,12 @@ function ChatPage() {
                     <div className="flex flex-col gap-2">
                       <label className="text-sm font-medium text-[#17231b] flex items-center gap-2">
                         <Mountain className="w-4 h-4 text-[#316f8f]" />
-                        Povezana gora (Izbirno)
+                        Related mountain (Optional)
                       </label>
                       <div className="relative" ref={state.mountainRef}>
                         <Input
                           id="mountain-search"
-                          placeholder="Išči goro..."
+                          placeholder="Search for a mountain..."
                           value={state.mountainQuery}
                           onChange={(e) => actions.handleMountainQueryChange(e.target.value)}
                           onFocus={() => actions.setmountainSuggestion(true)}
@@ -178,7 +177,7 @@ function ChatPage() {
                       onClick={actions.handlePostSubmit} 
                       className="mt-2 w-full bg-gradient-to-r from-[#2f6b4f] to-[#316f8f] hover:from-[#214b39] hover:to-[#225c76] text-white py-3 rounded-lg font-semibold transition-all active:scale-[0.98] shadow-sm"
                     >
-                      Objavi zdaj
+                      Post now
                     </button>
                   </div>
                 </DialogContent>
@@ -190,7 +189,7 @@ function ChatPage() {
           {state.showSuccess && (
             <div className="mx-4 mt-4 flex items-center gap-2 text-[#2f6b4f] bg-[#edf8ee] p-3 rounded-lg border border-[#bcd8c2]">
               <CheckCircle2 className="w-4 h-4" />
-              <span className="text-sm">Vaša objava je bila uspešno objavljena.</span>
+              <span className="text-sm">Your post was successfully posted.</span>
             </div>
           )}
 
@@ -199,7 +198,7 @@ function ChatPage() {
             {state.boardsLoading ? (
               <div className="flex justify-center items-center py-12">
                 <Loader2 className="animate-spin h-8 w-8 text-[#2f6b4f]" />
-                <span className="ml-3 text-[#647067]">Nalaganje objav...</span>
+                <span className="ml-3 text-[#647067]">Loading posts...</span>
               </div>
             ) : (
               <>
@@ -211,8 +210,8 @@ function ChatPage() {
                     <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[#f0f4ea] flex items-center justify-center">
                       <MessageSquare className="w-8 h-8 text-[#647067]" />
                     </div>
-                    <p className="text-[#647067]">Ni še nobene objave.</p>
-                    <p className="text-sm text-[#647067] mt-1">Bodite prvi, ki deli svojo izkušnjo!</p>
+                    <p className="text-[#647067]">No posts yet.</p>
+                    <p className="text-sm text-[#647067] mt-1"> Be the first to share your experience!</p>
                   </div>
                 )}
               </>
@@ -238,11 +237,11 @@ function ChatPage() {
                 }`}
               >
                 <ChevronLeft className="w-4 h-4" />
-                Prejšnje
+                Previous
               </button>
 
               <span className="text-sm text-[#647067]">
-                Stran {Math.floor(state.offset / LIMIT) + 1}
+                Page {Math.floor(state.offset / LIMIT) + 1}
               </span>
 
               <button
@@ -254,7 +253,7 @@ function ChatPage() {
                     : "text-[#2f6b4f] hover:bg-[#f0f4ea]"
                 }`}
               >
-                Naslednje
+                Next
                 <ChevronRight className="w-4 h-4" />
               </button>
             </div>
@@ -448,7 +447,7 @@ function ChatDisplayNew({ data }: { data: any }) {
             className="flex items-center gap-2 text-[#316f8f] text-sm font-medium hover:text-[#225c76] transition-colors"
           >
             <MessageSquare className="w-4 h-4" />
-            Ogled {commentCount} komentarjev
+            View  {commentCount} comments
           </a>
         </div>
       </div>
