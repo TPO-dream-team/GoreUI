@@ -141,12 +141,13 @@ function BoardChatPage() {
                           <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#2f6b4f] to-[#316f8f] flex items-center justify-center">
                             <User className="w-3 h-3 text-white" />
                           </div>
-                          <span 
-                             onClick={() => navigate(`/profile/${chat.userId}`)}
-                              className="font-semibold text-[#17231b] text-sm cursor-pointer hover:text-[#2f6b4f] hover:underline"
-                            >
-                              {chat.username}
-                          </span>
+                          <button
+                            type="button"
+                            onClick={() => navigate(`/profile/${chat.userId}`)}
+                            className="font-semibold text-[#17231b] text-sm cursor-pointer hover:text-[#2f6b4f] hover:underline"
+                          >
+                            {chat.username}
+                          </button>
                         </div>
                         <div className="flex items-center gap-1 text-xs text-[#647067]">
                           <Clock className="w-3 h-3" />
@@ -263,12 +264,13 @@ function BoardChatPage() {
               {state.messages.map((chat) => (
                 <div key={chat.id} className="rounded-md border p-3">
                   <div className="flex items-center justify-between">
-                    <span
+                    <button
+                      type = "button"
                       onClick={() => navigate(`/profile/${chat.userId}`)}
                       className="font-semibold text-[#17231b] text-sm cursor-pointer hover:text-[#2f6b4f] hover:underline"
                     >
                       {chat.username}
-                    </span>
+                    </button>
                     <span className="text-xs text-muted-foreground">
                       {new Date(chat.timestamp).toLocaleString()}
                     </span>

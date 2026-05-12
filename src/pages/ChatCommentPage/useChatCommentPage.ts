@@ -13,6 +13,7 @@ export interface Comment {
 export interface Post {
   id: string;
   username: string;
+  userId: string;
   tagline: string;
   startMsg: string;
   mountainName?: string;

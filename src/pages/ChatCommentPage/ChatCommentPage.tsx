@@ -12,9 +12,9 @@ const formatDate = (dateString: string) => {
   const diffMs = now.getTime() - date.getTime();
   const diffDays = Math.floor(diffMs / 86400000);
   
-  if (diffDays === 0) return "Danes";
-  if (diffDays === 1) return "Včeraj";
-  if (diffDays < 7) return `Pred ${diffDays} dnevi`;
+  if (diffDays === 0) return "Today";
+  if (diffDays === 1) return "Yesterday";
+  if (diffDays < 7) return `${diffDays} days ago`;
   return date.toLocaleDateString("sl-SI", { month: 'short', day: 'numeric', year: 'numeric' });
 };
 
@@ -56,7 +56,7 @@ function ChatCommentPage() {
         <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-[#f6f7f2] via-[#f6f7f2] to-white">
           <div className="flex flex-col items-center gap-3">
             <Loader2 className="w-8 h-8 text-[#2f6b4f] animate-spin" />
-            <p className="text-[#647067] text-sm">Nalaganje...</p>
+            <p className="text-[#647067] text-sm">Loading...</p>
           </div>
         </div>
       );
@@ -82,8 +82,8 @@ function ChatCommentPage() {
                   <MessageSquare className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-lg font-bold text-[#17231b]">Pogovor o objavi</h1>
-                  <p className="text-xs text-[#647067]">Komentarji skupnosti</p>
+                  <h1 className="text-lg font-bold text-[#17231b]">Post discussion</h1>
+                  <p className="text-xs text-[#647067]">Community comments</p>
                 </div>
               </div>
             </div>
@@ -102,7 +102,13 @@ function ChatCommentPage() {
                         <User className="w-4 h-4 text-white" />
                       </div>
                       <div>
-                        <span className="font-semibold text-[#17231b] text-sm">@{state.post.username}</span>
+                        <button
+                          type="button"
+                          onClick={() => navigate(`/profile/${state.post?.userId}`)}
+                          className="font-semibold text-[#17231b] text-sm hover:text-[#2f6b4f] hover:underline"
+                        >
+                          @{state.post.username}
+                        </button>
                         {state.post.mountainName && (
                           <div className="flex items-center gap-1 mt-0.5">
                             <Mountain className="w-3 h-3 text-[#2f6b4f]" />
@@ -140,7 +146,8 @@ function ChatCommentPage() {
                     key={comment.id} 
                     username={comment.username} 
                     text={comment.message} 
-                    time={comment.timeStamp} 
+                    time={comment.timeStamp}
+                    onUserClick={() => navigate(`/profile/${comment.createdBy}`)} 
                   />
                 ))
               ) : (
@@ -148,8 +155,8 @@ function ChatCommentPage() {
                   <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-[#f0f4ea] flex items-center justify-center">
                     <MessageSquare className="w-6 h-6 text-[#647067]" />
                   </div>
-                  <p className="text-[#647067] text-sm">Ni še nobenega komentarja.</p>
-                  <p className="text-xs text-[#647067] mt-1">Bodite prvi, ki komentira!</p>
+                  <p className="text-[#647067] text-sm">There are no comments yet.</p>
+                  <p className="text-xs text-[#647067] mt-1">Be the first to comment!</p>
                 </div>
               )}
             </div>
@@ -185,7 +192,7 @@ function ChatCommentPage() {
             {state.showSuccess && (
               <div className="flex items-center gap-2 mt-2 text-[#2f6b4f] text-xs bg-[#edf8ee] p-2 rounded-lg">
                 <CheckCircle2 className="w-3 h-3" />
-                <span>Vaš komentar je bil uspešno objavljen.</span>
+                <span>Your comment has been successfully posted.</span>
               </div>
             )}
           </footer>
@@ -224,7 +231,13 @@ function ChatCommentPage() {
             <div className="p-4 border rounded-lg shadow-sm bg-white border-blue-200 ring-1 ring-blue-50/50">
               <div className="flex justify-between items-center mb-3">
                 <span className="flex items-center gap-3">
-                  <span className="font-bold text-gray-900">@{state.post.username}</span>
+                  <button
+                    type="button"
+                    onClick={() => navigate(`/profile/${state.post?.userId}`)}
+                    className="font-bold text-gray-900 hover:underline"
+                  >
+                    @{state.post.username}
+                  </button>
                   {state.post.mountainName && (
                     <span className="text-blue-600 text-[10px] uppercase bg-blue-50 px-2 py-0.5 rounded-full font-bold">
                       {state.post.mountainName}
@@ -250,6 +263,7 @@ function ChatCommentPage() {
                   username={comment.username} 
                   text={comment.message} 
                   time={comment.timeStamp} 
+                  onUserClick={() => navigate(`/profile/${comment.createdBy}`)}
                 />
               ))
             ) : (
@@ -294,7 +308,7 @@ function ChatCommentPage() {
 }
 
 // New Style Comment Item
-function CommentItemNew({ username, text, time }: { username: string, text: string, time: string }) {
+function CommentItemNew({ username,  text, time, onUserClick }: { username: string, text: string, time: string,  onUserClick: () => void; }) {
   return (
     <div className="bg-white rounded-lg border border-[#e5eadf] shadow-sm hover:shadow-md transition-all ml-0">
       <div className="p-4">
@@ -303,7 +317,13 @@ function CommentItemNew({ username, text, time }: { username: string, text: stri
             <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#2f6b4f] to-[#316f8f] flex items-center justify-center">
               <User className="w-3 h-3 text-white" />
             </div>
-            <span className="font-semibold text-[#2f6b4f] text-sm">@{username}</span>
+            <button
+              type = "button"
+              onClick={onUserClick}
+              className="font-semibold text-[#17231b] text-sm hover:text-[#2f6b4f] hover:underline"
+            >
+              @{username}
+            </button>
           </div>
           <div className="flex items-center gap-1 text-[10px] text-[#647067] font-medium">
             <Clock className="w-3 h-3" />
@@ -317,11 +337,17 @@ function CommentItemNew({ username, text, time }: { username: string, text: stri
 }
 
 // Old Style Comment Item
-function CommentItem({ username, text, time }: { username: string, text: string, time: string }) {
+function CommentItem({ username, text, time, onUserClick }: { username: string, text: string, time: string, onUserClick?: () => void }) {
   return (
     <div className="p-3 bg-white/95 rounded-lg shadow-sm ml-4 border-l-4 border-blue-500">
       <div className="flex justify-between items-center mb-1">
-        <span className="font-bold text-blue-600 text-sm">@{username}</span>
+        <button
+          type = "button"
+          onClick={onUserClick}
+          className="font-semibold text-[#17231b] text-sm hover:text-[#2f6b4f] hover:underline"
+        >
+          @{username}
+        </button>
         <span className="text-[10px] text-gray-400 font-medium uppercase">
           {formatTime(time)}
         </span>

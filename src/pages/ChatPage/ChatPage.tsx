@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -403,8 +404,8 @@ function ChatPage() {
 
 // New Style Chat Display Component
 function ChatDisplayNew({ data }: { data: any }) {
-  const { username, mountainName, tagline, id, commentCount, startMsg, timeStamp } = data;
-  
+  const { username, userId, mountainName, tagline, id, commentCount, startMsg, timeStamp } = data;
+  const navigate = useNavigate();
   return (
     <div className="max-w-2xl mx-auto bg-white rounded-xl border border-[#dce3d7] shadow-sm hover:shadow-md transition-all mb-5 overflow-hidden">
       <div className="p-5">
@@ -414,7 +415,13 @@ function ChatDisplayNew({ data }: { data: any }) {
               <User className="w-4 h-4 text-white" />
             </div>
             <div>
-              <span className="font-semibold text-[#17231b] text-sm">@{username}</span>
+              <button
+                type="button"
+                onClick={() => navigate(`/profile/${userId}`)}
+                className="font-semibold text-[#17231b] text-sm hover:text-[#2f6b4f] hover:underline"
+              >
+                @{username}
+              </button>
             </div>
           </div>
           <div className="flex items-center gap-1 text-xs text-[#647067]">
@@ -451,13 +458,20 @@ function ChatDisplayNew({ data }: { data: any }) {
 
 // Old Style Chat Display Component
 function ChatDisplay({ data }: { data: any }) {
-  const { username, mountainName, tagline, id, commentCount, startMsg, timeStamp } = data;
+  const { username, userId, mountainName, tagline, id, commentCount, startMsg, timeStamp } = data;
+  const navigate = useNavigate();
   
   return (
     <div className="max-w-xl mx-auto p-4 border rounded-lg shadow-sm bg-white mb-5">
       <div className="flex justify-between items-center mb-3">
         <span className="flex items-center gap-3">
-          <span className="font-bold text-gray-900">@{username}</span>
+          <button
+            type="button"
+            onClick={() => navigate(`/profile/${userId}`)}
+            className="font-bold text-gray-900 hover:underline"
+          >
+            @{username}
+          </button>
         </span>
         <span className="text-sm text-gray-500">{formatDate(timeStamp)}</span>
       </div>
