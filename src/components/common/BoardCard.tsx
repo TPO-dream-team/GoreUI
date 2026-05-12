@@ -13,6 +13,7 @@ type BoardCardProps = {
   description: string;
   difficulty: number;
   onChatClick?: () => void;
+  onOrganizerClick?: () => void;
   hideCommentButton?: boolean;
 };
 
@@ -25,6 +26,7 @@ function BoardCard({
   description,
   difficulty,
   onChatClick,
+  onOrganizerClick,
   hideCommentButton,
 }: BoardCardProps) {
   const outletContext = useOutletContext<{ useNewStyle?: boolean }>();
@@ -80,7 +82,13 @@ function BoardCard({
                 </div>
                 <div>
                   <p className="text-xs text-[#647067]">Organiser</p>
-                  <p className="font-semibold text-[#17231b] text-sm">{organizer}</p>
+                  <button
+                    type="button"
+                    onClick={onOrganizerClick}
+                    className="font-semibold text-[#17231b] text-sm hover:text-[#2f6b4f] hover:underline"
+                  >
+                    {organizer}
+                  </button>
                 </div>
               </div>
               {!hideCommentButton && onChatClick && (
@@ -142,7 +150,14 @@ function BoardCard({
               <div className="text-base font-semibold text-black">
                 <p>Organiser:</p>
                 <p>
-                  {organizer} <span className="text-sm text-zinc-500">• 12 peaks</span>
+                  <button
+                    type="button"
+                    onClick={onOrganizerClick}
+                    className="hover:underline"
+                  >
+                    {organizer}
+                  </button>{" "}
+                  <span className="text-sm text-zinc-500">• 12 peaks</span>
                 </p>
               </div>
 

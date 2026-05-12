@@ -270,6 +270,7 @@ function BoardPage() {
                     organizer={post.username}
                     description={post.description}
                     difficulty={post.difficulty}
+                    onOrganizerClick={() => navigate(`/profile/${post.userId}`)}
                     onChatClick={() =>
                       navigate(`/board/${post.boardId}`, {
                         state: { organizer: post.username },
@@ -426,6 +427,7 @@ function BoardPage() {
                 organizer={post.username}
                 description={post.description}
                 difficulty={post.difficulty}
+                onOrganizerClick={() => navigate(`/profile/${post.userId}`)}
                 onChatClick={() =>
                   navigate(`/board/${post.boardId}`, {
                     state: { organizer: post.username },
