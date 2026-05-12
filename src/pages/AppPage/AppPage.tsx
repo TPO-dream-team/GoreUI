@@ -215,7 +215,7 @@ function AppPage() {
             </div>
             <div className="space-y-2">
               <p className="text-sm text-muted-foreground max-w-[250px] mx-auto">
-                Authentication Required. Please log in to your account to enable all the features. You can find the login button above. If you don't already have an account you can also register top right.
+                Authentication Required. Please log in to your account to enable all the features. You can find the login button above. If you don't already have an account you can also register using the button in the top-right corner.
               </p>
             </div>
           </div>

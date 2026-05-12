@@ -234,7 +234,7 @@ export function Navigation() {
                           />
                         </div>
                         <div className="grid gap-2">
-                          <Label htmlFor="registerPassword" className="text-[#17231b] font-medium">Geslo</Label>
+                          <Label htmlFor="registerPassword" className="text-[#17231b] font-medium">Password</Label>
                           <Input 
                             id="registerPassword" 
                             type="password" 
@@ -245,7 +245,7 @@ export function Navigation() {
                           />
                         </div>
                         <div className="grid gap-2">
-                          <Label htmlFor="registerConfirm" className="text-[#17231b] font-medium">Potrdite geslo</Label>
+                          <Label htmlFor="registerConfirm" className="text-[#17231b] font-medium">Confirm password</Label>
                           <Input 
                             id="registerConfirm" 
                             type="password" 
@@ -255,7 +255,7 @@ export function Navigation() {
                             onChange={(e) => setSignupPassword2(e.target.value)} 
                           />
                           <Button disabled={signUpLoading} className="bg-[#2f6b4f] hover:bg-[#214b39] mt-2">
-                            {signUpLoading ? "Signing up..." : "Registered"}
+                            {signUpLoading ? "Signing up..." : "Register"}
                           </Button>
                           {signupInfoText && <span className="text-red-500 text-sm text-center">{signupInfoText}</span>}
                         </div>
@@ -374,7 +374,7 @@ export function Navigation() {
                       <Input id="registerPassword" type="password" required onChange={(e) => setSignupPassword1(e.target.value)} />
                       <Label htmlFor="registerConfirm">Confirm password</Label>
                       <Input id="registerConfirm" type="password" required onChange={(e) => setSignupPassword2(e.target.value)} />
-                      <Button disabled={signUpLoading}>{signUpLoading ? "Signing up..." : "Registered"}</Button>
+                      <Button disabled={signUpLoading}>{signUpLoading ? "Signing up..." : "Register"}</Button>
                       {signupInfoText && <span className="text-red-500 text-sm text-center">{signupInfoText}</span>}
                     </div>
                   </div>

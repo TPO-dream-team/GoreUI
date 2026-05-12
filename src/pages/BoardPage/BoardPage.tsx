@@ -55,10 +55,10 @@ function BoardPage() {
                 <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#2f6b4f] to-[#316f8f] flex items-center justify-center">
                   <Mountain className="w-4 h-4 text-white" />
                 </div>
-                <h1 className="text-2xl md:text-3xl font-bold text-[#17231b]">Ture</h1>
+                <h1 className="text-2xl md:text-3xl font-bold text-[#17231b]">Tours</h1>
               </div>
               <p className="text-[#647067] text-sm mt-1">
-                Pregled objavljenih planinskih tur in poti
+                Browse published hikes
               </p>
             </div>
 
@@ -66,7 +66,7 @@ function BoardPage() {
               <DialogTrigger asChild>
                 <Button className="bg-[#2f6b4f] hover:bg-[#214b39] text-white rounded-lg gap-2">
                   <Plus className="w-4 h-4" />
-                  Nova tura
+                  New tour
                 </Button>
               </DialogTrigger>
 
@@ -76,9 +76,9 @@ function BoardPage() {
                     <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#2f6b4f] to-[#316f8f] flex items-center justify-center">
                       <Mountain className="w-4 h-4 text-white" />
                     </div>
-                    <DialogTitle className="text-xl text-[#17231b]">Ustvari novo turo</DialogTitle>
+                    <DialogTitle className="text-xl text-[#17231b]">Create a new tour</DialogTitle>
                   </div>
-                  <p className="text-sm text-[#647067]">Delite svojo planinsko izkušnjo z drugimi</p>
+                  <p className="text-sm text-[#647067]">Share your hiking experience with others</p>
                 </DialogHeader>
 
                 <div className="space-y-5 mt-2">
@@ -86,12 +86,12 @@ function BoardPage() {
                   <div className="space-y-2">
                     <Label htmlFor="mountain-search" className="text-[#17231b] font-medium flex items-center gap-2">
                       <Mountain className="w-4 h-4 text-[#2f6b4f]" />
-                      Izbira gore
+                      Mountain selection
                     </Label>
                     <div className="relative">
                       <Input
                         id="mountain-search"
-                        placeholder="Vnesite ime gore ..."
+                        placeholder="Enter mountain name ..."
                         value={state.mountainQuery}
                         onChange={(e) => actions.handleMountainQueryChange(e.target.value)}
                         onFocus={() => actions.setmountainSuggestion(true)}
@@ -121,7 +121,7 @@ function BoardPage() {
                   {state.selectedMountain && (
                     <div className="rounded-lg bg-[#f0f4ea] p-3 border border-[#dce3d7]">
                       <p className="text-sm">
-                        <span className="font-medium text-[#17231b]">Izbrana gora:</span>{" "}
+                        <span className="font-medium text-[#17231b]">Selected mountain:</span>{" "}
                         <span className="text-[#2f6b4f] font-semibold">{state.selectedMountain.name}</span>
                         {" · "}
                         <span className="text-[#316f8f]">{state.selectedMountain.height} m</span>
@@ -133,7 +133,7 @@ function BoardPage() {
                   <div className="space-y-2">
                     <Label htmlFor="date" className="text-[#17231b] font-medium flex items-center gap-2">
                       <Calendar className="w-4 h-4 text-[#c7792b]" />
-                      Datum ture
+                      Tour date
                     </Label>
                     <Input
                       id="date"
@@ -150,14 +150,14 @@ function BoardPage() {
                     <div className="space-y-2">
                       <Label htmlFor="duration" className="text-[#17231b] font-medium flex items-center gap-2">
                         <Clock className="w-4 h-4 text-[#316f8f]" />
-                        Trajanje (ure)
+                        Duration (hours)
                       </Label>
                       <Input
                         id="duration"
                         type="number"
                         min="1"
                         step="0.5"
-                        placeholder="npr. 5"
+                        placeholder="e.g. 5"
                         value={state.duration}
                         onChange={(e) => actions.setDuration(e.target.value)}
                         className="border-[#dce3d7] focus:border-[#2f6b4f] focus:ring-[#2f6b4f]/20 rounded-lg"
@@ -166,14 +166,14 @@ function BoardPage() {
                     <div className="space-y-2">
                       <Label htmlFor="difficulty" className="text-[#17231b] font-medium flex items-center gap-2">
                         <TrendingUp className="w-4 h-4 text-[#c7792b]" />
-                        Zahtevnost (1-5)
+                        Difficulty (1-5)
                       </Label>
                       <Input
                         id="difficulty"
                         type="number"
                         min="1"
                         max="5"
-                        placeholder="npr. 3"
+                        placeholder="e.g. 3"
                         value={state.difficulty}
                         onChange={(e) => actions.setDifficulty(e.target.value)}
                         className="border-[#dce3d7] focus:border-[#2f6b4f] focus:ring-[#2f6b4f]/20 rounded-lg"
@@ -185,11 +185,11 @@ function BoardPage() {
                   <div className="space-y-2">
                     <Label htmlFor="description" className="text-[#17231b] font-medium flex items-center gap-2">
                       <FileText className="w-4 h-4 text-[#647067]" />
-                      Opis ture
+                      Tour description
                     </Label>
                     <Textarea
                       id="description"
-                      placeholder="Delite podrobnosti o poti, razmerah in izkušnjah ..."
+                      placeholder="Share details about the route, conditions, and experience ..."
                       value={state.description}
                       onChange={(e) => actions.handleDescriptionChange(e.target.value)}
                       className="border-[#dce3d7] focus:border-[#2f6b4f] focus:ring-[#2f6b4f]/20 rounded-lg min-h-[100px]"
@@ -214,7 +214,7 @@ function BoardPage() {
                       disabled={state.creatingBoard}
                       className="bg-[#2f6b4f] hover:bg-[#214b39] text-white rounded-lg gap-2"
                     >
-                      {state.creatingBoard ? "Ustvarjanje..." : "Objavi turo"}
+                      {state.creatingBoard ? "Creating..." : "Publish tour"}
                     </Button>
                   </div>
                 </div>
@@ -228,7 +228,7 @@ function BoardPage() {
             {state.boardsLoading && (
               <div className="flex justify-center items-center py-12">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#2f6b4f]"></div>
-                <span className="ml-3 text-[#647067]">Nalaganje tur...</span>
+                <span className="ml-3 text-[#647067]">Loading tours...</span>
               </div>
             )}
 
@@ -237,7 +237,7 @@ function BoardPage() {
               <div className="text-center py-12">
                 <div className="inline-flex items-center gap-2 text-[#b2473e] bg-[#fff4f2] px-4 py-2 rounded-lg">
                   <AlertCircle className="w-5 h-5" />
-                  <span>Napaka: {state.boardsError}</span>
+                  <span>Error: {state.boardsError}</span>
                 </div>
               </div>
             )}
@@ -248,8 +248,8 @@ function BoardPage() {
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[#f0f4ea] flex items-center justify-center">
                   <Mountain className="w-8 h-8 text-[#647067]" />
                 </div>
-                <p className="text-[#647067]">Trenutno ni objavljenih tur.</p>
-                <p className="text-sm text-[#647067] mt-1">Bodite prvi, ki deli svojo izkušnjo!</p>
+                <p className="text-[#647067]">There are currently no published tours.</p>
+                <p className="text-sm text-[#647067] mt-1">Be the first to share your experience!</p>
               </div>
             )}
 
@@ -263,7 +263,7 @@ function BoardPage() {
                 return (
                   <BoardCard
                     key={post.boardId}
-                    mountainName={mountain?.name ?? "Neznana gora"}
+                    mountainName={mountain?.name ?? "Unknown mountain"}
                     mountainHeight={mountain?.height ?? 0}
                     date={post.expiryDate}
                     duration={String(post.tourTime)}
@@ -308,7 +308,7 @@ function BoardPage() {
                 <div className="relative">
                   <Input
                     id="mountain-search"
-                    placeholder="Ime gore ..."
+                    placeholder="Mountain name ..."
                     value={state.mountainQuery}
                     onChange={(e) => actions.handleMountainQueryChange(e.target.value)}
                     onFocus={() => actions.setmountainSuggestion(true)}

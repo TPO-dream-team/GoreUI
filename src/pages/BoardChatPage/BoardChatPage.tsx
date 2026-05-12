@@ -42,10 +42,10 @@ function BoardChatPage() {
     const diffHours = Math.floor(diffMs / 3600000);
     const diffDays = Math.floor(diffMs / 86400000);
 
-    if (diffMins < 1) return "Pravkar";
-    if (diffMins < 60) return `${diffMins} min nazaj`;
-    if (diffHours < 24) return `${diffHours} h nazaj`;
-    if (diffDays < 7) return `${diffDays} dni nazaj`;
+    if (diffMins < 1) return "Just now";
+    if (diffMins < 60) return `${diffMins} min ago`;
+    if (diffHours < 24) return `${diffHours} h ago`;
+    if (diffDays < 7) return `${diffDays} days ago`;
     return date.toLocaleDateString("sl-SI");
   };
 
@@ -63,14 +63,14 @@ function BoardChatPage() {
                 className="text-[#647067] hover:text-[#2f6b4f] hover:bg-[#f0f4ea] rounded-lg gap-2"
               >
                 <ArrowLeft className="w-4 h-4" />
-                Nazaj na ture
+                Back to tours
               </Button>
               <div className="h-6 w-px bg-[#dce3d7]" />
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#2f6b4f] to-[#316f8f] flex items-center justify-center">
                   <MessageSquare className="w-4 h-4 text-white" />
                 </div>
-                <h1 className="text-xl md:text-2xl font-bold text-[#17231b]">Komentarji ture</h1>
+                <h1 className="text-xl md:text-2xl font-bold text-[#17231b]">Tour comments</h1>
               </div>
             </div>
           </div>
@@ -87,11 +87,11 @@ function BoardChatPage() {
           {state.board && (
             <div className="mb-8 flex justify-center">
               <BoardCard
-                mountainName={state.mountain?.name ?? "Neznana gora"}
+                mountainName={state.mountain?.name ?? "Unknown mountain"}
                 mountainHeight={state.mountain?.height ?? 0}
                 date={state.board.expiryDate}
                 duration={String(state.board.tourTime)}
-                organizer={state.organizerFromState ?? "Neznan organizator"}
+                organizer={state.organizerFromState ?? "Unknown organizer"}
                 description={state.board.description}
                 difficulty={state.board.difficulty}
                 onOrganizerClick={() => navigate(`/profile/${state.board?.userId}`)}
@@ -106,7 +106,7 @@ function BoardChatPage() {
             <div className="bg-[#fbfcf8] px-5 py-3 border-b border-[#dce3d7]">
               <h2 className="text-base font-semibold text-[#17231b] flex items-center gap-2">
                 <MessageSquare className="w-4 h-4 text-[#2f6b4f]" />
-                Komentarji
+                Comments
                 {state.messages.length > 0 && (
                   <span className="text-xs text-[#647067] font-normal ml-1">
                     ({state.messages.length})
@@ -119,15 +119,15 @@ function BoardChatPage() {
               {state.loadingMessages ? (
                 <div className="flex justify-center items-center py-8">
                   <Loader2 className="animate-spin h-6 w-6 text-[#2f6b4f]" />
-                  <span className="ml-3 text-[#647067]">Nalaganje komentarjev...</span>
+                  <span className="ml-3 text-[#647067]">Loading comments...</span>
                 </div>
               ) : state.messages.length === 0 ? (
                 <div className="text-center py-8">
                   <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-[#f0f4ea] flex items-center justify-center">
                     <MessageSquare className="w-6 h-6 text-[#647067]" />
                   </div>
-                  <p className="text-[#647067]">Ni še nobenega komentarja.</p>
-                  <p className="text-sm text-[#647067] mt-1">Bodite prvi, ki komentira!</p>
+                  <p className="text-[#647067]">No comments yet.</p>
+                  <p className="text-sm text-[#647067] mt-1">Be the first to comment!</p>
                 </div>
               ) : (
                 <div className="space-y-4">
@@ -169,14 +169,14 @@ function BoardChatPage() {
             <div className="bg-[#fbfcf8] px-5 py-3 border-b border-[#dce3d7]">
               <h2 className="text-base font-semibold text-[#17231b] flex items-center gap-2">
                 <Send className="w-4 h-4 text-[#c7792b]" />
-                Dodaj komentar
+                Add comment
               </h2>
             </div>
 
             <div className="p-5">
               <div className="space-y-3">
                 <Input
-                  placeholder="Napišite komentar..."
+                  placeholder="Write a comment..."
                   value={state.message}
                   onChange={(e) => actions.setMessage(e.target.value)}
                   onKeyDown={(e) => {
@@ -204,12 +204,12 @@ function BoardChatPage() {
                     {state.sending ? (
                       <>
                         <Loader2 className="animate-spin h-4 w-4" />
-                        Pošiljanje...
+                        Sending...
                       </>
                     ) : (
                       <>
                         <Send className="w-4 h-4" />
-                        Objavi
+                        Post
                       </>
                     )}
                   </Button>
