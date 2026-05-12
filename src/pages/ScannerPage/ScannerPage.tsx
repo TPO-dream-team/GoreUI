@@ -40,9 +40,9 @@ export default function ScannerPage() {
             <div className="inline-flex items-center justify-center w-14 h-14 mb-4 rounded-xl bg-gradient-to-br from-[#2f6b4f] to-[#316f8f] shadow-lg">
               <Zap className="w-7 h-7 text-white" />
             </div>
-            <h1 className="text-2xl md:text-3xl font-bold text-[#17231b]">Skeniranje vrha</h1>
+            <h1 className="text-2xl md:text-3xl font-bold text-[#17231b]">Peak Scan</h1>
             <p className="text-[#647067] mt-2 text-sm max-w-md mx-auto">
-              Preverite svojo lokacijo in preberite NFC oznako za potrditev vzpona
+              Verify your location and scan the NFC tag to confirm your ascent
             </p>
           </div>
           
@@ -55,7 +55,7 @@ export default function ScannerPage() {
               <CardHeader className="pb-3">
                 <CardTitle className="text-center flex items-center justify-center gap-2 text-[#17231b]">
                   <MapPin className="w-5 h-5 text-[#316f8f]" />
-                  GPS lokacija
+                  GPS Location
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-center space-y-4">
@@ -65,12 +65,12 @@ export default function ScannerPage() {
                   className="w-full bg-[#316f8f] hover:bg-[#225c76] text-white rounded-lg transition-all"
                 >
                   {state.gpsLoading ? <Loader2 className="animate-spin mr-2 h-4 w-4" /> : null}
-                  {state.gpsLoading ? "Pridobivanje lokacije..." : "Preveri GPS"}
+                  {state.gpsLoading ? "Getting location..." : "Check GPS"}
                 </Button>
                 <div className="min-h-[70px] pt-2">
                   {state.gpsData && (
                     <div className="text-sm bg-[#fbfcf8] rounded-lg p-3 border border-[#e5eadf]">
-                      <p className="text-[#647067] text-xs mb-1">Trenutna lokacija:</p>
+                      <p className="text-[#647067] text-xs mb-1">Current location:</p>
                       <p className="font-mono text-[#17231b]">{state.gpsData.lat.toFixed(6)}</p>
                       <p className="font-mono text-[#17231b]">{state.gpsData.lon.toFixed(6)}</p>
                       {state.gpsGoraText && (
@@ -95,7 +95,7 @@ export default function ScannerPage() {
               <CardHeader className="pb-3">
                 <CardTitle className="text-center flex items-center justify-center gap-2 text-[#17231b]">
                   <Nfc className="w-5 h-5 text-[#2f6b4f]" />
-                  NFC oznaka
+                  NFC Tag
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-center space-y-4">
@@ -105,7 +105,7 @@ export default function ScannerPage() {
                   className="w-full bg-[#2f6b4f] hover:bg-[#214b39] text-white rounded-lg transition-all"
                 >
                   {state.nfcLoading ? <Loader2 className="animate-spin mr-2 h-4 w-4" /> : null}
-                  {state.nfcLoading ? "Iskanje oznake..." : "Skeniraj NFC"}
+                  {state.nfcLoading ? "Searching for tag..." : "Scan NFC"}
                 </Button>
                 <div className="min-h-[70px] pt-2">
                   {state.nfcText && (
@@ -120,7 +120,7 @@ export default function ScannerPage() {
                   )}
                   {!state.gpsData && !state.nfcText && !state.nfcError && (
                     <p className="text-[#647067] text-xs italic bg-[#fbfcf8] rounded-lg p-3">
-                      Najprej preverite GPS lokacijo
+                      Check your GPS location first
                     </p>
                   )}
                 </div>
@@ -133,7 +133,7 @@ export default function ScannerPage() {
               <CardHeader className="pb-3">
                 <CardTitle className="text-center flex items-center justify-center gap-2 text-[#17231b]">
                   <CheckCircle2 className="w-5 h-5 text-[#2f6b4f]" />
-                  Potrditev
+                  Confirmation
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-center space-y-4">
@@ -143,7 +143,7 @@ export default function ScannerPage() {
                   disabled={!state.nfcSerialNumber || state.scanLoading}
                 >
                   {state.scanLoading ? <Loader2 className="animate-spin mr-2 h-4 w-4" /> : <Save className="mr-2 h-4 w-4" />}
-                  {state.scanLoading ? "Shranjevanje..." : "Shrani verifikacijo"}
+                  {state.scanLoading ? "Saving..." : "Save verification"}
                 </Button>
                 <div className="min-h-[70px] pt-2">
                   {state.scanText && (
@@ -158,7 +158,7 @@ export default function ScannerPage() {
                   )}
                   {state.nfcSerialNumber && !state.scanText && !state.scanError && (
                     <p className="text-xs text-[#647067] bg-[#fbfcf8] rounded-lg p-2">
-                      Pripravljeno za shranjevanje
+                      Ready to save
                     </p>
                   )}
                 </div>
@@ -173,11 +173,11 @@ export default function ScannerPage() {
                 <Mountain className="w-4 h-4 text-white" />
               </div>
               <div>
-                <h4 className="font-semibold text-[#17231b] text-sm mb-1">Kako deluje?</h4>
+                <h4 className="font-semibold text-[#17231b] text-sm mb-1">How does it work?</h4>
                 <p className="text-[#647067] text-xs leading-relaxed">
-                  1. Preverite GPS lokacijo - sistem bo potrdil, če ste v bližini znanega vrha.<br />
-                  2. Skenirajte NFC oznako na vrhu - ta edinstvena koda potrdi vaš obisk.<br />
-                  3. Shranite verifikacijo - vrh bo dodan v vaš osebni dnevnik.
+                  1. Check your GPS location - the system will confirm whether you are near a known peak.<br />
+                  2. Scan the NFC tag at the summit - this unique code confirms your visit.<br />
+                  3. Save the verification - the peak will be added to your personal log.
                 </p>
               </div>
             </div>

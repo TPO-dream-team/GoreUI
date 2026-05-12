@@ -76,7 +76,7 @@ function ModeratorPage() {
       setModerationItem({
         id: item.id ?? item.messageId ?? "-",
         username: item.username ?? "unknown",
-        category: item.category ?? item.type ?? "Vsebina",
+        category: item.category ?? item.type ?? "Content",
         content: item.message ?? item.msg ?? item.content ?? item.text ?? "",
         timestamp: item.timestamp ?? item.timeStamp ?? item.createdAt ?? new Date().toISOString(),
         aiConfidence: Number(
@@ -86,7 +86,7 @@ function ModeratorPage() {
             item.probability ??
             0
         ),
-        reason: item.reason ?? "možno spam vsebino",
+        reason: item.reason ?? "possible spam content",
       });
 
       setMetrics(metricsResponse.data);
@@ -94,7 +94,7 @@ function ModeratorPage() {
       setError(
         err.response?.data?.message ||
           err.response?.data?.detail ||
-          "Napaka pri nalaganju moderacije."
+          "Error while loading moderation."
       );
     } finally {
       setLoading(false);
@@ -132,7 +132,7 @@ function ModeratorPage() {
   }
 
   if (loading) {
-    return <div className="p-8 text-center text-slate-600">Nalaganje moderacije...</div>;
+    return <div className="p-8 text-center text-slate-600">Loading moderation...</div>;
   }
 
   if (error) {
@@ -152,7 +152,7 @@ function ModeratorPage() {
   const category = moderationItem?.category ?? "-";
   const timestamp = moderationItem?.timestamp ?? new Date().toISOString();
   const confidence = moderationItem?.aiConfidence ?? 0;
-  const reason = moderationItem?.reason ?? "možno spam vsebino";
+  const reason = moderationItem?.reason ?? "possible spam content";
   const content = moderationItem?.content ?? "";
 
   // New Style (Mountain Theme)
@@ -166,9 +166,9 @@ function ModeratorPage() {
             <div className="inline-flex items-center justify-center w-14 h-14 mb-3 rounded-xl bg-gradient-to-br from-[#b2473e] to-[#c7792b] shadow-lg">
               <ShieldAlert className="w-7 h-7 text-white" />
             </div>
-            <h1 className="text-2xl md:text-3xl font-bold text-[#17231b]">Moderacija vsebin</h1>
+            <h1 className="text-2xl md:text-3xl font-bold text-[#17231b]">Content moderation</h1>
             <p className="text-[#647067] mt-2 text-sm max-w-md mx-auto">
-              Pregled vsebin, ki jih je označil AI moderator
+              Review content flagged by the AI moderator
             </p>
           </div>
 
@@ -180,7 +180,7 @@ function ModeratorPage() {
                     <ShieldAlert className="w-3 h-3 text-white" />
                   </div>
                   <span className="text-xs font-bold text-[#b2473e] uppercase tracking-wider">
-                    Čaka na pregled
+                    Pending review
                   </span>
                 </div>
                 <span className="text-xs text-[#647067] flex items-center gap-1">
@@ -192,13 +192,13 @@ function ModeratorPage() {
             <div className="flex flex-wrap items-center justify-between gap-2 px-5 py-3 bg-[#fbfcf8] border-b border-[#e5eadf] text-xs">
               <div className="flex items-center gap-2">
                 <User className="w-3 h-3 text-[#647067]" />
-                <span className="text-[#647067]">Od:</span>
+                <span className="text-[#647067]">From:</span>
                 <span className="font-semibold text-[#2f6b4f]">@{username}</span>
               </div>
               <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#edf8ee]">
                 <Tag className="w-3 h-3 text-[#2f6b4f]" />
                 <span className="text-[10px] font-bold text-[#2f6b4f] uppercase">
-                  Kategorija: {category}
+                  Category: {category}
                 </span>
               </div>
               <div className="flex items-center gap-1">
@@ -215,7 +215,7 @@ function ModeratorPage() {
                   <div className="w-9 h-9 rounded-full bg-[#f0f4ea] border border-[#dce3d7] flex items-center justify-center">
                     <CheckCircle2 className="w-5 h-5 text-[#647067]" />
                   </div>
-                  <p className="text-sm text-[#647067]">Ni novih vsebin za moderacijo</p>
+                  <p className="text-sm text-[#647067]">No new content to moderate</p>
                 </div>
               ) : (
                 <p className="text-[#344255] text-base leading-relaxed italic">
@@ -228,25 +228,9 @@ function ModeratorPage() {
               <div className="flex items-center justify-center gap-2">
                 <Info size={14} className="text-[#316f8f]" />
                 <p className="text-xs text-[#316f8f]">
-                  AI je <span className="font-bold">{confidence}%</span>{" "}
-                  prepričan, da gre za {reason}
+                  AI is <span className="font-bold">{confidence}%</span>{" "}
+                  confident this is {reason}
                 </p>
-              </div>
-            </div>
-
-            <div className="p-3 bg-white border-b border-[#e5eadf]">
-              <div className="mb-2 flex items-center justify-between text-xs">
-                <span className="text-[#647067] flex items-center gap-1">
-                  <Activity className="w-3 h-3" />
-                  Stopnja tveganja
-                </span>
-                <span className="font-semibold text-[#c7792b]">{confidence}%</span>
-              </div>
-              <div className="h-2 bg-[#e5eadf] rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-[#2f6b4f] via-[#c7792b] to-[#b2473e] rounded-full transition-all duration-500"
-                  style={{ width: `${confidence}%` }}
-                />
               </div>
             </div>
 
@@ -256,8 +240,8 @@ function ModeratorPage() {
                   <TrendingUp className="w-3 h-3 text-[#316f8f]" />
                   <span>F1: <span className="font-bold text-[#2f6b4f]">{f1}</span></span>
                 </div>
-                <span>Natančnost: <span className="font-bold text-[#2f6b4f]">{precision}</span></span>
-                <span>Priklic: <span className="font-bold text-[#2f6b4f]">{recall}</span></span>
+                <span>Precision: <span className="font-bold text-[#2f6b4f]">{precision}</span></span>
+                <span>Recall: <span className="font-bold text-[#2f6b4f]">{recall}</span></span>
               </div>
             </div>
 
@@ -269,7 +253,7 @@ function ModeratorPage() {
                 className="h-12 text-sm font-bold bg-[#b2473e] hover:bg-[#96362d] rounded-lg flex gap-2 shadow-sm active:scale-95 transition-all"
               >
                 <ShieldAlert size={18} />
-                ZAVRNI
+                REJECT
               </Button>
               <Button
                 disabled={actionLoading || isEmpty}
@@ -277,7 +261,7 @@ function ModeratorPage() {
                 className="h-12 text-sm font-bold rounded-lg bg-[#2f6b4f] hover:bg-[#214b39] flex gap-2 shadow-sm active:scale-95 transition-all"
               >
                 <ShieldCheck size={18} />
-                ODOBRI
+                APPROVE
               </Button>
             </div>
           </div>
@@ -321,7 +305,7 @@ function ModeratorPage() {
               {isEmpty ? (
                 <div className="flex flex-col items-center gap-2">
                   <CheckCircle2 className="w-6 h-6 text-gray-400" />
-                  <p className="text-sm text-gray-400">Ni novih vsebin za moderacijo</p>
+                  <p className="text-sm text-gray-400">No new content to moderate</p>
                 </div>
               ) : (
                 <p className="text-lg md:text-xl text-gray-800 text-center italic leading-relaxed">

@@ -222,21 +222,22 @@ function UserProfilePage() {
             <h1 className="text-3xl md:text-4xl font-bold text-[#17231b] tracking-tight">
               @{user.username}
             </h1>
-            <div className="flex items-center justify-center gap-2 mt-3">
+            <div className="flex items-center justify-center gap-2 mt-3 flex-wrap">
               <Badge className="bg-[#2f6b4f] hover:bg-[#2f6b4f] text-white px-4 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
                 {derivedLevel}
               </Badge>
-              <div className="h-4 w-[1px] bg-[#dce3d7]" />
-              <p className="text-[#647067] text-sm">Vpogled v dosežke</p>
+              <Badge className="bg-[#edf8ee] text-[#275b35] border border-[#bcd8c2] px-4 py-1 rounded-full text-xs font-semibold">
+                {totalSummits} achievements
+              </Badge>
             </div>
           </div>
 
           {/* Stats Overview */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <StatsCardNew title="Vsi vzponi" value={String(totalSummits)} icon={<Mountain className="w-4 h-4" />} />
-            <StatsCardNew title="Unikatni vrhi" value={String(uniqueSummits)} icon={<MapPin className="w-4 h-4" />} />
-            <StatsCardNew title="Objave" value={String(userPosts.length)} icon={<Activity className="w-4 h-4" />} />
-            <StatsCardNew title="Težavnost" value={averageDifficulty} icon={<TrendingUp className="w-4 h-4" />} />
+            <StatsCardNew title="All ascents" value={String(totalSummits)} icon={<Mountain className="w-4 h-4" />} />
+            <StatsCardNew title="Unique peaks" value={String(uniqueSummits)} icon={<MapPin className="w-4 h-4" />} />
+            <StatsCardNew title="Posts" value={String(userPosts.length)} icon={<Activity className="w-4 h-4" />} />
+            <StatsCardNew title="Difficulty" value={averageDifficulty} icon={<TrendingUp className="w-4 h-4" />} />
           </div>
 
           {/* Main Grid Container with items-stretch to ensure equal height */}
@@ -249,7 +250,7 @@ function UserProfilePage() {
                 <CardHeader className="pb-4">
                   <CardTitle className="flex items-center gap-2 text-[#17231b]">
                     <CheckCircle2 className="w-5 h-5 text-[#2f6b4f]" />
-                    Verificirani dosežki
+                    Verified achievements
                   </CardTitle>
                 </CardHeader>
                 {/* flex-1 ensures this content fills the available height */}
@@ -262,7 +263,7 @@ function UserProfilePage() {
                   {userScans.length === 0 ? (
                     <div className="flex flex-col items-center justify-center flex-1 min-h-[300px] bg-[#fbfcf8] rounded-xl border border-dashed border-[#dce3d7] text-center p-4">
                       <Mountain className="w-10 h-10 text-[#dce3d7] mb-2" />
-                      <p className="text-[#647067] italic">Uporabnik še nima verificiranih vzponov.</p>
+                      <p className="text-[#647067] italic">This user has no verified ascents yet.</p>
                     </div>
                   ) : (
                     userScans.map((achievement, idx) => (
@@ -279,7 +280,7 @@ function UserProfilePage() {
                           </div>
                         </div>
                         <Badge className="bg-[#edf8ee] text-[#275b35] border-[#bcd8c2] shadow-none hidden sm:flex">
-                          Preverjeno
+                          Verified
                         </Badge>
                       </div>
                     ))
@@ -295,7 +296,7 @@ function UserProfilePage() {
                 <CardHeader className="bg-[#fbfcf8] border-b border-[#e5eadf] py-4">
                   <CardTitle className="text-sm font-bold flex items-center gap-2">
                     <Tag className="w-4 h-4 text-[#316f8f]" />
-                    Aktivne oglasne deske
+                    Active tour boards
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="p-4 space-y-3 flex-1 overflow-y-auto max-h-[280px]">
@@ -316,12 +317,12 @@ function UserProfilePage() {
                 <CardHeader className="bg-[#fbfcf8] border-b border-[#e5eadf] py-4">
                   <CardTitle className="text-sm font-bold flex items-center gap-2">
                     <Activity className="w-4 h-4 text-[#c7792b]" />
-                    Zadnje objave
+                    Recent posts
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="p-4 space-y-3 flex-1 overflow-y-auto max-h-[280px]">
                   {userPosts.length === 0 ? (
-                    <p className="text-xs text-[#647067] italic text-center py-4">Ni objav.</p>
+                    <p className="text-xs text-[#647067] italic text-center py-4">No posts.</p>
                   ) : (
                     userPosts.map((post) => (
                       <Link key={post.id} to={`/chat/${post.id}`} className="group block border-b border-[#f0f4ea] last:border-0 pb-2">
@@ -354,8 +355,13 @@ function UserProfilePage() {
                     <h1 className="text-2xl font-bold tracking-tight text-white sm:text-4xl">
                       @{user.username}
                     </h1>
+
                     <Badge className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[10px] uppercase tracking-wide text-white backdrop-blur sm:text-xs">
                       {derivedLevel}
+                    </Badge>
+
+                    <Badge className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[10px] uppercase tracking-wide text-white backdrop-blur sm:text-xs">
+                      {totalSummits} achievements
                     </Badge>
                   </div>
                   <p className="max-w-2xl text-xs text-cyan-50/80 sm:text-sm">
@@ -375,7 +381,7 @@ function UserProfilePage() {
             </CardHeader>
             <CardContent className="space-y-4 px-4 sm:px-6">
               {userScans.length === 0 && (
-                <p className="text-sm text-slate-500">Uporabnik še nima verificiranih dosežkov.</p>
+                <p className="text-sm text-slate-500">This user has no verified achievements yet.</p>
               )}
               {userScans.map((achievement, index) => (
                 <div key={String(achievement.scanId)}>
@@ -454,7 +460,7 @@ function UserProfilePage() {
               </CardHeader>
               <CardContent className="space-y-3 px-4 sm:px-6">
                 {userPosts.length === 0 && (
-                  <p className="text-sm text-slate-500">Uporabnik še nima objav.</p>
+                  <p className="text-sm text-slate-500">This user has no posts yet.</p>
                 )}
 
                 {userPosts.map((post) => (
