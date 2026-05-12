@@ -58,9 +58,9 @@ function BoardCard({
   };
 
   const getDifficultyLabel = (diff: number) => {
-    if (diff <= 2) return "Lahka";
-    if (diff <= 4) return "Srednja";
-    return "Zahtevna";
+    if (diff <= 2) return "Easy";
+    if (diff <= 4) return "Moderate";
+    return "Difficult";
   };
 
   // New Style (Mountain Theme)
@@ -79,7 +79,7 @@ function BoardCard({
                   <Users className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <p className="text-xs text-[#647067]">Organizator</p>
+                  <p className="text-xs text-[#647067]">Organiser</p>
                   <p className="font-semibold text-[#17231b] text-sm">{organizer}</p>
                 </div>
               </div>
@@ -90,7 +90,7 @@ function BoardCard({
                   className="text-[#316f8f] hover:text-[#225c76] hover:bg-[#eef8fc] rounded-full gap-1"
                 >
                   <MessageSquare className="w-4 h-4" />
-                  <span className="text-sm">Komentarji</span>
+                  <span className="text-sm">Comments</span>
                 </Button>
               )}
             </div>
@@ -140,7 +140,7 @@ function BoardCard({
           <div>
             <div className="mb-8 flex items-center justify-between gap-4">
               <div className="text-base font-semibold text-black">
-                <p>Organizator:</p>
+                <p>Organiser:</p>
                 <p>
                   {organizer} <span className="text-sm text-zinc-500">• 12 peaks</span>
                 </p>

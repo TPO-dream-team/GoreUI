@@ -47,12 +47,12 @@ function AppPage() {
               </svg>
             </div>
             <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-[#17231b]">
-              Planinski vrhovi
+              PeakProof
             </h1>
             <p className="text-[#647067] mt-2 text-base max-w-md mx-auto">
               {username
-                ? `Dobrodošel nazaj, ${username}`
-                : "Preverjeni vzponi in ture"}
+                ? `Welcome back, ${username}`
+                : "Verified ascents and tours"}
             </p>
           </div>
 
@@ -66,8 +66,8 @@ function AppPage() {
               >
                 <div className="flex flex-col items-center gap-2 w-full">
                   <Scan className="h-8 w-8 text-[#2f6b4f] group-hover:scale-105 transition-transform" />
-                  <span className="text-lg font-semibold">Skeniranje</span>
-                  <span className="text-xs text-[#647067]">Preveri vrh z GPS in NFC</span>
+                  <span className="text-lg font-semibold">Scan</span>
+                  <span className="text-xs text-[#647067]">Verify peak with GPS and NFC</span>
                 </div>
               </Button>
 
@@ -79,8 +79,8 @@ function AppPage() {
               >
                 <div className="flex flex-col items-center gap-2 w-full">
                   <Map className="h-8 w-8 text-[#316f8f] group-hover:scale-105 transition-transform" />
-                  <span className="text-lg font-semibold">Ture</span>
-                  <span className="text-xs text-[#647067]">Objavljene planinske poti</span>
+                  <span className="text-lg font-semibold">Tours</span>
+                  <span className="text-xs text-[#647067]">Find a hike</span>
                 </div>
               </Button>
 
@@ -92,8 +92,8 @@ function AppPage() {
               >
                 <div className="flex flex-col items-center gap-2 w-full">
                   <MessageSquare className="h-8 w-8 text-[#c7792b] group-hover:scale-105 transition-transform" />
-                  <span className="text-lg font-semibold">Objave</span>
-                  <span className="text-xs text-[#647067]">Razmere in dogovori</span>
+                  <span className="text-lg font-semibold">Posts</span>
+                  <span className="text-xs text-[#647067]">Community discussions</span>
                 </div>
               </Button>
 
@@ -106,8 +106,8 @@ function AppPage() {
                 >
                   <div className="flex flex-col items-center gap-2 w-full">
                     <ShieldCheck className="h-8 w-8 text-[#b2473e] group-hover:scale-105 transition-transform" />
-                    <span className="text-lg font-semibold">Moderacija</span>
-                    <span className="text-xs text-[#647067]">Pregled vsebin</span>
+                    <span className="text-lg font-semibold">Moderation</span>
+                    <span className="text-xs text-[#647067]">Content overview</span>
                   </div>
                 </Button>
               )}
@@ -121,8 +121,8 @@ function AppPage() {
                 >
                   <div className="flex items-center justify-center gap-3">
                     <HelpCircle className="h-5 w-5" />
-                    <span className="text-base font-medium">Potrebuješ pomoč?</span>
-                    <span className="text-sm">Preveri pogosta vprašanja</span>
+                    <span className="text-base font-medium">New here?</span>
+                    <span className="text-sm">Get help</span>
                   </div>
                 </Button>
               </div>
@@ -134,36 +134,12 @@ function AppPage() {
                   <HelpCircle className="h-8 w-8 text-[#2f6b4f]" />
                 </div>
                 <h3 className="text-lg font-semibold text-[#17231b] mb-2">
-                  Za dostop do funkcij se prijavi
+                  Sign in to access features
                 </h3>
                 <p className="text-sm text-[#647067] max-w-sm mx-auto">
-                  Uporabi gumb Prijava zgoraj desno za dostop do skeniranja, tur, objav in osebnega profila.
-                  Nimaš računa? Registriraj se preko gumba Register.
+                  Sign in using the button in the top-right corner to access scanning, tours, posts, and your profile.
+                  Don't have an account? Register via the Register button.
                 </p>
-              </div>
-            </div>
-          )}
-
-          {/* Stats / Info Cards for logged in users */}
-          {role && (
-            <div className="mt-12 pt-6 border-t border-[#dce3d7]">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-2xl mx-auto">
-                <div className="bg-white border border-[#dce3d7] rounded-lg p-3 text-center">
-                  <div className="text-2xl font-bold text-[#2f6b4f]">2</div>
-                  <div className="text-xs text-[#647067]">preverjena vrha</div>
-                </div>
-                <div className="bg-white border border-[#dce3d7] rounded-lg p-3 text-center">
-                  <div className="text-2xl font-bold text-[#316f8f]">3</div>
-                  <div className="text-xs text-[#647067]">objavljene ture</div>
-                </div>
-                <div className="bg-white border border-[#dce3d7] rounded-lg p-3 text-center">
-                  <div className="text-2xl font-bold text-[#c7792b]">12</div>
-                  <div className="text-xs text-[#647067]">komentarjev</div>
-                </div>
-                <div className="bg-white border border-[#dce3d7] rounded-lg p-3 text-center">
-                  <div className="text-2xl font-bold text-[#17231b]">91%</div>
-                  <div className="text-xs text-[#647067]">AI natančnost</div>
-                </div>
               </div>
             </div>
           )}
