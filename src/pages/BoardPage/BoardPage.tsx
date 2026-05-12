@@ -15,7 +15,10 @@ import { useBoardPage } from "./useBoardPage";
 import type { Gora } from "@/utility/stores_slices/goreSlice";
 import { useOutletContext } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Mountain, Plus, Calendar, Clock, TrendingUp, FileText, AlertCircle } from "lucide-react";
+import {Mountain, Plus,Calendar as CalendarIcon,Clock, TrendingUp, FileText,AlertCircle} from "lucide-react";
+import { format } from "date-fns";
+import { Calendar } from "@/components/ui/calendar";
+import {Popover,PopoverContent,PopoverTrigger} from "@/components/ui/popover";
 
 function BoardPage() {
   const navigate = useNavigate();
@@ -131,18 +134,40 @@ function BoardPage() {
 
                   {/* Date */}
                   <div className="space-y-2">
-                    <Label htmlFor="date" className="text-[#17231b] font-medium flex items-center gap-2">
-                      <Calendar className="w-4 h-4 text-[#c7792b]" />
+                    <Label className="text-[#17231b] font-medium flex items-center gap-2">
+                      <CalendarIcon className="w-4 h-4 text-[#c7792b]" />
                       Tour date
                     </Label>
-                    <Input
-                      id="date"
-                      type="date"
-                      value={state.date}
-                      min={new Date().toISOString().split("T")[0]}
-                      onChange={(e) => actions.setDate(e.target.value)}
-                      className="border-[#dce3d7] focus:border-[#2f6b4f] focus:ring-[#2f6b4f]/20 rounded-lg"
-                    />
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          className="w-full justify-start text-left font-normal border-[#dce3d7] hover:bg-[#f0f4ea]"
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {state.date ? (
+                            format(new Date(state.date), "PPP")
+                          ) : (
+                            <span>Select a date</span>
+                          )}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          captionLayout="dropdown"
+                          startMonth={new Date()}
+                          endMonth={new Date(new Date().getFullYear() + 5, 11)}
+                          selected={state.date ? new Date(state.date) : undefined}
+                          onSelect={(date) => {
+                            if (date) {
+                              actions.setDate(date.toISOString().split("T")[0]);
+                            }
+                          }}
+                          disabled={(date) => date < new Date()}
+                        />
+                      </PopoverContent>
+                    </Popover>
                   </div>
 
                   {/* Duration and Difficulty */}
@@ -341,14 +366,40 @@ function BoardPage() {
               )}
 
               <div className="space-y-2">
-                <Label htmlFor="date">Day of the tour</Label>
-                <Input
-                  id="date"
-                  type="date"
-                  value={state.date}
-                  min={new Date().toISOString().split("T")[0]}
-                  onChange={(e) => actions.setDate(e.target.value)}
-                />
+                <Label>Day of the tour</Label>
+
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className="w-full justify-start text-left font-normal"
+                    >
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+
+                      {state.date ? (
+                        format(new Date(state.date), "PPP")
+                      ) : (
+                        <span>Select a date</span>
+                      )}
+                    </Button>
+                  </PopoverTrigger>
+
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      captionLayout="dropdown"
+                      startMonth={new Date()}
+                      endMonth={new Date(new Date().getFullYear() + 5, 11)}
+                      selected={state.date ? new Date(state.date) : undefined}
+                      onSelect={(date) => {
+                        if (date) {
+                          actions.setDate(date.toISOString().split("T")[0]);
+                        }
+                      }}
+                      disabled={(date) => date < new Date()}
+                    />
+                  </PopoverContent>
+                </Popover>
               </div>
 
               <div className="grid grid-cols-2 gap-4">

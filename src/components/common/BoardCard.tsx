@@ -81,7 +81,7 @@ function BoardCard({
                   <Users className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <p className="text-xs text-[#647067]">Organiser</p>
+                  <p className="text-xs text-[#647067]">Organizer</p>
                   <button
                     type="button"
                     onClick={onOrganizerClick}
@@ -148,7 +148,7 @@ function BoardCard({
           <div>
             <div className="mb-8 flex items-center justify-between gap-4">
               <div className="text-base font-semibold text-black">
-                <p>Organiser:</p>
+                <p>Organizer:</p>
                 <p>
                   <button
                     type="button"
