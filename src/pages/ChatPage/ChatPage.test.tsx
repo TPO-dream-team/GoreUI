@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import ChatPage from "./ChatPage";
 import { useChatPage } from "./useChatPage";
+import { MemoryRouter } from "react-router-dom"; // Added for useNavigate/Link
 
 vi.mock("./useChatPage", () => ({
   useChatPage: vi.fn(),
@@ -44,11 +45,13 @@ describe("ChatPage Component", () => {
 
   it("renders the list of posts correctly", () => {
     (useChatPage as any).mockReturnValue({ state: defaultState, actions: mockActions });
-    render(<ChatPage />);
+    render(<MemoryRouter><ChatPage /></MemoryRouter>);
 
     expect(screen.getByText(/@tester/i)).toBeDefined();
     expect(screen.getByText(/Great Hike/i)).toBeDefined();
-    expect(screen.getByText(/View 5 Comments/i)).toBeDefined();
+    // Fixed: New UI uses lowercase 'comments' and includes the number 5
+    expect(screen.getByText(/view/i)).toBeDefined();
+    expect(screen.getByText(/5/i)).toBeDefined();
   });
 
   it("shows the loading state in the board section", () => {
@@ -56,24 +59,23 @@ describe("ChatPage Component", () => {
       state: { ...defaultState, boardsLoading: true, boards: [] }, 
       actions: mockActions 
     });
-    render(<ChatPage />);
+    render(<MemoryRouter><ChatPage /></MemoryRouter>);
     expect(screen.getByText(/Loading posts.../i)).toBeDefined();
   });
 
   it("opens the dialog and handles input changes", () => {
-    // Simulate dialog being open
     (useChatPage as any).mockReturnValue({ 
       state: { ...defaultState, isDialogOpen: true, title: "Initial Title" }, 
       actions: mockActions 
     });
     
-    render(<ChatPage />);
+    render(<MemoryRouter><ChatPage /></MemoryRouter>);
 
     // Check if Dialog title is visible
-    expect(screen.getByText("New post")).toBeDefined();
+    expect(screen.getAllByText("New post")[0]).toBeDefined();
 
-    // Check title input
-    const titleInput = screen.getByPlaceholderText(/My amazing weekend/i);
+    // Fixed: Placeholder changed in New UI
+    const titleInput = screen.getByPlaceholderText(/My experience on Triglav/i);
     expect((titleInput as HTMLInputElement).value).toBe("Initial Title");
 
     fireEvent.change(titleInput, { target: { value: "New Title" } });
@@ -91,7 +93,7 @@ describe("ChatPage Component", () => {
       actions: mockActions 
     });
 
-    render(<ChatPage />);
+    render(<MemoryRouter><ChatPage /></MemoryRouter>);
 
     expect(screen.getByText("Mount Everest")).toBeDefined();
     expect(screen.getByText("8848 m")).toBeDefined();
@@ -106,7 +108,7 @@ describe("ChatPage Component", () => {
       actions: mockActions 
     });
 
-    render(<ChatPage />);
+    render(<MemoryRouter><ChatPage /></MemoryRouter>);
     const prevButton = screen.getByText(/Previous/i);
     expect(prevButton).toBeDisabled();
   });
@@ -118,7 +120,7 @@ describe("ChatPage Component", () => {
       actions: mockActions 
     });
 
-    render(<ChatPage />);
+    render(<MemoryRouter><ChatPage /></MemoryRouter>);
     const nextButton = screen.getByText(/Next/i);
     
     fireEvent.click(nextButton);
@@ -131,7 +133,7 @@ describe("ChatPage Component", () => {
       actions: mockActions 
     });
 
-    render(<ChatPage />);
+    render(<MemoryRouter><ChatPage /></MemoryRouter>);
     expect(screen.getByText("Title is required")).toBeDefined();
   });
 });

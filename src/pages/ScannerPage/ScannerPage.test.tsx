@@ -44,8 +44,8 @@ describe("ScannerPage Component", () => {
     });
     render(<ScannerPage />);
 
-    expect(screen.getByText(/Lat: 46.1234/i)).toBeDefined();
-    expect(screen.getByText(/Lon: 13.5678/i)).toBeDefined();
+    expect(screen.getByText(/46.1234/i)).toBeDefined();
+    expect(screen.getByText(/13.5678/i)).toBeDefined();
     expect(screen.getByText("Triglav")).toBeDefined();
   });
 
@@ -70,7 +70,7 @@ describe("ScannerPage Component", () => {
     (useScannerPage as any).mockReturnValue({ state: defaultState, actions: mockActions });
     render(<ScannerPage />);
 
-    const gpsButton = screen.getByText("Scan Location");
+    const gpsButton = screen.getByText(/Check GPS/i);
     fireEvent.click(gpsButton);
     expect(mockActions.scanGps).toHaveBeenCalledTimes(1);
   });
@@ -82,19 +82,20 @@ describe("ScannerPage Component", () => {
     });
     render(<ScannerPage />);
 
-    const nfcButton = screen.getByText("Scan Tag");
+    const nfcButton = screen.getByText(/Scan NFC/i);
     fireEvent.click(nfcButton);
     expect(mockActions.scanNfc).toHaveBeenCalledTimes(1);
   });
 
-  it("calls saveScan when Send Data button is clicked and enabled", () => {
+  it("calls saveScan when Save verification button is clicked and enabled", () => {
     (useScannerPage as any).mockReturnValue({ 
       state: { ...defaultState, nfcSerialNumber: "NFC-12345" }, 
       actions: mockActions 
     });
     render(<ScannerPage />);
 
-    const sendButton = screen.getByText("Send Data");
+    // Fixed: Label changed from "Send Data" to "Save verification"
+    const sendButton = screen.getByText(/Save verification/i);
     fireEvent.click(sendButton);
     expect(mockActions.saveScan).toHaveBeenCalledTimes(1);
   });
@@ -109,14 +110,14 @@ describe("ScannerPage Component", () => {
     expect(screen.getByText("Successfully saved!")).toBeDefined();
   });
 
-  it("shows 'Get GPS first' hint when no GPS data and NFC is not scanned", () => {
+  it("shows 'Check your GPS location first' hint when no GPS data and NFC is not scanned", () => {
     (useScannerPage as any).mockReturnValue({ 
       state: { ...defaultState, gpsData: null }, 
       actions: mockActions 
     });
     render(<ScannerPage />);
 
-    expect(screen.getByText(/Get GPS first/i)).toBeDefined();
+    expect(screen.getByText(/Check your GPS location first/i)).toBeDefined();
   });
 
   it("shows loading state on save button when scanLoading is true", () => {

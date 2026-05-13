@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { Navigation } from './Navigation'
 import { useNavigation } from './useNavigation'
-import { vi, describe, it, expect } from 'vitest'
+import { vi, describe, it, expect, beforeEach } from 'vitest'
 
 vi.mock('./useNavigation')
 
@@ -12,6 +12,7 @@ describe('Navigation Component', () => {
   const defaultMockValues = {
     username: null,
     role: null,
+    id: "1",
     navigate: mockNavigate,
     loginLoading: false,
     loginDialogOpen: false,
@@ -31,6 +32,11 @@ describe('Navigation Component', () => {
     handleLogoutBtn: vi.fn(),
   }
 
+  beforeEach(() => {
+    vi.clearAllMocks();
+    localStorage.clear();
+  })
+
   it('renders the brand name "PeakProof"', () => {
     (useNavigation as any).mockReturnValue(defaultMockValues)
     render(
@@ -38,21 +44,24 @@ describe('Navigation Component', () => {
         <Navigation />
       </MemoryRouter>
     )
-    expect(screen.getByText('PeakProof')).toBeInTheDocument()
+    const brandElements = screen.getAllByText(/PeakProof/i)
+    expect(brandElements.length).toBeGreaterThan(0)
   })
 
-  it('shows Login and Register buttons when user is NOT logged in', () => {
+  it('shows Login and Registration buttons when user is NOT logged in', () => {
     (useNavigation as any).mockReturnValue(defaultMockValues)
     render(
       <MemoryRouter>
         <Navigation />
       </MemoryRouter>
     )
+    
     expect(screen.getByRole('button', { name: /login/i })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /register/i })).toBeInTheDocument()
+    // Changed "register" to "registration" to match your new UI label
+    expect(screen.getByRole('button', { name: /registration/i })).toBeInTheDocument()
   })
 
-  it('shows the username and hides Register button when user IS logged in', () => {
+  it('shows the username and hides Registration button when user IS logged in', () => {
     (useNavigation as any).mockReturnValue({
       ...defaultMockValues,
       username: 'TestUser123'
@@ -62,8 +71,9 @@ describe('Navigation Component', () => {
         <Navigation />
       </MemoryRouter>
     )
+    
     expect(screen.getByText('TestUser123')).toBeInTheDocument()
-    expect(screen.queryByRole('button', { name: /register/i })).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: /registration/i })).not.toBeInTheDocument()
   })
 
   it('displays login error message when loginInfoText is provided', () => {
@@ -95,7 +105,22 @@ describe('Navigation Component', () => {
       </MemoryRouter>
     )
 
-    expect(screen.getByText('Logging in...')).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Logging in...' })).toBeDisabled()
+    const loadingBtn = screen.getByRole('button', { name: /logging in.../i })
+    expect(loadingBtn).toBeInTheDocument()
+    expect(loadingBtn).toBeDisabled()
+  })
+
+  it('toggles the style when the palette button is clicked', () => {
+    (useNavigation as any).mockReturnValue(defaultMockValues)
+    render(
+      <MemoryRouter>
+        <Navigation />
+      </MemoryRouter>
+    )
+
+    const toggleBtn = screen.getByTitle(/toggle style|switch to/i)
+    fireEvent.click(toggleBtn)
+
+    expect(localStorage.getItem("useNewStyle")).toBe("false")
   })
 })
