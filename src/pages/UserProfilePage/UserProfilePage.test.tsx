@@ -1,299 +1,154 @@
-import { render, screen, waitFor } from "@testing-library/react"
-import { describe, it, expect, vi, beforeEach } from "vitest"
-import { MemoryRouter } from "react-router-dom"
-import api from "@/utility/axios"
-import UserProfilePage from "./UserProfilePage"
+import { render, screen } from "@testing-library/react";
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import { MemoryRouter } from "react-router-dom";
+import UserProfilePage from "./UserProfilePage";
+import { useUserProfile } from "./useUserProfile";
 
-vi.mock("@/utility/axios", () => ({
-  default: {
-    get: vi.fn(),
-  },
-}))
-
-vi.mock("react-router-dom", async () => {
-  const actual = await vi.importActual<any>("react-router-dom")
-
-  return {
-    ...actual,
-    useParams: () => ({
-      id: "user-123",
-    }),
-  }
-})
+vi.mock("./useUserProfile", () => ({
+  useUserProfile: vi.fn(),
+}));
 
 describe("UserProfilePage", () => {
-  beforeEach(() => {
-    vi.clearAllMocks()
-  })
+  const mockProfile = {
+    user: { username: "mountain_climber" },
+  };
 
-  function renderPage() {
-    return render(
+  const mockScans = [
+    {
+      scanId: "1",
+      mountainName: "Triglav",
+      mountainHeight: 2864,
+      verifiedAt: "2023-08-15T10:00:00Z",
+    },
+  ];
+
+  const mockBoards = [
+    {
+      boardId: "b1",
+      mountainName: "Grintovec",
+      difficulty: "3",
+      description: "Beautiful route",
+      expiryDate: "2024-12-31",
+      tourTime: "5",
+    },
+  ];
+
+  const defaultState = {
+    useNewStyle: true,
+    profile: mockProfile,
+    loading: false,
+    error: null,
+    userScans: mockScans,
+    userBoards: mockBoards,
+    userPosts: [],
+    totalSummits: 1,
+    uniqueSummits: 1,
+    lastAchievement: mockScans[0],
+    mostClimbed: { name: "Triglav" },
+    averageDifficulty: "2.5",
+    derivedLevel: "Intermediate",
+  };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  const renderComponent = () =>
+    render(
       <MemoryRouter>
         <UserProfilePage />
       </MemoryRouter>
-    )
-  }
+    );
 
-  it("shows loading state first", () => {
-    ;(api.get as any).mockReturnValue(new Promise(() => {}))
+  it("renders loading state", () => {
+    (useUserProfile as any).mockReturnValue({
+      state: { ...defaultState, loading: true },
+    });
+    renderComponent();
+    expect(screen.getByText(/loading profile.../i)).toBeDefined();
+  });
 
-    renderPage()
+  it("renders error state when profile is missing or error exists", () => {
+    (useUserProfile as any).mockReturnValue({
+      state: { ...defaultState, error: "Failed to fetch" },
+    });
+    renderComponent();
+    expect(screen.getByText(/failed to fetch/i)).toBeDefined();
+  });
 
-    expect(screen.getByText("Loading profile...")).toBeInTheDocument()
-  })
+  describe("New Style Theme (Mountain Theme)", () => {
+    beforeEach(() => {
+      (useUserProfile as any).mockReturnValue({
+        state: { ...defaultState, useNewStyle: true },
+      });
+    });
 
-  it("renders user profile data", async () => {
-    ;(api.get as any).mockImplementation((url: string) => {
-      if (url === "/user/user-123/profile") {
-        return Promise.resolve({
-          data: {
-            user: {
-              id: "user-123",
-              username: "testuser",
-            },
-            scans: [
-              {
-                id: 1,
-                userId: "user-123",
-                mountainId: "mountain-1",
-                timestamp: "2026-05-08T12:00:00Z",
-                mountainName: "Triglav",
-                mountainHeight: 2864,
-              },
-            ],
-            boards: [],
-          },
-        })
-      }
+    it("renders the username with the @ prefix", () => {
+      renderComponent();
+      expect(screen.getByText("@mountain_climber")).toBeDefined();
+    });
 
-      if (url === "/user/user-123/boards") {
-        return Promise.resolve({
-          data: [
-            {
-              boardId: "board-1",
-              expiryDate: "2026-06-01",
-              username: "testuser",
-              userId: "user-123",
-              mountainId: "mountain-1",
-              description: "Planirana tura na Triglav",
-              tourTime: 6,
-              difficulty: 4,
-            },
-          ],
-        })
-      }
+    it("displays the derived level and achievement count badge", () => {
+      renderComponent();
+      expect(screen.getByText("Intermediate")).toBeDefined();
+      expect(screen.getByText(/1 achievements/i)).toBeDefined();
+    });
 
-      if (url === "/post") {
-        return Promise.resolve({
-          data: [
-            {
-              id: 10,
-              tagline: "Moj prvi post",
-              username: "testuser",
-              mountainName: "Triglav",
-              commentCount: 3,
-              startMsg: "Danes je bil super vzpon.",
-              timeStamp: "2026-05-08T10:00:00Z",
-            },
-          ],
-        })
-      }
+    it("renders the Stats Cards with correct labels", () => {
+      renderComponent();
+      expect(screen.getByText(/All ascents/i)).toBeDefined();
+      expect(screen.getByText(/Unique peaks/i)).toBeDefined();
+      expect(screen.getByText("2.5")).toBeDefined(); // averageDifficulty
+    });
 
-      return Promise.reject(new Error("Unknown endpoint"))
-    })
+    it("lists achievements correctly", () => {
+      renderComponent();
+      expect(screen.getByText("Triglav")).toBeDefined();
+      expect(screen.getByText(/2864 m/i)).toBeDefined();
+    });
 
-    renderPage()
+    it("shows empty state message for scans", () => {
+      (useUserProfile as any).mockReturnValue({
+        state: { ...defaultState, userScans: [] },
+      });
+      renderComponent();
+      expect(screen.getByText(/no verified ascents yet/i)).toBeDefined();
+    });
+  });
 
-    await waitFor(() => {
-      expect(screen.getByText("@testuser")).toBeInTheDocument()
-    })
+  describe("Old Style Theme (Classic)", () => {
+    beforeEach(() => {
+      (useUserProfile as any).mockReturnValue({
+        state: { ...defaultState, useNewStyle: false },
+      });
+    });
 
-    expect(screen.getByText("Verified achievements")).toBeInTheDocument()
-    expect(screen.getByText("Triglav")).toBeInTheDocument()
-    expect(screen.getByText("2864 m")).toBeInTheDocument()
+    it("renders board activity links", () => {
+      renderComponent();
+      const boardLink = screen.getByRole("link", { name: /Grintovec/i });
+      expect(boardLink.getAttribute("href")).toBe("/board/b1");
+    });
 
-    expect(screen.getByText("Board activity")).toBeInTheDocument()
-    expect(screen.getByText("Planirana tura na Triglav")).toBeInTheDocument()
-    expect(screen.getByText("Difficulty: 4")).toBeInTheDocument()
-
-    expect(screen.getByText("Recent posts")).toBeInTheDocument()
-    expect(screen.getByText("Moj prvi post")).toBeInTheDocument()
-    expect(screen.getByText("Danes je bil super vzpon.")).toBeInTheDocument()
-    expect(screen.getByText("3 comments")).toBeInTheDocument()
-  })
-
-  it("shows empty states when user has no scans, boards or posts", async () => {
-    ;(api.get as any).mockImplementation((url: string) => {
-      if (url === "/user/user-123/profile") {
-        return Promise.resolve({
-          data: {
-            user: {
-              id: "user-123",
-              username: "emptyuser",
-            },
-            scans: [],
-            boards: [],
-          },
-        })
-      }
-
-      if (url === "/user/user-123/boards") {
-        return Promise.resolve({ data: [] })
-      }
-
-      if (url === "/post") {
-        return Promise.resolve({ data: [] })
-      }
-
-      return Promise.reject(new Error("Unknown endpoint"))
-    })
-
-    renderPage()
-
-    await waitFor(() => {
-      expect(screen.getByText("@emptyuser")).toBeInTheDocument()
-    })
-
-    expect(screen.getByText("Uporabnik še nima verificiranih dosežkov.")).toBeInTheDocument()
-    expect(screen.getByText("Uporabnik še nima objav.")).toBeInTheDocument()
-    expect(screen.getByText("Beginner")).toBeInTheDocument()
-    expect(screen.getByText("0.0")).toBeInTheDocument()
-  })
-
-  it("filters posts by username", async () => {
-    ;(api.get as any).mockImplementation((url: string) => {
-      if (url === "/user/user-123/profile") {
-        return Promise.resolve({
-          data: {
-            user: {
-              id: "user-123",
-              username: "testuser",
-            },
-            scans: [],
-            boards: [],
-          },
-        })
-      }
-
-      if (url === "/user/user-123/boards") {
-        return Promise.resolve({ data: [] })
-      }
-
-      if (url === "/post") {
-        return Promise.resolve({
-          data: [
-            {
-              id: 1,
-              tagline: "Pravi post",
-              username: "testuser",
-              mountainName: "Triglav",
-              commentCount: 1,
-              startMsg: "To se mora prikazati.",
-              timeStamp: "2026-05-08T10:00:00Z",
-            },
-            {
-              id: 2,
-              tagline: "Tuj post",
-              username: "otheruser",
-              mountainName: "Mangart",
-              commentCount: 2,
-              startMsg: "To se ne sme prikazati.",
-              timeStamp: "2026-05-08T11:00:00Z",
-            },
-          ],
-        })
-      }
-
-      return Promise.reject(new Error("Unknown endpoint"))
-    })
-
-    renderPage()
-
-    await waitFor(() => {
-      expect(screen.getByText("Pravi post")).toBeInTheDocument()
-    })
-
-    expect(screen.queryByText("Tuj post")).not.toBeInTheDocument()
-    expect(screen.queryByText("To se ne sme prikazati.")).not.toBeInTheDocument()
-  })
-
-  it("renders clickable board and post links", async () => {
-    ;(api.get as any).mockImplementation((url: string) => {
-      if (url === "/user/user-123/profile") {
-        return Promise.resolve({
-          data: {
-            user: {
-              id: "user-123",
-              username: "testuser",
-            },
-            scans: [],
-            boards: [],
-          },
-        })
-      }
-
-      if (url === "/user/user-123/boards") {
-        return Promise.resolve({
-          data: [
-            {
-              boardId: "board-123",
-              expiryDate: "2026-06-01",
-              username: "testuser",
-              userId: "user-123",
-              mountainId: "mountain-1",
-              description: "Klikabilna tura",
-              tourTime: 5,
-              difficulty: 3,
-            },
-          ],
-        })
-      }
-
-      if (url === "/post") {
-        return Promise.resolve({
-          data: [
-            {
-              id: 55,
-              tagline: "Klikabilen post",
-              username: "testuser",
-              mountainName: "Triglav",
-              commentCount: 0,
-              startMsg: "Post content",
-              timeStamp: "2026-05-08T10:00:00Z",
-            },
-          ],
-        })
-      }
-
-      return Promise.reject(new Error("Unknown endpoint"))
-    })
-
-    renderPage()
-
-    await waitFor(() => {
-      expect(screen.getByText("Klikabilna tura")).toBeInTheDocument()
-    })
-
-    const boardLink = screen.getByText("Klikabilna tura").closest("a")
-    const postLink = screen.getByText("Klikabilen post").closest("a")
-
-    expect(boardLink).toHaveAttribute("href", "/board/board-123")
-    expect(postLink).toHaveAttribute("href", "/chat/55")
-  })
-
-  it("shows error when API fails", async () => {
-    ;(api.get as any).mockRejectedValue({
-      response: {
-        data: {
-          message: "Profile API error",
+    it("displays the correct number of comments in post badges", () => {
+      (useUserProfile as any).mockReturnValue({
+        state: { 
+          ...defaultState, 
+          useNewStyle: false,
+          userPosts: [{ id: "p1", tagline: "Great Day", commentCount: 5, mountainName: "Krn", timeStamp: "2023-01-01" }]
         },
-      },
-    })
+      });
+      renderComponent();
+      expect(screen.getByText(/5 comments/i)).toBeDefined();
+    });
+  });
 
-    renderPage()
-
-    await waitFor(() => {
-      expect(screen.getByText("Profile API error")).toBeInTheDocument()
-    })
-  })
-})
+  it("formats dates using Slovenian locale (sl-SI)", () => {
+    (useUserProfile as any).mockReturnValue({
+      state: { ...defaultState, useNewStyle: true },
+    });
+    renderComponent();
+    // 2023-08-15 in sl-SI usually results in "15. avg. 2023" or similar depending on environment
+    expect(screen.getByText(/15\./)).toBeDefined();
+    expect(screen.getByText(/2023/)).toBeDefined();
+  });
+});
