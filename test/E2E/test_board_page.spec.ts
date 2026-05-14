@@ -12,11 +12,11 @@ test('test board page: PU-01, PU-02, PU-05, PU-06, PU-07, PU-08', async ({ page,
   await page.goto('/');
 
   // Register
-  await page.getByRole('button', { name: 'Register' }).click();
+  await page.getByRole('button', { name: 'Registration' }).click();
   await page.getByLabel('Username').fill('testuser1');
   await page.getByLabel('Password', { exact: true }).fill('testuser1');
   await page.getByLabel('Confirm password').fill('testuser1');
-  await page.getByRole('button', { name: 'Sign in' }).click();
+  await page.getByRole('button', { name: 'Register' }).click();
 
   // Login
   await page.getByRole('button', { name: 'Login' }).click();
@@ -27,15 +27,21 @@ test('test board page: PU-01, PU-02, PU-05, PU-06, PU-07, PU-08', async ({ page,
 
   // Navigation & Action
   await page.getByRole('button', { name: 'Tours' }).click();
-  await page.getByRole('button', { name: 'Create new tour' }).click();
+  await page.getByRole('button', { name: 'New tour' }).click();
   await page.getByRole('button', { name: 'Skrlatica 2740 m' }).click();
   
   // Fill Form
-  await page.getByRole('textbox', { name: 'Day of the tour' }).fill('2033-10-21');
-  await page.getByRole('spinbutton', { name: 'Time (hours)' }).fill('3');
+  await page.getByRole('button', { name: 'Select a date' }).click();
+  await page.getByLabel('Choose the Year').selectOption('2031');
+  await page.getByRole('button', { name: 'Wednesday, May 21st,' }).click();
+  await page.getByRole('button', { name: 'May 21st, 2031', exact: true }).click()
+
+  await page.getByRole('spinbutton', { name: 'Duration (hours)' }).click();
+  await page.getByRole('spinbutton', { name: 'Duration (hours)' }).fill('4');
+  await page.getByRole('spinbutton', { name: 'Difficulty (1-5)' }).click();
   await page.getByRole('spinbutton', { name: 'Difficulty (1-5)' }).fill('4');
   await page.getByRole('textbox', { name: 'Description' }).fill('First tour');
-  await page.getByRole('button', { name: 'Create a tour' }).click();
+  await page.getByRole('button', { name: 'Publish tour' }).click();
 
   // Commenting
   await page.getByRole('button', { name: 'Comment' }).click();

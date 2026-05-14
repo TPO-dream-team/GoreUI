@@ -56,9 +56,9 @@ test('test new verify: PU-02, PU-04', async ({ page, context }) => {
 
     await page.waitForTimeout(10);
     await page.getByRole('button', { name: 'Scan' }).click();
-    await page.getByRole('button', { name: 'Scan Location' }).click();
 
-    await page.getByRole('button', { name: 'Scan Tag' }).click();
+    await page.getByRole('button', { name: 'Check GPS' }).click();
+    await page.getByRole('button', { name: 'Scan NFC' }).click();
 
     await page.evaluate(() => {
         if (window.activeMockReader) {
@@ -66,7 +66,7 @@ test('test new verify: PU-02, PU-04', async ({ page, context }) => {
         }
     });
 
-    await page.getByRole('button', { name: 'Send data' }).click();
+    await page.getByRole('button', { name: 'Save verification' }).click();
     await expect(page.getByText('Successfully saved!')).toBeVisible();
 });
 

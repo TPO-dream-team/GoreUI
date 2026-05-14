@@ -161,7 +161,9 @@ function BoardPage() {
                           selected={state.date ? new Date(state.date) : undefined}
                           onSelect={(date) => {
                             if (date) {
-                              actions.setDate(date.toISOString().split("T")[0]);
+                              const offset = date.getTimezoneOffset();
+                              const localDate = new Date(date.getTime() - (offset * 60 * 1000));
+                              actions.setDate(localDate.toISOString().split("T")[0]);
                             }
                           }}
                           disabled={(date) => date < new Date()}
