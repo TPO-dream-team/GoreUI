@@ -1,4 +1,4 @@
-//Tests: PU-02, PU-04:E1
+//Tests: PU-02, PU-04:E1, PU-13
 import { test, expect } from '../fixtures';
 declare global {
   interface Window {
@@ -68,5 +68,8 @@ test('test new verify: PU-02, PU-04', async ({ page, context }) => {
 
     await page.getByRole('button', { name: 'Save verification' }).click();
     await expect(page.getByText('Successfully saved!')).toBeVisible();
+
+    await page.getByText('admin', { exact: true }).click();
+    await expect(page.getByText('Mangart')).toBeVisible();
 });
 
