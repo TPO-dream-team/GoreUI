@@ -159,7 +159,7 @@ export function Navigation() {
                     <DialogDescription>Enter your login details.</DialogDescription>
                   </VisuallyHidden.Root>
 
-                  <form onSubmit={handleLogin} className="space-y-6">
+                  <form onSubmit={handleLogin} noValidate className="space-y-6">
                     <div className="text-center mb-4">
                       <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-gradient-to-br from-[#2f6b4f] to-[#316f8f] flex items-center justify-center">
                         <Mountain className="h-6 w-6 text-white" />
@@ -213,7 +213,7 @@ export function Navigation() {
                       <DialogDescription>Create a new account.</DialogDescription>
                     </VisuallyHidden.Root>
 
-                    <form onSubmit={handleSignUp} className="space-y-6">
+                    <form onSubmit={handleSignUp} noValidate className="space-y-6">
                       <div className="text-center mb-2">
                         <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-gradient-to-br from-[#2f6b4f] to-[#316f8f] flex items-center justify-center">
                           <User className="h-6 w-6 text-white" />
@@ -335,7 +335,7 @@ export function Navigation() {
                 <DialogDescription>Enter your credentials to log in.</DialogDescription>
               </VisuallyHidden.Root>
 
-              <form onSubmit={handleLogin} className="space-y-6">
+              <form onSubmit={handleLogin} noValidate className="space-y-6">
                 <div className="grid flex-1 auto-rows-min gap-6 px-4">
                   <div className="grid gap-3">
                     <Label htmlFor="loginUsername">Username</Label>
@@ -365,7 +365,7 @@ export function Navigation() {
                   <DialogDescription>Create a new account.</DialogDescription>
                 </VisuallyHidden.Root>
 
-                <form onSubmit={handleSignUp} className="space-y-6">
+                <form onSubmit={handleSignUp} noValidate className="space-y-6">
                   <div className="grid flex-1 auto-rows-min gap-6 px-4">
                     <div className="grid gap-3">
                       <Label htmlFor="registerUsername">Username</Label>
