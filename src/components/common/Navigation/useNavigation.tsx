@@ -63,6 +63,10 @@ export const useNavigation = () => {
       setSignUpDialogOpen(false);
       setLoginDialogOpen(true);
       setLoginInfoText("Registration successful");
+      setTimeout(() => {
+        setLoginInfoText("");
+      }, 2000);
+
     } else if (signUpUser.rejected.match(result)) {
       const errorMessage = (result.payload as any)?.message || "An error occurred";
       setSignupInfoText(errorMessage);
