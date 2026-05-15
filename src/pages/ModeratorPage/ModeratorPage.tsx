@@ -45,126 +45,132 @@ function ModeratorPage() {
   // New Style (Mountain Theme)
   if (useNewStyle) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#f6f7f2] via-[#f6f7f2] to-white">
-        <div className="container mx-auto px-4 py-8 max-w-2xl">
-          {/* Header */}
-          <div className="mb-6 text-center">
-            <div className="inline-flex items-center justify-center w-14 h-14 mb-3 rounded-xl bg-gradient-to-br from-[#b2473e] to-[#c7792b] shadow-lg">
-              <ShieldAlert className="w-7 h-7 text-white" />
+      <div className="min-h-screen bg-gradient-to-b from-brand-bg via-brand-bg to-white">
+      <div className="container mx-auto px-4 py-8 max-w-2xl">
+        {/* Header */}
+        <div className="mb-6 text-center">
+          <div className="inline-flex items-center justify-center w-14 h-14 mb-3 rounded-xl bg-gradient-to-br from-brand-danger to-brand-warning shadow-lg">
+            <ShieldAlert className="w-7 h-7 text-white" />
+          </div>
+          <h1 className="text-2xl md:text-3xl font-bold text-brand-headline">
+            Content moderation
+          </h1>
+          <p className="text-brand-body mt-2 text-sm max-w-md mx-auto">
+            Review content flagged by the AI moderator
+          </p>
+        </div>
+
+        <div className="bg-white rounded-xl border border-brand-border/60 shadow-md overflow-hidden">
+          {/* Alert Header State */}
+          <div className="px-5 py-3 bg-gradient-to-r from-brand-danger/10 to-brand-warning/10 border-b border-brand-danger/20">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded-full bg-brand-danger flex items-center justify-center">
+                  <ShieldAlert className="w-3 h-3 text-white" />
+                </div>
+                <span className="text-xs font-bold text-brand-danger uppercase tracking-wider">
+                  Pending review
+                </span>
+              </div>
+              <span className="text-xs text-brand-body flex items-center gap-1">
+                <Clock className="w-3 h-3" />#{itemId}
+              </span>
             </div>
-            <h1 className="text-2xl md:text-3xl font-bold text-[#17231b]">
-              Content moderation
-            </h1>
-            <p className="text-[#647067] mt-2 text-sm max-w-md mx-auto">
-              Review content flagged by the AI moderator
-            </p>
           </div>
 
-          <div className="bg-white rounded-xl border border-[#dce3d7] shadow-md overflow-hidden">
-            <div className="px-5 py-3 bg-gradient-to-r from-[#b2473e]/10 to-[#c7792b]/10 border-b border-[#ecc1bb]">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 rounded-full bg-[#b2473e] flex items-center justify-center">
-                    <ShieldAlert className="w-3 h-3 text-white" />
-                  </div>
-                  <span className="text-xs font-bold text-[#b2473e] uppercase tracking-wider">
-                    Pending review
-                  </span>
-                </div>
-                <span className="text-xs text-[#647067] flex items-center gap-1">
-                  <Clock className="w-3 h-3" />#{itemId}
-                </span>
-              </div>
+          {/* Meta Bar */}
+          <div className="flex flex-wrap items-center justify-between gap-2 px-5 py-3 bg-brand-nested-bg/30 border-b border-brand-border/40 text-xs">
+            <div className="flex items-center gap-2">
+              <User className="w-3 h-3 text-brand-body" />
+              <span className="text-brand-body">From:</span>
+              <span className="font-semibold text-brand-primary">@{username}</span>
             </div>
+            <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-brand-accent-sage">
+              <Tag className="w-3 h-3 text-brand-primary" />
+              <span className="text-[10px] font-bold text-brand-primary uppercase">
+                Category: {category}
+              </span>
+            </div>
+            <div className="flex items-center gap-1">
+              <Clock className="w-3 h-3 text-brand-body" />
+              <span className="text-brand-body">
+                {new Date(timestamp).toLocaleDateString("sl-SI")}
+              </span>
+            </div>
+          </div>
 
-            <div className="flex flex-wrap items-center justify-between gap-2 px-5 py-3 bg-[#fbfcf8] border-b border-[#e5eadf] text-xs">
-              <div className="flex items-center gap-2">
-                <User className="w-3 h-3 text-[#647067]" />
-                <span className="text-[#647067]">From:</span>
-                <span className="font-semibold text-[#2f6b4f]">@{username}</span>
+          {/* Content Area */}
+          <div className="p-6 bg-white border-b border-brand-border/40 min-h-[90px] flex items-center justify-center">
+            {isEmpty ? (
+              <div className="flex flex-col items-center gap-2">
+                <div className="w-9 h-9 rounded-full bg-brand-accent-sage/40 border border-brand-border/40 flex items-center justify-center">
+                  <CheckCircle2 className="w-5 h-5 text-brand-body" />
+                </div>
+                <p className="text-sm text-brand-body">
+                  No new content to moderate
+                </p>
               </div>
-              <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#edf8ee]">
-                <Tag className="w-3 h-3 text-[#2f6b4f]" />
-                <span className="text-[10px] font-bold text-[#2f6b4f] uppercase">
-                  Category: {category}
-                </span>
-              </div>
+            ) : (
+              <p className="text-brand-slate text-base leading-relaxed italic">
+                "{content}"
+              </p>
+            )}
+          </div>
+
+          {/* AI Intelligence Insights */}
+          <div className="p-3 bg-brand-nested-bg border-b border-brand-border/60">
+            <div className="flex items-center justify-center gap-2">
+              <Info size={14} className="text-brand-hover-blue" />
+              <p className="text-xs text-brand-hover-blue">
+                AI is <span className="font-bold">{confidence}%</span> confident
+                this is {reason}
+              </p>
+            </div>
+          </div>
+
+          {/* Performance Statistics Metrics */}
+          <div className="p-3 bg-white border-b border-brand-border/40">
+            <div className="flex flex-wrap items-center justify-center gap-4 text-[10px] text-brand-body uppercase tracking-wider">
               <div className="flex items-center gap-1">
-                <Clock className="w-3 h-3 text-[#647067]" />
-                <span className="text-[#647067]">
-                  {new Date(timestamp).toLocaleDateString("sl-SI")}
-                </span>
-              </div>
-            </div>
-
-            <div className="p-6 bg-white border-b border-[#e5eadf] min-h-[90px] flex items-center justify-center">
-              {isEmpty ? (
-                <div className="flex flex-col items-center gap-2">
-                  <div className="w-9 h-9 rounded-full bg-[#f0f4ea] border border-[#dce3d7] flex items-center justify-center">
-                    <CheckCircle2 className="w-5 h-5 text-[#647067]" />
-                  </div>
-                  <p className="text-sm text-[#647067]">
-                    No new content to moderate
-                  </p>
-                </div>
-              ) : (
-                <p className="text-[#344255] text-base leading-relaxed italic">
-                  "{content}"
-                </p>
-              )}
-            </div>
-
-            <div className="p-3 bg-[#f0f4ea] border-b border-[#dce3d7]">
-              <div className="flex items-center justify-center gap-2">
-                <Info size={14} className="text-[#316f8f]" />
-                <p className="text-xs text-[#316f8f]">
-                  AI is <span className="font-bold">{confidence}%</span> confident
-                  this is {reason}
-                </p>
-              </div>
-            </div>
-
-            <div className="p-3 bg-white border-b border-[#e5eadf]">
-              <div className="flex flex-wrap items-center justify-center gap-4 text-[10px] text-[#647067] uppercase tracking-wider">
-                <div className="flex items-center gap-1">
-                  <TrendingUp className="w-3 h-3 text-[#316f8f]" />
-                  <span>
-                    F1: <span className="font-bold text-[#2f6b4f]">{f1}</span>
-                  </span>
-                </div>
+                <TrendingUp className="w-3 h-3 text-brand-hover-blue" />
                 <span>
-                  Precision:{" "}
-                  <span className="font-bold text-[#2f6b4f]">{precision}</span>
-                </span>
-                <span>
-                  Recall:{" "}
-                  <span className="font-bold text-[#2f6b4f]">{recall}</span>
+                  F1: <span className="font-bold text-brand-primary">{f1}</span>
                 </span>
               </div>
+              <span>
+                Precision:{" "}
+                <span className="font-bold text-brand-primary">{precision}</span>
+              </span>
+              <span>
+                Recall:{" "}
+                <span className="font-bold text-brand-primary">{recall}</span>
+              </span>
             </div>
+          </div>
 
-            <div className="p-4 grid grid-cols-2 gap-3 bg-gradient-to-r from-[#b2473e]/5 to-[#c7792b]/5">
-              <Button
-                disabled={actionLoading || isEmpty}
-                onClick={() => handleTrain(true)}
-                variant="destructive"
-                className="h-12 text-sm font-bold bg-[#b2473e] hover:bg-[#96362d] rounded-lg flex gap-2 shadow-sm active:scale-95 transition-all"
-              >
-                <ShieldAlert size={18} />
-                REJECT
-              </Button>
-              <Button
-                disabled={actionLoading || isEmpty}
-                onClick={() => handleTrain(false)}
-                className="h-12 text-sm font-bold rounded-lg bg-[#2f6b4f] hover:bg-[#214b39] flex gap-2 shadow-sm active:scale-95 transition-all"
-              >
-                <ShieldCheck size={18} />
-                APPROVE
-              </Button>
-            </div>
+          {/* Action Tray */}
+          <div className="p-4 grid grid-cols-2 gap-3 bg-gradient-to-r from-brand-danger/5 to-brand-warning/5">
+            <Button
+              disabled={actionLoading || isEmpty}
+              onClick={() => handleTrain(true)}
+              variant="destructive"
+              className="h-12 text-sm font-bold bg-brand-danger hover:bg-brand-danger/90 text-white rounded-button flex gap-2 shadow-sm active:scale-95 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <ShieldAlert size={18} />
+              REJECT
+            </Button>
+            <Button
+              disabled={actionLoading || isEmpty}
+              onClick={() => handleTrain(false)}
+              className="h-12 text-sm font-bold rounded-button bg-brand-primary hover:bg-brand-hover-green text-white flex gap-2 shadow-sm active:scale-95 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <ShieldCheck size={18} />
+              APPROVE
+            </Button>
           </div>
         </div>
       </div>
+    </div>
     );
   }
 

@@ -50,21 +50,21 @@ function UserProfilePage() {
 
   if (useNewStyle) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#f6f7f2] via-[#f6f7f2] to-white">
+      <div className="min-h-screen bg-gradient-to-b from-brand-bg via-brand-bg to-white">
         <div className="container mx-auto px-4 py-8 md:py-12 max-w-6xl">
           {/* Header Section */}
           <div className="text-center mb-10">
-            <div className="inline-flex items-center justify-center w-16 h-16 mb-4 rounded-2xl bg-gradient-to-br from-[#2f6b4f] to-[#316f8f] shadow-lg text-white">
+            <div className="inline-flex items-center justify-center w-16 h-16 mb-4 rounded-2xl bg-gradient-to-br from-brand-primary to-brand-hover-blue shadow-lg text-white">
               <User className="w-8 h-8" />
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-[#17231b] tracking-tight">
+            <h1 className="text-3xl md:text-4xl font-bold text-brand-headline tracking-tight">
               @{user.username}
             </h1>
             <div className="flex items-center justify-center gap-2 mt-3 flex-wrap">
-              <Badge className="bg-[#2f6b4f] hover:bg-[#2f6b4f] text-white px-4 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
+              <Badge className="bg-brand-primary hover:bg-brand-primary text-white px-4 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
                 {derivedLevel}
               </Badge>
-              <Badge className="bg-[#edf8ee] text-[#275b35] border border-[#bcd8c2] px-4 py-1 rounded-full text-xs font-semibold">
+              <Badge className="bg-brand-accent-sage text-brand-primary border border-brand-primary/20 px-4 py-1 rounded-full text-xs font-semibold">
                 {totalSummits} achievements
               </Badge>
             </div>
@@ -98,11 +98,11 @@ function UserProfilePage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
             {/* Main Content: Achievements (Left Side) */}
             <div className="lg:col-span-2 flex">
-              <Card className="border border-[#dce3d7] rounded-2xl shadow-sm bg-white overflow-hidden flex flex-col w-full">
-                <div className="h-1.5 bg-gradient-to-r from-[#2f6b4f] to-[#316f8f]" />
+              <Card className="border border-brand-border/60 rounded-2xl shadow-sm bg-white overflow-hidden flex flex-col w-full">
+                <div className="h-1.5 bg-gradient-to-r from-brand-primary to-brand-hover-blue" />
                 <CardHeader className="pb-4">
-                  <CardTitle className="flex items-center gap-2 text-[#17231b]">
-                    <CheckCircle2 className="w-5 h-5 text-[#2f6b4f]" />
+                  <CardTitle className="flex items-center gap-2 text-brand-headline">
+                    <CheckCircle2 className="w-5 h-5 text-brand-primary" />
                     Verified achievements
                   </CardTitle>
                 </CardHeader>
@@ -114,9 +114,9 @@ function UserProfilePage() {
                     [&::-webkit-scrollbar]:display-none"
                 >
                   {userScans.length === 0 ? (
-                    <div className="flex flex-col items-center justify-center flex-1 min-h-[300px] bg-[#fbfcf8] rounded-xl border border-dashed border-[#dce3d7] text-center p-4">
-                      <Mountain className="w-10 h-10 text-[#dce3d7] mb-2" />
-                      <p className="text-[#647067] italic">
+                    <div className="flex flex-col items-center justify-center flex-1 min-h-[300px] bg-brand-nested-bg/30 rounded-xl border border-dashed border-brand-border/60 text-center p-4">
+                      <Mountain className="w-10 h-10 text-brand-border/60 mb-2" />
+                      <p className="text-brand-body italic">
                         This user has no verified ascents yet.
                       </p>
                     </div>
@@ -124,16 +124,16 @@ function UserProfilePage() {
                     userScans.map((achievement, idx) => (
                       <div
                         key={achievement.scanId}
-                        className="group flex items-center gap-4 p-4 rounded-xl border border-[#e5eadf] hover:bg-[#f6f7f2] transition-colors"
+                        className="group flex items-center gap-4 p-4 rounded-xl border border-brand-border/40 hover:bg-brand-bg transition-colors"
                       >
-                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#f0f4ea] text-[#2f6b4f] font-bold border border-[#dce3d7]">
+                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-nested-bg text-brand-primary font-bold border border-brand-border/60">
                           {userScans.length - idx}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h4 className="font-bold text-[#17231b] truncate">
+                          <h4 className="font-bold text-brand-headline truncate">
                             {achievement.mountainName}
                           </h4>
-                          <div className="flex items-center gap-3 mt-1 text-xs text-[#647067]">
+                          <div className="flex items-center gap-3 mt-1 text-xs text-brand-body">
                             <span className="flex items-center gap-1">
                               <TrendingUp className="w-3 h-3" />{" "}
                               {achievement.mountainHeight} m
@@ -145,7 +145,7 @@ function UserProfilePage() {
                             </span>
                           </div>
                         </div>
-                        <Badge className="bg-[#edf8ee] text-[#275b35] border-[#bcd8c2] shadow-none hidden sm:flex">
+                        <Badge className="bg-brand-accent-sage text-brand-primary border-brand-primary/20 shadow-none hidden sm:flex">
                           Verified
                         </Badge>
                       </div>
@@ -158,10 +158,10 @@ function UserProfilePage() {
             {/* Sidebar: Boards & Posts (Right Side) */}
             <div className="space-y-6 flex flex-col">
               {/* Board Activity */}
-              <Card className="border border-[#dce3d7] rounded-2xl shadow-sm bg-white overflow-hidden flex-1 flex flex-col">
-                <CardHeader className="bg-[#fbfcf8] border-b border-[#e5eadf] py-4">
+              <Card className="border border-brand-border/60 rounded-2xl shadow-sm bg-white overflow-hidden flex-1 flex flex-col">
+                <CardHeader className="bg-brand-nested-bg/30 border-b border-brand-border/40 py-4">
                   <CardTitle className="text-sm font-bold flex items-center gap-2">
-                    <Tag className="w-4 h-4 text-[#316f8f]" />
+                    <Tag className="w-4 h-4 text-brand-hover-blue" />
                     Active tour boards
                   </CardTitle>
                 </CardHeader>
@@ -170,17 +170,17 @@ function UserProfilePage() {
                     <Link
                       key={tour.boardId}
                       to={`/board/${tour.boardId}`}
-                      className="block p-3 rounded-xl border border-[#e5eadf] hover:border-[#316f8f] hover:bg-slate-50 transition-all"
+                      className="block p-3 rounded-xl border border-brand-border/40 hover:border-brand-hover-blue hover:bg-brand-bg/50 transition-all"
                     >
                       <div className="flex justify-between items-start mb-1">
-                        <span className="font-semibold text-sm text-[#17231b]">
+                        <span className="font-semibold text-sm text-brand-headline">
                           {tour.mountainName}
                         </span>
-                        <span className="text-[10px] bg-[#f0f4ea] text-[#2f6b4f] px-2 py-0.5 rounded-md font-medium">
+                        <span className="text-[10px] bg-brand-nested-bg text-brand-primary px-2 py-0.5 rounded-md font-medium">
                           D{tour.difficulty}
                         </span>
                       </div>
-                      <p className="text-[11px] text-[#647067] line-clamp-1">
+                      <p className="text-[11px] text-brand-body line-clamp-1">
                         {tour.description}
                       </p>
                     </Link>
@@ -189,16 +189,16 @@ function UserProfilePage() {
               </Card>
 
               {/* Recent Posts */}
-              <Card className="border border-[#dce3d7] rounded-2xl shadow-sm bg-white overflow-hidden flex-1 flex flex-col">
-                <CardHeader className="bg-[#fbfcf8] border-b border-[#e5eadf] py-4">
+              <Card className="border border-brand-border/60 rounded-2xl shadow-sm bg-white overflow-hidden flex-1 flex flex-col">
+                <CardHeader className="bg-brand-nested-bg/30 border-b border-brand-border/40 py-4">
                   <CardTitle className="text-sm font-bold flex items-center gap-2">
-                    <Activity className="w-4 h-4 text-[#c7792b]" />
+                    <Activity className="w-4 h-4 text-brand-warning" />
                     Recent posts
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="p-4 space-y-3 flex-1 overflow-y-auto max-h-[280px]">
                   {userPosts.length === 0 ? (
-                    <p className="text-xs text-[#647067] italic text-center py-4">
+                    <p className="text-xs text-brand-body italic text-center py-4">
                       No posts.
                     </p>
                   ) : (
@@ -206,12 +206,12 @@ function UserProfilePage() {
                       <Link
                         key={post.id}
                         to={`/chat/${post.id}`}
-                        className="group block border-b border-[#f0f4ea] last:border-0 pb-2"
+                        className="group block border-b border-brand-nested-bg last:border-0 pb-2"
                       >
-                        <p className="text-xs font-medium text-[#17231b] group-hover:text-[#2f6b4f] transition-colors line-clamp-1">
+                        <p className="text-xs font-medium text-brand-headline group-hover:text-brand-primary transition-colors line-clamp-1">
                           {post.tagline}
                         </p>
-                        <p className="text-[10px] text-[#a1aca3] mt-0.5">
+                        <p className="text-[10px] text-brand-slate mt-0.5">
                           {post.mountainName} • {formatDate(post.timeStamp)}
                         </p>
                       </Link>
