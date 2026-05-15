@@ -19,7 +19,8 @@ import storage from 'redux-persist/lib/storage';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['auth', 'mountain', 'scans']
+  whitelist: ['auth', 'mountain', 'scans'],
+  blacklist: ['mountain']
 };
 
 const rootReducer = combineReducers({

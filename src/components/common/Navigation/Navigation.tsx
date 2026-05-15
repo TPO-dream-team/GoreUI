@@ -62,7 +62,7 @@ export function Navigation() {
                 <SheetContent side="left" className="w-80 bg-white border-r border-[#dce3d7]">
                   <div className="flex flex-col gap-6 mt-8">
                     <div className="flex items-center gap-3 pb-4 border-b border-[#dce3d7]">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#2f6b4f] to-[#316f8f] flex items-center justify-center">
+                      <div className="w-10 h-10 ml-2 rounded-lg bg-gradient-to-br from-[#2f6b4f] to-[#316f8f] flex items-center justify-center">
                         <Mountain className="h-5 w-5 text-white" />
                       </div>
                       <div>
