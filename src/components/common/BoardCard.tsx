@@ -155,9 +155,8 @@ function BoardCard({
                     onClick={onOrganizerClick}
                     className="hover:underline"
                   >
-                    {organizer}
+                    @{organizer}
                   </button>{" "}
-                  <span className="text-sm text-zinc-500">• 12 peaks</span>
                 </p>
               </div>
 
