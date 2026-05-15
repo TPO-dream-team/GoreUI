@@ -18,7 +18,6 @@ describe("ModeratorPage", () => {
     actionLoading: false,
     isEmpty: false,
     itemId: "123",
-    username: "testuser",
     category: "Spam",
     timestamp: "2023-10-27T10:00:00Z",
     confidence: "95",
@@ -52,7 +51,6 @@ describe("ModeratorPage", () => {
     render(<ModeratorPage />);
 
     expect(screen.getByText(new RegExp(defaultState.content, "i"))).toBeInTheDocument();
-    expect(screen.getByText(`@${defaultState.username}`)).toBeInTheDocument();
     expect(screen.getByText(`${defaultState.confidence}%`)).toBeInTheDocument();
 
     const rejectBtn = screen.getByRole("button", { name: /REJECT/i });

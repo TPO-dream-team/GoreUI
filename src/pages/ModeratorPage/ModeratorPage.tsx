@@ -20,7 +20,6 @@ function ModeratorPage() {
     actionLoading,
     isEmpty,
     itemId,
-    username,
     category,
     timestamp,
     confidence,
@@ -80,11 +79,6 @@ function ModeratorPage() {
 
           {/* Meta Bar */}
           <div className="flex flex-wrap items-center justify-between gap-2 px-5 py-3 bg-brand-nested-bg/30 border-b border-brand-border/40 text-xs">
-            <div className="flex items-center gap-2">
-              <User className="w-3 h-3 text-brand-body" />
-              <span className="text-brand-body">From:</span>
-              <span className="font-semibold text-brand-primary">@{username}</span>
-            </div>
             <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-brand-accent-sage">
               <Tag className="w-3 h-3 text-brand-primary" />
               <span className="text-[10px] font-bold text-brand-primary uppercase">
@@ -188,10 +182,6 @@ function ModeratorPage() {
             </div>
 
             <div className="flex justify-between items-center px-4 py-2 bg-gray-50 border-b text-[11px] text-gray-500 font-medium">
-              <div className="flex gap-1">
-                <span>From:</span>
-                <span className="text-cyan-700 font-bold">@{username}</span>
-              </div>
               <div className="bg-cyan-100 text-cyan-800 px-2 py-0.5 rounded-full text-[9px] uppercase font-bold">
                 Category: {category}
               </div>

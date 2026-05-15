@@ -25,7 +25,6 @@ describe("useModerator", () => {
 
   const mockItem = {
     id: "msg-123",
-    username: "mountain_climber",
     type: "Spam",
     msg: "Buy cheap gear here!",
     timestamp: "2023-10-27T10:00:00Z",

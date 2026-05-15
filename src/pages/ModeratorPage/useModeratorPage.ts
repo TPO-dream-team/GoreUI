@@ -4,7 +4,6 @@ import api from "@/utility/axios";
 
 type ModerationItem = {
   id: number | string;
-  username: string;
   category: string;
   content: string;
   timestamp: string;
@@ -78,7 +77,6 @@ export function useModerator() {
 
       setModerationItem({
         id: item.id ?? item.messageId ?? "-",
-        username: item.username ?? "unknown",
         category: item.category ?? item.type ?? "Content",
         content:
           item.message ?? item.msg ?? item.content ?? item.text ?? "",
@@ -141,7 +139,6 @@ export function useModerator() {
   const recall = Number(metrics?.recall ?? 0).toFixed(2);
   const isEmpty = !moderationItem;
   const itemId = moderationItem?.id ?? "-";
-  const username = moderationItem?.username ?? "unknown";
   const category = moderationItem?.category ?? "-";
   const timestamp = moderationItem?.timestamp ?? new Date().toISOString();
   const confidence = moderationItem?.aiConfidence ?? 0;
@@ -161,7 +158,6 @@ export function useModerator() {
       recall,
       isEmpty,
       itemId,
-      username,
       category,
       timestamp,
       confidence,
