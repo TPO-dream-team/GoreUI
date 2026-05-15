@@ -74,7 +74,18 @@ export const useNavigation = () => {
     setSignUpLoading(false);
   };
 
+  const syncQueue = useSelector((state: any) => state.scans.queue);
   const handleLogoutBtn = () => {
+    if (syncQueue.length > 0) {
+      const confirmLogout = window.confirm(
+        "You have unsynced scans. If you log out now, these might be lost or inaccessible. Are you sure you want to logout?"
+      );
+
+      if (!confirmLogout) {
+        return; 
+      }
+    }
+
     dispatch(logout());
     navigate("/");
   };
