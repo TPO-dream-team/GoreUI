@@ -42,6 +42,8 @@ export const useNavigation = () => {
     if (loginUser.fulfilled.match(result)) {
       setLoginDialogOpen(false);
       setLoginInfoText("");
+      setLoginUsername("");
+      setLoginPassword("");
       navigate("/");
     } else if (loginUser.rejected.match(result)) {
       const errorMessage = (result.payload as any)?.message || "An error occurred";
