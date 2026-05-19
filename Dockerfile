@@ -10,6 +10,10 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
+# Injects the API base URL from build arguments
+ARG VITE_AUTH_API_BASEURL=http://localhost:5148
+ENV VITE_AUTH_API_BASEURL=$VITE_AUTH_API_BASEURL
+
 # Build the app (Vite outputs to the /dist folder by default)
 RUN npm run build
 

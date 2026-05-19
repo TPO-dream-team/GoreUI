@@ -27,6 +27,8 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
+          build-args: |
+            VITE_AUTH_API_BASEURL=${{ secrets.PROD_API_URL }}
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/peakproof-frontend:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/peakproof-frontend:${{ github.ref_name }}
