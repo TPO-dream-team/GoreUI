@@ -4,10 +4,9 @@ import type { RootState } from "../store";
 import { REHYDRATE } from "redux-persist";
 
 export interface ScansMsg {
-    id: string;
-    userId: string;
-    mountainId: string;
-    createdAt: string;
+  nfc: string;
+  lon: number;
+  lat: number;
 }
 
 interface ScanItem {

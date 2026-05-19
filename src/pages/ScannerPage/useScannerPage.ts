@@ -2,14 +2,9 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "@/utility/store";
 import type { Gora } from "@/utility/stores_slices/goreSlice";
-import { enqueueScan } from "@/utility/stores_slices/scanSlice";
+import { enqueueScan, type ScansMsg } from "@/utility/stores_slices/scanSlice";
 import api from '@/utility/axios';
 
-export interface ScansMsg {
-  nfc: string;
-  lon: number;
-  lat: number;
-}
 
 export const useScannerPage = () => {
   const dispatch = useDispatch<AppDispatch>();
