@@ -11,12 +11,12 @@ test('test new post: PU-01, PU-02, PU-03, PU-09, PU-10, PU-11, PU-12', async ({ 
 
   await page.goto('/');
 
-   // Register
-  await page.getByRole('button', { name: 'Register' }).click();
+  // Register
+  await page.getByRole('button', { name: 'Registration' }).click();
   await page.getByLabel('Username').fill('testuser1');
   await page.getByLabel('Password', { exact: true }).fill('testuser1');
   await page.getByLabel('Confirm password').fill('testuser1');
-  await page.getByRole('button', { name: 'Sign in' }).click();
+  await page.getByRole('button', { name: 'Register' }).click();
 
   // Login
   await page.getByRole('button', { name: 'Login' }).click();
@@ -26,10 +26,10 @@ test('test new post: PU-01, PU-02, PU-03, PU-09, PU-10, PU-11, PU-12', async ({ 
 
   await page.getByRole('button', { name: 'Posts' }).click();
   await page.getByRole('button', { name: 'Post' }).click();
-  await page.getByRole('textbox', { name: 'My amazing weekend...' }).click();
-  await page.getByRole('textbox', { name: 'My amazing weekend...' }).fill('Moj prvi testpost');
-  await page.getByRole('textbox', { name: 'How are you feeling?' }).click();
-  await page.getByRole('textbox', { name: 'How are you feeling?' }).fill('Vredu se počutim 123');
+  await page.getByRole('textbox', { name: 'My experience on Triglav...' }).click();
+  await page.getByRole('textbox', { name: 'My experience on Triglav...' }).fill('Moj prvi testpost');
+  await page.getByRole('textbox', { name: 'How was it? Share the details...' }).click();
+  await page.getByRole('textbox', { name: 'How was it? Share the details...' }).fill('Vredu se počutim 123');
   await page.getByRole('button', { name: 'Post now' }).click();
   await page.getByRole('link', { name: 'View 0 Comments' }).click();
   await page.getByRole('textbox', { name: 'Write a comment...' }).click();

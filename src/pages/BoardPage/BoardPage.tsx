@@ -49,46 +49,46 @@ function BoardPage() {
   // New Style (Mountain Theme)
   if (useNewStyle) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#f6f7f2] via-[#f6f7f2] to-white">
+      <div className="min-h-screen bg-gradient-to-b from-brand-bg via-brand-bg to-white">
         <div className="container mx-auto px-4 py-8 md:py-10 max-w-7xl">
           {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8 pb-4 border-b border-[#dce3d7]">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8 pb-4 border-b border-brand-border">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#2f6b4f] to-[#316f8f] flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-primary to-brand-hover-blue flex items-center justify-center">
                   <Mountain className="w-4 h-4 text-white" />
                 </div>
-                <h1 className="text-2xl md:text-3xl font-bold text-[#17231b]">Tours</h1>
+                <h1 className="text-2xl md:text-3xl font-bold text-brand-headline">Tours</h1>
               </div>
-              <p className="text-[#647067] text-sm mt-1">
+              <p className="text-brand-body text-sm mt-1">
                 Browse published hikes
               </p>
             </div>
 
             <Dialog open={state.open} onOpenChange={actions.handleDialogChange}>
               <DialogTrigger asChild>
-                <Button className="bg-[#2f6b4f] hover:bg-[#214b39] text-white rounded-lg gap-2">
+                <Button className="bg-brand-primary hover:bg-brand-hover-green text-white rounded-button gap-2">
                   <Plus className="w-4 h-4" />
                   New tour
                 </Button>
               </DialogTrigger>
 
-              <DialogContent className="sm:max-w-[550px] rounded-xl border-[#dce3d7]">
+              <DialogContent className="sm:max-w-[550px] rounded-xl border-brand-border">
                 <DialogHeader>
                   <div className="flex items-center gap-2 mb-2">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#2f6b4f] to-[#316f8f] flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-primary to-brand-hover-blue flex items-center justify-center">
                       <Mountain className="w-4 h-4 text-white" />
                     </div>
-                    <DialogTitle className="text-xl text-[#17231b]">Create a new tour</DialogTitle>
+                    <DialogTitle className="text-xl text-brand-headline">Create a new tour</DialogTitle>
                   </div>
-                  <p className="text-sm text-[#647067]">Share your hiking experience with others</p>
+                  <p className="text-sm text-brand-body">Share your hiking experience with others</p>
                 </DialogHeader>
 
                 <div className="space-y-5 mt-2">
                   {/* Mountain Selection */}
                   <div className="space-y-2">
-                    <Label htmlFor="mountain-search" className="text-[#17231b] font-medium flex items-center gap-2">
-                      <Mountain className="w-4 h-4 text-[#2f6b4f]" />
+                    <Label htmlFor="mountain-search" className="text-brand-headline font-medium flex items-center gap-2">
+                      <Mountain className="w-4 h-4 text-brand-primary" />
                       Mountain selection
                     </Label>
                     <div className="relative">
@@ -99,20 +99,20 @@ function BoardPage() {
                         onChange={(e) => actions.handleMountainQueryChange(e.target.value)}
                         onFocus={() => actions.setmountainSuggestion(true)}
                         autoComplete="off"
-                        className="border-[#dce3d7] focus:border-[#2f6b4f] focus:ring-[#2f6b4f]/20 rounded-lg"
+                        className="border-brand-border focus:border-brand-primary focus:ring-brand-primary/20 rounded-button"
                       />
 
                       {state.mountainSuggestion && state.filteredMountains.length > 0 && (
-                        <div className="absolute z-50 mt-1 max-h-60 w-full overflow-y-auto rounded-lg bg-white shadow-lg border border-[#dce3d7]">
+                        <div className="absolute z-50 mt-1 max-h-60 w-full overflow-y-auto rounded-lg bg-white shadow-lg border border-brand-border">
                           {state.filteredMountains.map((gora: Gora) => (
                             <button
                               key={gora.id}
                               type="button"
                               onClick={() => actions.handleSelectMountain(gora)}
-                              className="flex w-full justify-between items-center px-4 py-2 text-left hover:bg-[#f0f4ea] transition-colors border-b border-[#e5eadf] last:border-0"
+                              className="flex w-full justify-between items-center px-4 py-2 text-left hover:bg-brand-accent-sage transition-colors border-b border-brand-border/40 last:border-0"
                             >
-                              <span className="font-medium text-[#17231b]">{gora.name}</span>
-                              <span className="text-sm text-[#647067]">{gora.height} m</span>
+                              <span className="font-medium text-brand-headline">{gora.name}</span>
+                              <span className="text-sm text-brand-body">{gora.height} m</span>
                             </button>
                           ))}
                         </div>
@@ -122,27 +122,27 @@ function BoardPage() {
 
                   {/* Selected Mountain Preview */}
                   {state.selectedMountain && (
-                    <div className="rounded-lg bg-[#f0f4ea] p-3 border border-[#dce3d7]">
+                    <div className="rounded-lg bg-brand-accent-sage p-3 border border-brand-border">
                       <p className="text-sm">
-                        <span className="font-medium text-[#17231b]">Selected mountain:</span>{" "}
-                        <span className="text-[#2f6b4f] font-semibold">{state.selectedMountain.name}</span>
+                        <span className="font-medium text-brand-headline">Selected mountain:</span>{" "}
+                        <span className="text-brand-primary font-semibold">{state.selectedMountain.name}</span>
                         {" · "}
-                        <span className="text-[#316f8f]">{state.selectedMountain.height} m</span>
+                        <span className="text-brand-hover-blue">{state.selectedMountain.height} m</span>
                       </p>
                     </div>
                   )}
 
                   {/* Date */}
                   <div className="space-y-2">
-                    <Label className="text-[#17231b] font-medium flex items-center gap-2">
-                      <CalendarIcon className="w-4 h-4 text-[#c7792b]" />
+                    <Label className="text-brand-headline font-medium flex items-center gap-2">
+                      <CalendarIcon className="w-4 h-4 text-brand-warning" />
                       Tour date
                     </Label>
                     <Popover>
                       <PopoverTrigger asChild>
                         <Button
                           variant="outline"
-                          className="w-full justify-start text-left font-normal border-[#dce3d7] hover:bg-[#f0f4ea]"
+                          className="w-full justify-start text-left font-normal border-brand-border hover:bg-brand-accent-sage rounded-button"
                         >
                           <CalendarIcon className="mr-2 h-4 w-4" />
                           {state.date ? (
@@ -161,7 +161,9 @@ function BoardPage() {
                           selected={state.date ? new Date(state.date) : undefined}
                           onSelect={(date) => {
                             if (date) {
-                              actions.setDate(date.toISOString().split("T")[0]);
+                              const offset = date.getTimezoneOffset();
+                              const localDate = new Date(date.getTime() - (offset * 60 * 1000));
+                              actions.setDate(localDate.toISOString().split("T")[0]);
                             }
                           }}
                           disabled={(date) => date < new Date()}
@@ -173,8 +175,8 @@ function BoardPage() {
                   {/* Duration and Difficulty */}
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="duration" className="text-[#17231b] font-medium flex items-center gap-2">
-                        <Clock className="w-4 h-4 text-[#316f8f]" />
+                      <Label htmlFor="duration" className="text-brand-headline font-medium flex items-center gap-2">
+                        <Clock className="w-4 h-4 text-brand-hover-blue" />
                         Duration (hours)
                       </Label>
                       <Input
@@ -185,12 +187,12 @@ function BoardPage() {
                         placeholder="e.g. 5"
                         value={state.duration}
                         onChange={(e) => actions.setDuration(e.target.value)}
-                        className="border-[#dce3d7] focus:border-[#2f6b4f] focus:ring-[#2f6b4f]/20 rounded-lg"
+                        className="border-brand-border focus:border-brand-primary focus:ring-brand-primary/20 rounded-button"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="difficulty" className="text-[#17231b] font-medium flex items-center gap-2">
-                        <TrendingUp className="w-4 h-4 text-[#c7792b]" />
+                      <Label htmlFor="difficulty" className="text-brand-headline font-medium flex items-center gap-2">
+                        <TrendingUp className="w-4 h-4 text-brand-warning" />
                         Difficulty (1-5)
                       </Label>
                       <Input
@@ -201,15 +203,15 @@ function BoardPage() {
                         placeholder="e.g. 3"
                         value={state.difficulty}
                         onChange={(e) => actions.setDifficulty(e.target.value)}
-                        className="border-[#dce3d7] focus:border-[#2f6b4f] focus:ring-[#2f6b4f]/20 rounded-lg"
+                        className="border-brand-border focus:border-brand-primary focus:ring-brand-primary/20 rounded-button"
                       />
                     </div>
                   </div>
 
                   {/* Description */}
                   <div className="space-y-2">
-                    <Label htmlFor="description" className="text-[#17231b] font-medium flex items-center gap-2">
-                      <FileText className="w-4 h-4 text-[#647067]" />
+                    <Label htmlFor="description" className="text-brand-headline font-medium flex items-center gap-2">
+                      <FileText className="w-4 h-4 text-brand-body" />
                       Tour description
                     </Label>
                     <Textarea
@@ -217,16 +219,16 @@ function BoardPage() {
                       placeholder="Share details about the route, conditions, and experience ..."
                       value={state.description}
                       onChange={(e) => actions.handleDescriptionChange(e.target.value)}
-                      className="border-[#dce3d7] focus:border-[#2f6b4f] focus:ring-[#2f6b4f]/20 rounded-lg min-h-[100px]"
+                      className="border-brand-border focus:border-brand-primary focus:ring-brand-primary/20 rounded-button min-h-[100px]"
                     />
-                    <p className="text-right text-xs text-[#647067]">
+                    <p className="text-right text-xs text-brand-body">
                       {state.description.length}/150
                     </p>
                   </div>
 
                   {/* Error Message */}
                   {state.formError && (
-                    <div className="flex items-center gap-2 text-sm text-[#b2473e] bg-[#fff4f2] p-3 rounded-lg border border-[#ecc1bb]">
+                    <div className="flex items-center gap-2 text-sm text-brand-error-text bg-brand-error-bg p-3 rounded-button border border-brand-error-border">
                       <AlertCircle className="w-4 h-4" />
                       {state.formError}
                     </div>
@@ -237,7 +239,7 @@ function BoardPage() {
                     <Button 
                       onClick={actions.handleCreatePost} 
                       disabled={state.creatingBoard}
-                      className="bg-[#2f6b4f] hover:bg-[#214b39] text-white rounded-lg gap-2"
+                      className="bg-brand-primary hover:bg-brand-hover-green text-white rounded-button gap-2"
                     >
                       {state.creatingBoard ? "Creating..." : "Publish tour"}
                     </Button>
@@ -252,15 +254,15 @@ function BoardPage() {
             {/* Loading State */}
             {state.boardsLoading && (
               <div className="flex justify-center items-center py-12">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#2f6b4f]"></div>
-                <span className="ml-3 text-[#647067]">Loading tours...</span>
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-primary"></div>
+                <span className="ml-3 text-brand-body">Loading tours...</span>
               </div>
             )}
 
             {/* Error State */}
             {state.boardsError && !state.boardsLoading && (
               <div className="text-center py-12">
-                <div className="inline-flex items-center gap-2 text-[#b2473e] bg-[#fff4f2] px-4 py-2 rounded-lg">
+                <div className="inline-flex items-center gap-2 text-brand-error-text bg-brand-error-bg px-4 py-2 rounded-button border border-brand-error-border">
                   <AlertCircle className="w-5 h-5" />
                   <span>Error: {state.boardsError}</span>
                 </div>
@@ -270,11 +272,11 @@ function BoardPage() {
             {/* Empty State */}
             {!state.boardsLoading && !state.boardsError && state.boards.length === 0 && (
               <div className="text-center py-12">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[#f0f4ea] flex items-center justify-center">
-                  <Mountain className="w-8 h-8 text-[#647067]" />
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-brand-accent-sage flex items-center justify-center">
+                  <Mountain className="w-8 h-8 text-brand-body" />
                 </div>
-                <p className="text-[#647067]">There are currently no published tours.</p>
-                <p className="text-sm text-[#647067] mt-1">Be the first to share your experience!</p>
+                <p className="text-brand-body">There are currently no published tours.</p>
+                <p className="text-sm text-brand-body mt-1">Be the first to share your experience!</p>
               </div>
             )}
 

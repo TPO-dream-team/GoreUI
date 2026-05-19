@@ -1,40 +1,43 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGore } from '@/utility/stores_slices/goreSlice';
 import type { AppDispatch, RootState } from '@/utility/store';
 
 export default function AppInitializer({ children }: { children: React.ReactNode }) {
   const dispatch = useDispatch<AppDispatch>();
-
-  const gore = useSelector((state: RootState) => state.mountain.gore);
-  const loading = useSelector((state: RootState) => state.mountain.loading);
+  
+  const { gore, loading } = useSelector((state: RootState) => state.mountain);
   const isRehydrated = useSelector((state: RootState) => state._persist?.rehydrated);
+  
+  const hasNoData = !gore || (Array.isArray(gore) && gore.length === 0);
+  const hasAttemptedFetch = useRef(false);
 
   useEffect(() => {
-    if (!isRehydrated) return;
+    if (isRehydrated && hasNoData && !loading && !hasAttemptedFetch.current) {
+      hasAttemptedFetch.current = true;
+      dispatch(fetchGore(false));
+    }
+  }, [isRehydrated, hasNoData, loading, dispatch]);
 
-    const attemptFetch = () => {
-      if (!gore) {
-        console.log("Attempting to fetch...");
-        dispatch(fetchGore());
-      }
-    };
-
-    attemptFetch();
-
-    const retryInterval = setInterval(() => {
-      attemptFetch();
-    }, 5000);
-
-    return () => clearInterval(retryInterval);
-  }, [dispatch, isRehydrated, gore]);
-
-  if (!isRehydrated || !gore) {
+  if (!isRehydrated || (loading && hasNoData)) {
     return (
-      <div className='flex items-center justify-center min-h-screen text-center p-4'>
-        <div className="space-y-4">
-          <p>Že dolgo se nisi prijavil v spletno stran. Prosim prijavi se z internetno povezavo.</p>
-        </div>
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900" />
+      </div>
+    );
+  }
+
+  if (hasNoData) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen p-4 text-center">
+        <p className="mb-4 text-gray-600">Please sign in while connected to the internet.</p>
+        <button
+          className="bg-blue-600 text-white px-6 py-2 rounded-lg disabled:bg-gray-300"
+          disabled={loading}
+          onClick={() => dispatch(fetchGore(true))}
+        >
+          {loading ? 'Connecting...' : 'Retry'}
+        </button>
       </div>
     );
   }

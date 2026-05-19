@@ -42,6 +42,8 @@ export const useNavigation = () => {
     if (loginUser.fulfilled.match(result)) {
       setLoginDialogOpen(false);
       setLoginInfoText("");
+      setLoginUsername("");
+      setLoginPassword("");
       navigate("/");
     } else if (loginUser.rejected.match(result)) {
       const errorMessage = (result.payload as any)?.message || "An error occurred";
@@ -63,6 +65,10 @@ export const useNavigation = () => {
       setSignUpDialogOpen(false);
       setLoginDialogOpen(true);
       setLoginInfoText("Registration successful");
+      setTimeout(() => {
+        setLoginInfoText("");
+      }, 2000);
+
     } else if (signUpUser.rejected.match(result)) {
       const errorMessage = (result.payload as any)?.message || "An error occurred";
       setSignupInfoText(errorMessage);
@@ -70,7 +76,18 @@ export const useNavigation = () => {
     setSignUpLoading(false);
   };
 
+  const syncQueue = useSelector((state: any) => state.scans.queue);
   const handleLogoutBtn = () => {
+    if (syncQueue.length > 0) {
+      const confirmLogout = window.confirm(
+        "You have unsynced scans. If you log out now, these might be lost or inaccessible. Are you sure you want to logout?"
+      );
+
+      if (!confirmLogout) {
+        return; 
+      }
+    }
+
     dispatch(logout());
     navigate("/");
   };

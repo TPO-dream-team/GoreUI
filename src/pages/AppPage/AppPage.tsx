@@ -36,20 +36,20 @@ function AppPage() {
   // New Style (Mountain App Theme)
   if (useNewStyle) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#f6f7f2] via-[#f6f7f2] to-white">
+    <div className="min-h-screen bg-gradient-to-b from-brand-bg via-brand-bg to-white">
         <div className="container mx-auto px-4 py-8 md:py-12 max-w-5xl">
           {/* Hero Section */}
           <div className="text-center mb-10 md:mb-12">
-            <div className="inline-flex items-center justify-center w-16 h-16 mb-4 rounded-xl bg-gradient-to-br from-[#2f6b4f] to-[#316f8f] shadow-lg">
+            <div className="inline-flex items-center justify-center w-16 h-16 mb-4 rounded-xl bg-gradient-to-br from-brand-primary to-brand-hover-blue shadow-lg">
               <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M3 20h18L14 5l-4 8-2-3-5 10z" />
                 <path d="M14 5l-2 7 3-2" />
               </svg>
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-[#17231b]">
+            <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-brand-headline">
               PeakProof
             </h1>
-            <p className="text-[#647067] mt-2 text-base max-w-md mx-auto">
+            <p className="text-brand-body text-body-copy leading-body-copy mt-2 max-w-md mx-auto">
               {username
                 ? `Welcome back, ${username}`
                 : "Verified ascents and tours"}
@@ -61,39 +61,39 @@ function AppPage() {
               {/* Scan Button */}
               <Button
                 onClick={() => navigate("/scanner")}
-                className="h-auto py-6 px-4 bg-white border border-[#dce3d7] text-[#344255] hover:border-[#2f6b4f] hover:text-[#214b39] shadow-sm hover:shadow transition-all rounded-lg group"
+                className="h-auto py-6 px-4 bg-white border border-brand-border text-brand-slate hover:border-brand-primary hover:text-brand-hover-green shadow-sm hover:shadow transition-all rounded-button group"
                 variant="ghost"
               >
                 <div className="flex flex-col items-center gap-2 w-full">
-                  <Scan className="h-8 w-8 text-[#2f6b4f] group-hover:scale-105 transition-transform" />
+                  <Scan className="h-8 w-8 text-brand-primary group-hover:scale-105 transition-transform" />
                   <span className="text-lg font-semibold">Scan</span>
-                  <span className="text-xs text-[#647067]">Verify peak with GPS and NFC</span>
+                  <span className="text-xs text-brand-body">Verify peak with GPS and NFC</span>
                 </div>
               </Button>
 
               {/* Tours Button */}
               <Button
                 onClick={() => navigate("/board")}
-                className="h-auto py-6 px-4 bg-white border border-[#dce3d7] text-[#344255] hover:border-[#2f6b4f] hover:text-[#214b39] shadow-sm hover:shadow transition-all rounded-lg group"
+                className="h-auto py-6 px-4 bg-white border border-brand-border text-brand-slate hover:border-brand-primary hover:text-brand-hover-green shadow-sm hover:shadow transition-all rounded-button group"
                 variant="ghost"
               >
                 <div className="flex flex-col items-center gap-2 w-full">
-                  <Map className="h-8 w-8 text-[#316f8f] group-hover:scale-105 transition-transform" />
+                  <Map className="h-8 w-8 text-brand-hover-blue group-hover:scale-105 transition-transform" />
                   <span className="text-lg font-semibold">Tours</span>
-                  <span className="text-xs text-[#647067]">Find a hike</span>
+                  <span className="text-xs text-brand-body">Find a hike</span>
                 </div>
               </Button>
 
               {/* Posts Button */}
               <Button
                 onClick={() => navigate("/chat")}
-                className="h-auto py-6 px-4 bg-white border border-[#dce3d7] text-[#344255] hover:border-[#2f6b4f] hover:text-[#214b39] shadow-sm hover:shadow transition-all rounded-lg group"
+                className="h-auto py-6 px-4 bg-white border border-brand-border text-brand-slate hover:border-brand-primary hover:text-brand-hover-green shadow-sm hover:shadow transition-all rounded-button group"
                 variant="ghost"
               >
                 <div className="flex flex-col items-center gap-2 w-full">
-                  <MessageSquare className="h-8 w-8 text-[#c7792b] group-hover:scale-105 transition-transform" />
+                  <MessageSquare className="h-8 w-8 text-brand-warning group-hover:scale-105 transition-transform" />
                   <span className="text-lg font-semibold">Posts</span>
-                  <span className="text-xs text-[#647067]">Community discussions</span>
+                  <span className="text-xs text-brand-body">Community discussions</span>
                 </div>
               </Button>
 
@@ -101,13 +101,13 @@ function AppPage() {
               {role === "admin" && (
                 <Button
                   onClick={() => navigate("/moderation")}
-                  className="h-auto py-6 px-4 bg-white border border-[#dce3d7] text-[#344255] hover:border-[#b2473e] hover:text-[#b2473e] shadow-sm hover:shadow transition-all rounded-lg group"
+                  className="h-auto py-6 px-4 bg-white border border-brand-border text-brand-slate hover:border-brand-error-text hover:text-brand-error-text shadow-sm hover:shadow transition-all rounded-button group"
                   variant="ghost"
                 >
                   <div className="flex flex-col items-center gap-2 w-full">
-                    <ShieldCheck className="h-8 w-8 text-[#b2473e] group-hover:scale-105 transition-transform" />
+                    <ShieldCheck className="h-8 w-8 text-brand-error-text group-hover:scale-105 transition-transform" />
                     <span className="text-lg font-semibold">Moderation</span>
-                    <span className="text-xs text-[#647067]">Content overview</span>
+                    <span className="text-xs text-brand-body">Content overview</span>
                   </div>
                 </Button>
               )}
@@ -116,7 +116,7 @@ function AppPage() {
               <div className={role === "admin" ? "md:col-span-2 mt-2" : "col-span-1 md:col-span-2 mt-2"}>
                 <Button
                   onClick={() => navigate("/help")}
-                  className="w-full h-auto py-5 px-4 bg-transparent border border-dashed border-[#c9d4c5] text-[#647067] hover:border-[#2f6b4f] hover:text-[#214b39] hover:bg-[#f0f4ea] transition-all rounded-lg group"
+                  className="w-full h-auto py-5 px-4 bg-transparent border border-dashed border-brand-muted-sage text-brand-body hover:border-brand-primary hover:text-brand-hover-green hover:bg-brand-accent-sage transition-all rounded-button group"
                   variant="ghost"
                 >
                   <div className="flex items-center justify-center gap-3">
@@ -129,14 +129,14 @@ function AppPage() {
             </div>
           ) : (
             <div className="max-w-md mx-auto mt-8">
-              <div className="border border-dashed border-[#c9d4c5] rounded-xl bg-[#fbfcf8] p-8 text-center">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[#edf8ee] flex items-center justify-center">
-                  <HelpCircle className="h-8 w-8 text-[#2f6b4f]" />
+              <div className="border border-dashed border-brand-muted-sage rounded-xl bg-brand-nested-bg p-8 text-center">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-brand-success-bg flex items-center justify-center">
+                  <HelpCircle className="h-8 w-8 text-brand-primary" />
                 </div>
-                <h3 className="text-lg font-semibold text-[#17231b] mb-2">
+                <h3 className="text-lg font-semibold text-brand-headline mb-2">
                   Sign in to access features
                 </h3>
-                <p className="text-sm text-[#647067] max-w-sm mx-auto">
+                <p className="text-sm text-brand-body max-w-sm mx-auto">
                   Sign in using the button in the top-right corner to access scanning, tours, posts, and your profile.
                   Don't have an account? Register via the Register button.
                 </p>

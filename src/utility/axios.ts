@@ -4,6 +4,7 @@ import { logout } from './stores_slices/authSlice';
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_AUTH_API_BASEURL,
+  timeout: 20000
 });
 
 

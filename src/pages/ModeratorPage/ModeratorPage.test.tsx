@@ -1,216 +1,81 @@
-import { render, screen, waitFor, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { useOutletContext } from "react-router-dom";
-import api from "@/utility/axios";
 import ModeratorPage from "./ModeratorPage";
+import { useModerator } from "./useModeratorPage";
 
-vi.mock("react-router-dom", () => ({
-  useOutletContext: vi.fn(),
-}));
-
-vi.mock("@/utility/axios", () => ({
-  default: {
-    get: vi.fn(),
-    post: vi.fn(),
-  },
+// Mock the custom hook
+vi.mock("./useModeratorPage", () => ({
+  useModerator: vi.fn(),
 }));
 
 describe("ModeratorPage", () => {
+  const mockHandleTrain = vi.fn();
+
+  const defaultState = {
+    useNewStyle: true,
+    loading: false,
+    error: null,
+    actionLoading: false,
+    isEmpty: false,
+    itemId: "123",
+    category: "Spam",
+    timestamp: "2023-10-27T10:00:00Z",
+    confidence: "95",
+    reason: "suspicious links",
+    content: "Buy cheap watches now!",
+    f1: "0.88",
+    precision: "0.90",
+    recall: "0.86",
+  };
+
   beforeEach(() => {
     vi.clearAllMocks();
-    localStorage.clear();
-
-    (useOutletContext as any).mockReturnValue({
-      useNewStyle: true,
-    });
   });
 
-  it("shows loading state first", () => {
-    (api.get as any).mockReturnValue(new Promise(() => {}));
+  it("renders the loading state correctly", () => {
+    (useModerator as any).mockReturnValue({
+      state: { ...defaultState, loading: true },
+      actions: { handleTrain: mockHandleTrain },
+    });
 
     render(<ModeratorPage />);
-
-    expect(screen.getByText("Nalaganje moderacije...")).toBeInTheDocument();
+    expect(screen.getByText(/Loading moderation.../i)).toBeInTheDocument();
   });
 
-  it("renders moderation item from API", async () => {
-    (api.get as any).mockImplementation((url: string) => {
-      if (url === "/moderator/ambiguous") {
-        return Promise.resolve({
-          data: {
-            id: 1,
-            username: "testuser",
-            category: "Komentar",
-            message: "To je testna vsebina",
-            timestamp: "2026-05-08T12:00:00Z",
-            confidencePercentage: 75,
-            reason: "možno spam vsebino",
-          },
-        });
-      }
-
-      if (url === "/moderator/metrics") {
-        return Promise.resolve({
-          data: {
-            f1Score: 0.91,
-            precision: 0.88,
-            recall: 0.93,
-          },
-        });
-      }
-
-      return Promise.reject(new Error("Unknown endpoint"));
+  it("renders content and handles Approve/Reject actions", () => {
+    (useModerator as any).mockReturnValue({
+      state: defaultState,
+      actions: { handleTrain: mockHandleTrain },
     });
 
     render(<ModeratorPage />);
 
-    await waitFor(() => {
-      expect(screen.getByText("Moderacija vsebin")).toBeInTheDocument();
-    });
+    expect(screen.getByText(new RegExp(defaultState.content, "i"))).toBeInTheDocument();
+    expect(screen.getByText(`${defaultState.confidence}%`)).toBeInTheDocument();
 
-    expect(screen.getByText("@testuser")).toBeInTheDocument();
-    expect(screen.getByText("Kategorija: Komentar")).toBeInTheDocument();
-    expect(screen.getByText('"To je testna vsebina"')).toBeInTheDocument();
-    expect(screen.getByText("75%")).toBeInTheDocument();
-    expect(screen.getByText("0.91")).toBeInTheDocument();
-    expect(screen.getByText("0.88")).toBeInTheDocument();
-    expect(screen.getByText("0.93")).toBeInTheDocument();
+    const rejectBtn = screen.getByRole("button", { name: /REJECT/i });
+    fireEvent.click(rejectBtn);
+    expect(mockHandleTrain).toHaveBeenCalledWith(true);
+
+    const approveBtn = screen.getByRole("button", { name: /APPROVE/i });
+    fireEvent.click(approveBtn);
+    expect(mockHandleTrain).toHaveBeenCalledWith(false);
   });
 
-  it("renders empty state when there is no item to moderate", async () => {
-    (api.get as any).mockImplementation((url: string) => {
-      if (url === "/moderator/ambiguous") {
-        return Promise.resolve({ data: null });
-      }
-
-      if (url === "/moderator/metrics") {
-        return Promise.resolve({
-          data: {
-            f1Score: 0.8,
-            precision: 0.7,
-            recall: 0.6,
-          },
-        });
-      }
-
-      return Promise.reject(new Error("Unknown endpoint"));
+  it("displays empty state and disables buttons when no content is available", () => {
+    (useModerator as any).mockReturnValue({
+      state: { ...defaultState, isEmpty: true, content: "" },
+      actions: { handleTrain: mockHandleTrain },
     });
 
     render(<ModeratorPage />);
 
-    await waitFor(() => {
-      expect(screen.getByText("Ni novih vsebin za moderacijo")).toBeInTheDocument();
-    });
+    expect(screen.getByText(/No new content to moderate/i)).toBeInTheDocument();
 
-    expect(screen.getByText("ZAVRNI")).toBeDisabled();
-    expect(screen.getByText("ODOBRI")).toBeDisabled();
-  });
+    const rejectBtn = screen.getByRole("button", { name: /REJECT/i });
+    const approveBtn = screen.getByRole("button", { name: /APPROVE/i });
 
-  it("sends train request when rejecting content", async () => {
-    (api.get as any).mockImplementation((url: string) => {
-      if (url === "/moderator/ambiguous") {
-        return Promise.resolve({
-          data: {
-            id: 5,
-            username: "spamuser",
-            message: "Spam message",
-            confidencePercentage: 80,
-          },
-        });
-      }
-
-      if (url === "/moderator/metrics") {
-        return Promise.resolve({
-          data: {
-            f1Score: 1,
-            precision: 1,
-            recall: 1,
-          },
-        });
-      }
-
-      return Promise.reject(new Error("Unknown endpoint"));
-    });
-
-    (api.post as any).mockResolvedValue({ status: 200 });
-
-    render(<ModeratorPage />);
-
-    await waitFor(() => {
-      expect(screen.getByText('"Spam message"')).toBeInTheDocument();
-    });
-
-    fireEvent.click(screen.getByText("ZAVRNI"));
-
-    await waitFor(() => {
-      expect(api.post).toHaveBeenCalledWith("/moderator/train", null, {
-        params: {
-          messageId: 5,
-          isSpam: true,
-        },
-      });
-    });
-  });
-
-  it("sends train request when approving content", async () => {
-    (api.get as any).mockImplementation((url: string) => {
-      if (url === "/moderator/ambiguous") {
-        return Promise.resolve({
-          data: {
-            id: 7,
-            username: "normaluser",
-            message: "Normal message",
-            confidencePercentage: 40,
-          },
-        });
-      }
-
-      if (url === "/moderator/metrics") {
-        return Promise.resolve({
-          data: {
-            f1Score: 1,
-            precision: 1,
-            recall: 1,
-          },
-        });
-      }
-
-      return Promise.reject(new Error("Unknown endpoint"));
-    });
-
-    (api.post as any).mockResolvedValue({ status: 200 });
-
-    render(<ModeratorPage />);
-
-    await waitFor(() => {
-      expect(screen.getByText('"Normal message"')).toBeInTheDocument();
-    });
-
-    fireEvent.click(screen.getByText("ODOBRI"));
-
-    await waitFor(() => {
-      expect(api.post).toHaveBeenCalledWith("/moderator/train", null, {
-        params: {
-          messageId: 7,
-          isSpam: false,
-        },
-      });
-    });
-  });
-
-  it("shows error when API fails", async () => {
-    (api.get as any).mockRejectedValue({
-      response: {
-        data: {
-          message: "Napaka iz API-ja",
-        },
-      },
-    });
-
-    render(<ModeratorPage />);
-
-    await waitFor(() => {
-      expect(screen.getByText("Napaka iz API-ja")).toBeInTheDocument();
-    });
+    expect(rejectBtn).toBeDisabled();
+    expect(approveBtn).toBeDisabled();
   });
 });

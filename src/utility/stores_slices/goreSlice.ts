@@ -24,25 +24,26 @@ const initialState: GoreState = {
 };
 
 export const fetchGore = createAsyncThunk(
-    'mountain/get',
-    async (_, { rejectWithValue }) => {
-        try {
-            const response = await api.get('/mountain');
-            return { data: response.data };
-        } catch (err: any) {
-            return rejectWithValue(err.message);
-        }
-    },
-    {
-        condition: (arg, { getState }) => {
-            const state = getState() as RootState;
-            console.log(state.mountain)
-            if (state.mountain && state.mountain.gore && state.mountain.gore.length > 0) {
-                return false;
-            }
-            return true;
-        },
+  'mountain/get',
+  async (force: boolean = false, { rejectWithValue }) => {
+    try {
+      const response = await api.get('/mountain');
+      return { data: response.data };
+    } catch (err: any) {
+      return rejectWithValue(err.message || 'Connection Timeout');
     }
+  },
+  {
+    condition: (force, { getState }) => {
+      if (force) return true;
+      
+      const { mountain } = getState() as RootState;
+      if (mountain.loading) return false;
+      
+      const hasData = Array.isArray(mountain.gore) && mountain.gore.length > 0;
+      return !hasData;
+    },
+  }
 );
 
 const goreSlice = createSlice({
@@ -67,7 +68,7 @@ const goreSlice = createSlice({
             })
             .addCase(fetchGore.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.payload as string;
+                state.error = (action.payload as string) || "Something went wrong";
             });
     },
 });

@@ -51,6 +51,7 @@ export const syncMiddleware: Middleware<{}, LocalState> = (store) => {
     try {
         await api.post('/scans', scan.data);
         store.dispatch(removeFromQueue(scan.id));
+        alert("Scan successfully synced!")
     } catch (err) {
         console.error("Sync failed for item:", scan.id, err);
         break; 

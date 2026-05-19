@@ -52,32 +52,32 @@ function BoardChatPage() {
   // New Style (Mountain Theme)
   if (useNewStyle) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#f6f7f2] via-[#f6f7f2] to-white">
+      <div className="min-h-screen bg-gradient-to-b from-brand-bg via-brand-bg to-white">
         <div className="container mx-auto px-4 py-8 md:py-10 max-w-4xl">
           {/* Header */}
-          <div className="flex items-center justify-between mb-6 pb-4 border-b border-[#dce3d7]">
+          <div className="flex items-center justify-between mb-6 pb-4 border-b border-brand-border">
             <div className="flex items-center gap-3">
               <Button
                 variant="ghost"
                 onClick={() => navigate("/board")}
-                className="text-[#647067] hover:text-[#2f6b4f] hover:bg-[#f0f4ea] rounded-lg gap-2"
+                className="text-brand-body hover:text-brand-primary hover:bg-brand-accent-sage rounded-button gap-2"
               >
                 <ArrowLeft className="w-4 h-4" />
                 Back to tours
               </Button>
-              <div className="h-6 w-px bg-[#dce3d7]" />
+              <div className="h-6 w-px bg-brand-border" />
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#2f6b4f] to-[#316f8f] flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-primary to-brand-hover-blue flex items-center justify-center">
                   <MessageSquare className="w-4 h-4 text-white" />
                 </div>
-                <h1 className="text-xl md:text-2xl font-bold text-[#17231b]">Tour comments</h1>
+                <h1 className="text-xl md:text-2xl font-bold text-brand-headline">Tour comments</h1>
               </div>
             </div>
           </div>
 
           {/* Error State */}
           {state.boardError && (
-            <div className="mb-6 flex items-center gap-2 text-[#b2473e] bg-[#fff4f2] p-3 rounded-lg border border-[#ecc1bb]">
+            <div className="mb-6 flex items-center gap-2 text-brand-error-text bg-brand-error-bg p-3 rounded-button border border-brand-error-border">
               <AlertCircle className="w-5 h-5" />
               <span>{state.boardError}</span>
             </div>
@@ -102,13 +102,13 @@ function BoardChatPage() {
           )}
 
           {/* Comments Section */}
-          <div className="rounded-xl border border-[#dce3d7] bg-white shadow-sm overflow-hidden">
-            <div className="bg-[#fbfcf8] px-5 py-3 border-b border-[#dce3d7]">
-              <h2 className="text-base font-semibold text-[#17231b] flex items-center gap-2">
-                <MessageSquare className="w-4 h-4 text-[#2f6b4f]" />
+          <div className="rounded-xl border border-brand-border bg-white shadow-sm overflow-hidden">
+            <div className="bg-brand-nested-bg px-5 py-3 border-b border-brand-border">
+              <h2 className="text-base font-semibold text-brand-headline flex items-center gap-2">
+                <MessageSquare className="w-4 h-4 text-brand-primary" />
                 Comments
                 {state.messages.length > 0 && (
-                  <span className="text-xs text-[#647067] font-normal ml-1">
+                  <span className="text-xs text-brand-body font-normal ml-1">
                     ({state.messages.length})
                   </span>
                 )}
@@ -118,43 +118,43 @@ function BoardChatPage() {
             <div className="p-5">
               {state.loadingMessages ? (
                 <div className="flex justify-center items-center py-8">
-                  <Loader2 className="animate-spin h-6 w-6 text-[#2f6b4f]" />
-                  <span className="ml-3 text-[#647067]">Loading comments...</span>
+                  <Loader2 className="animate-spin h-6 w-6 text-brand-primary" />
+                  <span className="ml-3 text-brand-body">Loading comments...</span>
                 </div>
               ) : state.messages.length === 0 ? (
                 <div className="text-center py-8">
-                  <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-[#f0f4ea] flex items-center justify-center">
-                    <MessageSquare className="w-6 h-6 text-[#647067]" />
+                  <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-brand-accent-sage flex items-center justify-center">
+                    <MessageSquare className="w-6 h-6 text-brand-body" />
                   </div>
-                  <p className="text-[#647067]">No comments yet.</p>
-                  <p className="text-sm text-[#647067] mt-1">Be the first to comment!</p>
+                  <p className="text-brand-body">No comments yet.</p>
+                  <p className="text-sm text-brand-body mt-1">Be the first to comment!</p>
                 </div>
               ) : (
                 <div className="space-y-4">
                   {state.messages.map((chat) => (
                     <div
                       key={chat.id}
-                      className="bg-[#fbfcf8] rounded-lg border border-[#e5eadf] p-4 transition-all hover:shadow-sm"
+                      className="bg-brand-nested-bg rounded-lg border border-brand-border/50 p-4 transition-all hover:shadow-sm"
                     >
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-2">
-                          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#2f6b4f] to-[#316f8f] flex items-center justify-center">
+                          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-brand-primary to-brand-hover-blue flex items-center justify-center">
                             <User className="w-3 h-3 text-white" />
                           </div>
                           <button
                             type="button"
                             onClick={() => navigate(`/profile/${chat.userId}`)}
-                            className="font-semibold text-[#17231b] text-sm cursor-pointer hover:text-[#2f6b4f] hover:underline"
+                            className="font-semibold text-brand-headline text-sm cursor-pointer hover:text-brand-primary hover:underline"
                           >
                             {chat.username}
                           </button>
                         </div>
-                        <div className="flex items-center gap-1 text-xs text-[#647067]">
+                        <div className="flex items-center gap-1 text-xs text-brand-body">
                           <Clock className="w-3 h-3" />
                           <span>{formatDate(chat.timestamp)}</span>
                         </div>
                       </div>
-                      <p className="text-[#344255] text-sm leading-relaxed pl-8">
+                      <p className="text-brand-slate text-sm leading-relaxed pl-8">
                         {chat.msg}
                       </p>
                     </div>
@@ -165,10 +165,10 @@ function BoardChatPage() {
           </div>
 
           {/* Add Comment Section */}
-          <div className="mt-6 rounded-xl border border-[#dce3d7] bg-white shadow-sm overflow-hidden">
-            <div className="bg-[#fbfcf8] px-5 py-3 border-b border-[#dce3d7]">
-              <h2 className="text-base font-semibold text-[#17231b] flex items-center gap-2">
-                <Send className="w-4 h-4 text-[#c7792b]" />
+          <div className="mt-6 rounded-xl border border-brand-border bg-white shadow-sm overflow-hidden">
+            <div className="bg-brand-nested-bg px-5 py-3 border-b border-brand-border">
+              <h2 className="text-base font-semibold text-brand-headline flex items-center gap-2">
+                <Send className="w-4 h-4 text-brand-warning" />
                 Add comment
               </h2>
             </div>
@@ -185,11 +185,11 @@ function BoardChatPage() {
                       actions.handleSendMessage();
                     }
                   }}
-                  className="border-[#dce3d7] focus:border-[#2f6b4f] focus:ring-[#2f6b4f]/20 rounded-lg"
+                  className="border-brand-border focus:border-brand-primary focus:ring-brand-primary/20 rounded-button"
                 />
 
                 {state.commentError && (
-                  <div className="flex items-center gap-2 text-sm text-[#b2473e] bg-[#fff4f2] p-2 rounded-lg">
+                  <div className="flex items-center gap-2 text-sm text-brand-error-text bg-brand-error-bg p-2 rounded-button">
                     <AlertCircle className="w-4 h-4" />
                     {state.commentError}
                   </div>
@@ -199,7 +199,7 @@ function BoardChatPage() {
                   <Button
                     onClick={actions.handleSendMessage}
                     disabled={state.sending || !state.message.trim()}
-                    className="bg-[#2f6b4f] hover:bg-[#214b39] text-white rounded-lg gap-2"
+                    className="bg-brand-primary hover:bg-brand-hover-green text-white rounded-button gap-2"
                   >
                     {state.sending ? (
                       <>

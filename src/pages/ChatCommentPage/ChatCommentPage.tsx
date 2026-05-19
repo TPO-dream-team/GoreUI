@@ -53,37 +53,37 @@ function ChatCommentPage() {
   if (useNewStyle) {
     if (state.loading) {
       return (
-        <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-[#f6f7f2] via-[#f6f7f2] to-white">
-          <div className="flex flex-col items-center gap-3">
-            <Loader2 className="w-8 h-8 text-[#2f6b4f] animate-spin" />
-            <p className="text-[#647067] text-sm">Loading...</p>
-          </div>
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-brand-bg via-brand-bg to-white">
+        <div className="flex flex-col items-center gap-3">
+          <Loader2 className="w-8 h-8 text-brand-primary animate-spin" />
+          <p className="text-brand-body text-sm">Loading...</p>
         </div>
+      </div>
       );
     }
 
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#f6f7f2] via-[#f6f7f2] to-white">
+      <div className="min-h-screen bg-gradient-to-b from-brand-bg via-brand-bg to-white">
         <main className="w-full max-w-3xl mx-auto flex flex-col min-h-screen">
           
           {/* Header */}
-          <header className="sticky top-0 z-10 bg-white/90 backdrop-blur-md border-b border-[#dce3d7] px-4 py-3">
+          <header className="sticky top-0 z-10 bg-white/90 backdrop-blur-md border-b border-brand-border px-4 py-3">
             <div className="flex items-center gap-3">
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => navigate(-1)}
-                className="rounded-full text-[#647067] hover:text-[#2f6b4f] hover:bg-[#f0f4ea]"
+                className="rounded-full text-brand-body hover:text-brand-primary hover:bg-brand-accent-sage"
               >
                 <ArrowLeft className="w-5 h-5" />
               </Button>
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#2f6b4f] to-[#316f8f] flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-primary to-brand-hover-blue flex items-center justify-center">
                   <MessageSquare className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-lg font-bold text-[#17231b]">Post discussion</h1>
-                  <p className="text-xs text-[#647067]">Community comments</p>
+                  <h1 className="text-lg font-bold text-brand-headline">Post discussion</h1>
+                  <p className="text-xs text-brand-body">Community comments</p>
                 </div>
               </div>
             </div>
@@ -93,47 +93,47 @@ function ChatCommentPage() {
           <section className="flex-1 p-4 overflow-y-auto space-y-5">
             {/* Original Post */}
             {state.post && (
-              <div className="bg-white rounded-xl border border-[#dce3d7] shadow-sm overflow-hidden">
-                <div className="h-1 bg-gradient-to-r from-[#2f6b4f] to-[#316f8f]" />
+              <div className="bg-white rounded-xl border border-brand-border shadow-sm overflow-hidden">
+                <div className="h-1 bg-gradient-to-r from-brand-primary to-brand-hover-blue" />
                 <div className="p-5">
                   <div className="flex justify-between items-start mb-3">
                     <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#2f6b4f] to-[#316f8f] flex items-center justify-center">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-brand-primary to-brand-hover-blue flex items-center justify-center">
                         <User className="w-4 h-4 text-white" />
                       </div>
                       <div>
                         <button
                           type="button"
                           onClick={() => navigate(`/profile/${state.post?.userId}`)}
-                          className="font-semibold text-[#17231b] text-sm hover:text-[#2f6b4f] hover:underline"
+                          className="font-semibold text-brand-headline text-sm hover:text-brand-primary hover:underline"
                         >
                           @{state.post.username}
                         </button>
                         {state.post.mountainName && (
                           <div className="flex items-center gap-1 mt-0.5">
-                            <Mountain className="w-3 h-3 text-[#2f6b4f]" />
-                            <span className="text-[#2f6b4f] text-[10px] uppercase font-semibold bg-[#edf8ee] px-2 py-0.5 rounded-full">
+                            <Mountain className="w-3 h-3 text-brand-primary" />
+                            <span className="text-brand-primary text-[10px] uppercase font-semibold bg-brand-accent-sage px-2 py-0.5 rounded-full">
                               {state.post.mountainName}
                             </span>
                           </div>
                         )}
                       </div>
                     </div>
-                    <div className="flex items-center gap-1 text-xs text-[#647067]">
+                    <div className="flex items-center gap-1 text-xs text-brand-body">
                       <Calendar className="w-3 h-3" />
                       <span>{formatDate(state.post.timeStamp)}</span>
                     </div>
                   </div>
-                  <h2 className="text-lg font-semibold text-[#17231b] mb-2">{state.post.tagline}</h2>
-                  <p className="text-[#344255] text-sm leading-relaxed">{state.post.startMsg}</p>
+                  <h2 className="text-lg font-semibold text-brand-headline mb-2">{state.post.tagline}</h2>
+                  <p className="text-brand-slate text-sm leading-relaxed">{state.post.startMsg}</p>
                 </div>
               </div>
             )}
 
             {/* Comments Section Header */}
             <div className="flex items-center gap-2 pt-2 pb-1">
-              <MessageSquare className="w-4 h-4 text-[#2f6b4f]" />
-              <h3 className="text-sm font-semibold text-[#17231b] uppercase tracking-wider">
+              <MessageSquare className="w-4 h-4 text-brand-primary" />
+              <h3 className="text-sm font-semibold text-brand-headline uppercase tracking-wider">
                 Comments ({state.comments.length})
               </h3>
             </div>
@@ -151,26 +151,26 @@ function ChatCommentPage() {
                   />
                 ))
               ) : (
-                <div className="text-center py-8 bg-[#fbfcf8] rounded-lg border border-dashed border-[#c9d4c5]">
-                  <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-[#f0f4ea] flex items-center justify-center">
-                    <MessageSquare className="w-6 h-6 text-[#647067]" />
+                <div className="text-center py-8 bg-brand-nested-bg rounded-lg border border-dashed border-brand-border">
+                  <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-brand-accent-sage flex items-center justify-center">
+                    <MessageSquare className="w-6 h-6 text-brand-body" />
                   </div>
-                  <p className="text-[#647067] text-sm">There are no comments yet.</p>
-                  <p className="text-xs text-[#647067] mt-1">Be the first to comment!</p>
+                  <p className="text-brand-body text-sm">There are no comments yet.</p>
+                  <p className="text-xs text-brand-body mt-1">Be the first to comment!</p>
                 </div>
               )}
             </div>
           </section>
 
           {/* Footer - Add Comment */}
-          <footer className="sticky bottom-0 bg-white/90 backdrop-blur-md border-t border-[#dce3d7] p-4">
+          <footer className="sticky bottom-0 bg-white/90 backdrop-blur-md border-t border-brand-border p-4">
             <div className="flex gap-2 items-center">
               <Input
                 placeholder="Write a comment..."
                 value={state.commentText}
                 onChange={(e) => actions.setCommentText(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && actions.handlePostComment()}
-                className="flex-1 border-[#dce3d7] focus:border-[#2f6b4f] focus:ring-[#2f6b4f]/20 rounded-lg bg-white"
+                className="flex-1 border-brand-border focus:border-brand-primary focus:ring-brand-primary/20 rounded-button bg-white"
               />
               <Button 
                 size="icon" 
@@ -178,8 +178,8 @@ function ChatCommentPage() {
                 disabled={!state.canSubmit}
                 className={`rounded-full shrink-0 transition-all duration-200 ${
                   state.canSubmit 
-                    ? "bg-[#2f6b4f] hover:bg-[#214b39] shadow-sm" 
-                    : "bg-[#c9d4c5] cursor-not-allowed"
+                    ? "bg-brand-primary hover:bg-brand-hover-green shadow-sm text-white" 
+                    : "bg-brand-border cursor-not-allowed text-brand-body/50"
                 }`}
               >
                 {state.isSubmitting ? (
@@ -190,7 +190,7 @@ function ChatCommentPage() {
               </Button>
             </div>
             {state.showSuccess && (
-              <div className="flex items-center gap-2 mt-2 text-[#2f6b4f] text-xs bg-[#edf8ee] p-2 rounded-lg">
+              <div className="flex items-center gap-2 mt-2 text-brand-primary text-xs bg-brand-accent-sage p-2 rounded-button">
                 <CheckCircle2 className="w-3 h-3" />
                 <span>Your comment has been successfully posted.</span>
               </div>
@@ -310,29 +310,29 @@ function ChatCommentPage() {
 // New Style Comment Item
 function CommentItemNew({ username,  text, time, onUserClick }: { username: string, text: string, time: string,  onUserClick: () => void; }) {
   return (
-    <div className="bg-white rounded-lg border border-[#e5eadf] shadow-sm hover:shadow-md transition-all ml-0">
-      <div className="p-4">
-        <div className="flex justify-between items-center mb-2">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#2f6b4f] to-[#316f8f] flex items-center justify-center">
-              <User className="w-3 h-3 text-white" />
+      <div className="bg-white rounded-lg border border-brand-border/60 shadow-sm hover:shadow-md transition-all ml-0">
+        <div className="p-4">
+          <div className="flex justify-between items-center mb-2">
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-brand-primary to-brand-hover-blue flex items-center justify-center">
+                <User className="w-3 h-3 text-white" />
+              </div>
+              <button
+                type="button"
+                onClick={onUserClick}
+                className="font-semibold text-brand-headline text-sm hover:text-brand-primary hover:underline cursor-pointer"
+              >
+                @{username}
+              </button>
             </div>
-            <button
-              type = "button"
-              onClick={onUserClick}
-              className="font-semibold text-[#17231b] text-sm hover:text-[#2f6b4f] hover:underline"
-            >
-              @{username}
-            </button>
+            <div className="flex items-center gap-1 text-[10px] text-brand-body font-medium">
+              <Clock className="w-3 h-3" />
+              <span>{formatTime(time)}</span>
+            </div>
           </div>
-          <div className="flex items-center gap-1 text-[10px] text-[#647067] font-medium">
-            <Clock className="w-3 h-3" />
-            <span>{formatTime(time)}</span>
-          </div>
+          <p className="text-brand-slate text-sm leading-relaxed pl-8">{text}</p>
         </div>
-        <p className="text-[#344255] text-sm leading-relaxed pl-8">{text}</p>
       </div>
-    </div>
   );
 }
 

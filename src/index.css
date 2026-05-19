@@ -17,6 +17,35 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --radius: 0.625rem;
+  
+  /* --- PEAK SCAN PALETTE VARIABLES --- */
+
+  --brand-primary: #2f6b4f;         /* Primary Green */
+  --brand-secondary: #316f8f;       /* Secondary Blue */
+  --brand-headline: #17231B;        /* Deep Forest */
+  --brand-body: #647067;            /* Mountain Sage */
+  --brand-bg: #F6F7F2;              /* Alpine Mist */
+  --brand-border: #DCE3D7;          /* Silver Mist */
+
+  --brand-hover-green: #214B39;
+  --brand-hover-blue: #225C76;
+  --brand-accent-sage: #F0F4EA;
+  --brand-muted-sage: #94cb80;
+  --brand-slate: #344255; 
+
+  --brand-success-bg: #9cb59e;
+  --brand-success-border: #BCD8C2;
+  --brand-success-text: #275B35;
+  
+  --brand-error-bg: #FFF4F2;
+  --brand-error-border: #ECC1BB;
+  --brand-error-text: #B2473E;
+  
+  --brand-warning: #C7792B; 
+  --brand-danger: #b2473E;
+  --brand-nested-bg: #F0F4EA;
+
+  /* Standard Shadcn Variables */
   --background: oklch(1 0 0);
   --foreground: oklch(0.147 0.004 49.25);
   --card: oklch(1 0 0);
@@ -58,6 +87,41 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+  
+  /* Button Specifications Corner Radius Override */
+  --radius-button: 8px;
+
+  /* Typography Specifications Extensions */
+  --font-size-body-copy: 10.5pt;
+  --line-height-body-copy: 1.6;
+
+  /* --- TAILWIND v4 BRAND MAPPINGS --- */
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-secondary: var(--brand-secondary);
+  --color-brand-headline: var(--brand-headline);
+  --color-brand-body: var(--brand-body);
+  --color-brand-bg: var(--brand-bg);
+  --color-brand-border: var(--brand-border);
+  
+  --color-brand-hover-green: var(--brand-hover-green);
+  --color-brand-hover-blue: var(--brand-hover-blue);
+  --color-brand-accent-sage: var(--brand-accent-sage);
+  --color-brand-muted-sage: var(--brand-muted-sage);
+  --color-brand-slate: var(--brand-slate);
+
+  --color-brand-success-bg: var(--brand-success-bg);
+  --color-brand-success-border: var(--brand-success-border);
+  --color-brand-success-text: var(--brand-success-text);
+
+  --color-brand-error-bg: var(--brand-error-bg);
+  --color-brand-error-border: var(--brand-error-border);
+  --color-brand-error-text: var(--brand-error-text);
+
+  --color-brand-warning: var(--brand-warning);
+  --color-brand-danger: var(--brand-danger);
+  --color-brand-nested-bg: var(--brand-nested-bg);
+  
+  /* Standard Shadcn Mappings */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);

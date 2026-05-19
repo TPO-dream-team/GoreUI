@@ -36,7 +36,7 @@ function HelpPage() {
   // New Style (Mountain Theme)
   if (useNewStyle) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-[#f6f7f2] via-[#f6f7f2] to-white">
+      <div className="min-h-screen bg-gradient-to-b from-brand-bg via-brand-bg to-white">
         <div className="container mx-auto px-4 py-6 md:py-8 max-w-3xl">
           
           {/* Header */}
@@ -45,17 +45,17 @@ function HelpPage() {
               variant="ghost" 
               size="icon" 
               onClick={() => window.history.back()}
-              className="rounded-full text-[#647067] hover:text-[#2f6b4f] hover:bg-[#f0f4ea]"
+              className="rounded-full text-brand-body hover:text-brand-primary hover:bg-brand-accent-sage"
             >
               <ArrowLeft className="h-5 w-5" />
             </Button>
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2f6b4f] to-[#316f8f] flex items-center justify-center shadow-md">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-primary to-brand-hover-blue flex items-center justify-center shadow-md">
                 <HelpCircle className="h-5 w-5 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl md:text-3xl font-bold text-[#17231b]">Help</h1>
-                <p className="text-sm text-[#647067]">Answers to frequently asked questions</p>
+                <h1 className="text-2xl md:text-3xl font-bold text-brand-headline">Help</h1>
+                <p className="text-sm text-brand-body">Answers to frequently asked questions</p>
               </div>
             </div>
           </div>
@@ -63,97 +63,96 @@ function HelpPage() {
           <div className="space-y-8">
             {/* Quick Stats / Info Cards */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              <div className="bg-white border border-[#dce3d7] rounded-lg p-3 text-center">
-                <Scan className="w-5 h-5 text-[#316f8f] mx-auto mb-2" />
-                <div className="text-sm font-semibold text-[#17231b]">GPS + NFC</div>
-                <div className="text-xs text-[#647067]">Double verification</div>
+              <div className="bg-white border border-brand-border/60 rounded-lg p-3 text-center shadow-sm">
+                <Scan className="w-5 h-5 text-brand-hover-blue mx-auto mb-2" />
+                <div className="text-sm font-semibold text-brand-headline">GPS + NFC</div>
+                <div className="text-xs text-brand-body">Double verification</div>
               </div>
-              <div className="bg-white border border-[#dce3d7] rounded-lg p-3 text-center">
-                <Wifi className="w-5 h-5 text-[#c7792b] mx-auto mb-2" />
-                <div className="text-sm font-semibold text-[#17231b]">Offline mode</div>
-                <div className="text-xs text-[#647067]">Saving scans</div>
+              <div className="bg-white border border-brand-border/60 rounded-lg p-3 text-center shadow-sm">
+                <Wifi className="w-5 h-5 text-brand-warning mx-auto mb-2" />
+                <div className="text-sm font-semibold text-brand-headline">Offline mode</div>
+                <div className="text-xs text-brand-body">Saving scans</div>
               </div>
-              <div className="bg-white border border-[#dce3d7] rounded-lg p-3 text-center">
-                <ShieldCheck className="w-5 h-5 text-[#2f6b4f] mx-auto mb-2" />
-                <div className="text-sm font-semibold text-[#17231b]">AI moderation</div>
-                <div className="text-xs text-[#647067]">Safe community</div>
+              <div className="bg-white border border-brand-border/60 rounded-lg p-3 text-center shadow-sm">
+                <ShieldCheck className="w-5 h-5 text-brand-primary mx-auto mb-2" />
+                <div className="text-sm font-semibold text-brand-headline">AI moderation</div>
+                <div className="text-xs text-brand-body">Safe community</div>
               </div>
-              <div className="bg-white border border-[#dce3d7] rounded-lg p-3 text-center">
-                <MessageSquare className="w-5 h-5 text-[#c7792b] mx-auto mb-2" />
-                <div className="text-sm font-semibold text-[#17231b]">Community</div>
-                <div className="text-xs text-[#647067]">Sharing experiences</div>
+              <div className="bg-white border border-brand-border/60 rounded-lg p-3 text-center shadow-sm">
+                <MessageSquare className="w-5 h-5 text-brand-warning mx-auto mb-2" />
+                <div className="text-sm font-semibold text-brand-headline">Community</div>
+                <div className="text-xs text-brand-body">Sharing experiences</div>
               </div>
             </div>
 
             {/* FAQs Section */}
             <section>
               <div className="flex items-center gap-2 mb-4">
-                <MessageSquare className="w-5 h-5 text-[#2f6b4f]" />
-                <h2 className="text-lg font-semibold text-[#17231b]">Frequently Asked Questions</h2>
+                <MessageSquare className="w-5 h-5 text-brand-primary" />
+                <h2 className="text-lg font-semibold text-brand-headline">Frequently Asked Questions</h2>
               </div>
               
-              <div className="bg-white rounded-xl border border-[#dce3d7] shadow-sm overflow-hidden">
+              <div className="bg-white rounded-xl border border-brand-border/60 shadow-sm overflow-hidden">
                 <Accordion type="single" collapsible className="w-full">
-                  <AccordionItem value="item-1" className="border-b border-[#e5eadf]">
-                    <AccordionTrigger className="px-5 py-4 text-[#17231b] hover:text-[#2f6b4f] hover:no-underline">
+                  <AccordionItem value="item-1" className="border-b border-brand-border/40">
+                    <AccordionTrigger className="px-5 py-4 text-brand-headline hover:text-brand-primary hover:no-underline transition-colors">
                       How do I start scanning?
                     </AccordionTrigger>
-                    <AccordionContent className="px-5 pb-4 text-[#647067] leading-relaxed">
+                    <AccordionContent className="px-5 pb-4 text-brand-body leading-relaxed">
                       Press the "Scan" button on the home page. The app will first check your GPS location, then ask you to bring your phone close to the NFC tag at the summit. Both steps are required for successful verification.
                     </AccordionContent>
                   </AccordionItem>
 
-                  <AccordionItem value="item-2" className="border-b border-[#e5eadf]">
-                    <AccordionTrigger className="px-5 py-4 text-[#17231b] hover:text-[#2f6b4f] hover:no-underline">
+                  <AccordionItem value="item-2" className="border-b border-brand-border/40">
+                    <AccordionTrigger className="px-5 py-4 text-brand-headline hover:text-brand-primary hover:no-underline transition-colors">
                       Can I save tours without an internet connection?
                     </AccordionTrigger>
-                    <AccordionContent className="px-5 pb-4 text-[#647067] leading-relaxed">
+                    <AccordionContent className="px-5 pb-4 text-brand-body leading-relaxed">
                       Yes! All scanned peaks and comments are saved locally on your device. When you reconnect to the internet, the data is automatically synchronized with the server.
                     </AccordionContent>
                   </AccordionItem>
 
-                  <AccordionItem value="item-3" className="border-b border-[#e5eadf]">
-                    <AccordionTrigger className="px-5 py-4 text-[#17231b] hover:text-[#2f6b4f] hover:no-underline">
+                  <AccordionItem value="item-3" className="border-b border-brand-border/40">
+                    <AccordionTrigger className="px-5 py-4 text-brand-headline hover:text-brand-primary hover:no-underline transition-colors">
                       Why does the app require both GPS and NFC verification?
                     </AccordionTrigger>
-                    <AccordionContent className="px-5 pb-4 text-[#647067] leading-relaxed">
+                    <AccordionContent className="px-5 pb-4 text-brand-body leading-relaxed">
                       GPS confirms that you are near the summit, while NFC confirms that you physically reached the marked checkpoint. Using both methods helps prevent fake check-ins and improves reliability.
                     </AccordionContent>
                   </AccordionItem>
 
-                  <AccordionItem value="item-4">
-                    <AccordionTrigger className="px-5 py-4 text-[#17231b] hover:text-[#2f6b4f] hover:no-underline">
+                  <AccordionItem value="item-4" className="border-b border-brand-border/40 last:border-0">
+                    <AccordionTrigger className="px-5 py-4 text-brand-headline hover:text-brand-primary hover:no-underline transition-colors">
                       Why is my post held for moderation?
                     </AccordionTrigger>
-                    <AccordionContent className="px-5 pb-4 text-[#647067] leading-relaxed">
+                    <AccordionContent className="px-5 pb-4 text-brand-body leading-relaxed">
                       Our AI moderator automatically checks all posts and comments. If the system detects potentially inappropriate content, empty comments, or unclear descriptions, the post is temporarily held. A moderator will review it as soon as possible.
                     </AccordionContent>
                   </AccordionItem>
 
-                  <AccordionItem value="item-5">
-                    <AccordionTrigger className="px-5 py-4 text-[#17231b] hover:text-[#2f6b4f] hover:no-underline">
+                  <AccordionItem value="item-5" className="border-b border-brand-border/40 last:border-0">
+                    <AccordionTrigger className="px-5 py-4 text-brand-headline hover:text-brand-primary hover:no-underline transition-colors">
                       How do I join a tour?
                     </AccordionTrigger>
-                    <AccordionContent className="px-5 pb-4 text-[#647067] leading-relaxed">
+                    <AccordionContent className="px-5 pb-4 text-brand-body leading-relaxed">
                       Open the Tours page and browse available hikes. You can view details such as difficulty, duration, organizer, and discussion comments before commenting on the tour.
                     </AccordionContent>
                   </AccordionItem>
 
-                  <AccordionItem value="item-6" className="border-b border-[#e5eadf]">
-                    <AccordionTrigger className="px-5 py-4 text-[#17231b] hover:text-[#2f6b4f] hover:no-underline">
+                  <AccordionItem value="item-6" className="last:border-0">
+                    <AccordionTrigger className="px-5 py-4 text-brand-headline hover:text-brand-primary hover:no-underline transition-colors">
                       Can other users see my completed peaks?
                     </AccordionTrigger>
-                    <AccordionContent className="px-5 pb-4 text-[#647067] leading-relaxed">
+                    <AccordionContent className="px-5 pb-4 text-brand-body leading-relaxed">
                       Yes. Your scanned peaks are displayed on your profile so other hikers can view your progress and achievements.
                     </AccordionContent>
                   </AccordionItem>
-
                 </Accordion>
               </div>
             </section>
 
             {/* Contact Support Section */}
-            <section className="rounded-xl bg-gradient-to-r from-[#2f6b4f] to-[#316f8f] p-6 text-center shadow-md">
+            <section className="rounded-xl bg-gradient-to-r from-brand-primary to-brand-hover-blue p-6 text-center shadow-md">
               <div className="flex items-center justify-center gap-2 mb-3">
                 <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
                   <Mail className="h-6 w-6 text-white" />
@@ -164,7 +163,7 @@ function HelpPage() {
                 Our team is available every weekday. Send us an email and we will reply as soon as possible.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Button asChild className="bg-white hover:bg-gray-100 text-[#2f6b4f] rounded-full gap-2">
+                <Button asChild className="bg-white hover:bg-gray-100 text-brand-primary rounded-full gap-2 transition-colors">
                   <a href="mailto:support@peakproof.com?subject=Support Request">
                     <Mail className="h-4 w-4" />
                     support@peakproof.com
@@ -174,35 +173,35 @@ function HelpPage() {
             </section>
 
             {/* Quick Tips */}
-            <section className="bg-[#f0f4ea] rounded-xl p-5 border border-[#dce3d7]">
+            <section className="bg-brand-nested-bg rounded-xl p-5 border border-brand-border/60">
               <div className="flex items-center gap-2 mb-3">
-                <Mountain className="w-5 h-5 text-[#2f6b4f]" />
-                <h3 className="font-semibold text-[#17231b]">Quick tips</h3>
+                <Mountain className="w-5 h-5 text-brand-primary" />
+                <h3 className="font-semibold text-brand-headline">Quick tips</h3>
               </div>
               <div className="grid md:grid-cols-2 gap-3 text-sm">
                 <div className="flex items-start gap-2">
-                  <div className="w-5 h-5 rounded-full bg-[#edf8ee] flex items-center justify-center mt-0.5">
-                    <span className="text-xs text-[#2f6b4f] font-bold">1</span>
+                  <div className="w-5 h-5 rounded-full bg-brand-accent-sage flex items-center justify-center mt-0.5 shrink-0">
+                    <span className="text-xs text-brand-primary font-bold">1</span>
                   </div>
-                  <span className="text-[#344255]">For more accurate GPS, try standing in an open area</span>
+                  <span className="text-brand-slate">For more accurate GPS, try standing in an open area</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <div className="w-5 h-5 rounded-full bg-[#edf8ee] flex items-center justify-center mt-0.5">
-                    <span className="text-xs text-[#2f6b4f] font-bold">2</span>
+                  <div className="w-5 h-5 rounded-full bg-brand-accent-sage flex items-center justify-center mt-0.5 shrink-0">
+                    <span className="text-xs text-brand-primary font-bold">2</span>
                   </div>
-                  <span className="text-[#344255]">NFC tags are usually placed on information boards or summit registers</span>
+                  <span className="text-brand-slate">NFC tags are usually placed on information boards or summit registers</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <div className="w-5 h-5 rounded-full bg-[#edf8ee] flex items-center justify-center mt-0.5">
-                    <span className="text-xs text-[#2f6b4f] font-bold">3</span>
+                  <div className="w-5 h-5 rounded-full bg-brand-accent-sage flex items-center justify-center mt-0.5 shrink-0">
+                    <span className="text-xs text-brand-primary font-bold">3</span>
                   </div>
-                  <span className="text-[#344255]">Offline scans are automatically synchronized when you reconnect</span>
+                  <span className="text-brand-slate">Offline scans are automatically synchronized when you reconnect</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <div className="w-5 h-5 rounded-full bg-[#edf8ee] flex items-center justify-center mt-0.5">
-                    <span className="text-xs text-[#2f6b4f] font-bold">4</span>
+                  <div className="w-5 h-5 rounded-full bg-brand-accent-sage flex items-center justify-center mt-0.5 shrink-0">
+                    <span className="text-xs text-brand-primary font-bold">4</span>
                   </div>
-                  <span className="text-[#344255]">Take part in the community through posts and comments</span>
+                  <span className="text-brand-slate">Take part in the community through posts and comments</span>
                 </div>
               </div>
             </section>

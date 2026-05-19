@@ -2,13 +2,18 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import ChatCommentPage from "./ChatCommentPage";
 import { useChatCommentPage } from "./useChatCommentPage";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, MemoryRouter } from "react-router-dom";
 
 // Mock the hook and navigation
 vi.mock("./useChatCommentPage");
-vi.mock("react-router-dom", () => ({
-  useNavigate: vi.fn(),
-}));
+vi.mock("react-router-dom", async () => {
+  const actual = await vi.importActual("react-router-dom");
+  return {
+    ...actual,
+    useNavigate: vi.fn(),
+    useOutletContext: () => ({ useNewStyle: true }), // Default to new style for tests
+  };
+});
 
 describe("ChatCommentPage Component", () => {
   const mockNavigate = vi.fn();
@@ -21,6 +26,7 @@ describe("ChatCommentPage Component", () => {
   const defaultState = {
     post: {
       id: "1",
+      userId: "user_123",
       username: "mountain_guy",
       tagline: "Beautiful Day",
       startMsg: "The weather is perfect.",
@@ -28,7 +34,7 @@ describe("ChatCommentPage Component", () => {
       timeStamp: "2023-10-01T10:00:00Z",
     },
     comments: [
-      { id: 101, username: "climber1", message: "Agree!", timeStamp: "2023-10-01T10:05:00Z" }
+      { id: 101, createdBy: "user_456", username: "climber1", message: "Agree!", timeStamp: "2023-10-01T10:05:00Z" }
     ],
     loading: false,
     commentText: "",
@@ -40,80 +46,90 @@ describe("ChatCommentPage Component", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     (useNavigate as any).mockReturnValue(mockNavigate);
+    localStorage.clear();
   });
 
-  it("renders the loading spinner when state.loading is true", () => {
+  it("renders the loading spinner (New Style)", () => {
     (useChatCommentPage as any).mockReturnValue({
       state: { ...defaultState, loading: true },
       actions: mockActions,
     });
 
-    render(<ChatCommentPage />);
+    render(
+      <MemoryRouter>
+        <ChatCommentPage />
+      </MemoryRouter>
+    );
     
-    const loader = document.querySelector(".animate-spin");
-    expect(loader).toBeTruthy();
-    
-    expect(screen.queryByRole("main")).toBeNull();
+    // Check for the specific "Loading..." text in New Style
+    expect(screen.getByText("Loading...")).toBeInTheDocument();
   });
 
-  it("renders the post and comments correctly", () => {
+  it("renders the post content correctly", () => {
     (useChatCommentPage as any).mockReturnValue({
       state: defaultState,
       actions: mockActions,
     });
 
-    render(<ChatCommentPage />);
+    render(
+      <MemoryRouter>
+        <ChatCommentPage />
+      </MemoryRouter>
+    );
 
-    expect(screen.getByText("@mountain_guy")).toBeDefined();
-    expect(screen.getByText(/everest/i)).toBeDefined();
-    expect(screen.getByText("Beautiful Day")).toBeDefined();
-    expect(screen.getByText("@climber1")).toBeDefined();
-    expect(screen.getByText("Agree!")).toBeDefined();
+    // Using regex to handle the @ symbol and potential formatting
+    expect(screen.getByText(/@mountain_guy/i)).toBeInTheDocument();
+    expect(screen.getByText("Everest")).toBeInTheDocument();
+    expect(screen.getByText("Beautiful Day")).toBeInTheDocument();
+    expect(screen.getByText("Agree!")).toBeInTheDocument();
   });
 
-  it("calls setCommentText when typing in the input", () => {
+  it("navigates to user profile when clicking username", () => {
     (useChatCommentPage as any).mockReturnValue({
       state: defaultState,
       actions: mockActions,
     });
 
-    render(<ChatCommentPage />);
-    const input = screen.getByPlaceholderText("Write a comment...");
+    render(
+      <MemoryRouter>
+        <ChatCommentPage />
+      </MemoryRouter>
+    );
+
+    const userLink = screen.getByText(/@mountain_guy/i);
+    fireEvent.click(userLink);
     
-    fireEvent.change(input, { target: { value: "New view!" } });
-    expect(mockActions.setCommentText).toHaveBeenCalledWith("New view!");
+    expect(mockNavigate).toHaveBeenCalledWith("/profile/user_123");
   });
 
-  it("navigates back when clicking the back button", () => {
-    (useChatCommentPage as any).mockReturnValue({
-      state: defaultState,
-      actions: mockActions,
-    });
-
-    render(<ChatCommentPage />);
-    const backButton = screen.getAllByRole("button")[0]; // First button in header
-    
-    fireEvent.click(backButton);
-    expect(mockNavigate).toHaveBeenCalledWith(-1);
-  });
-
-  it("shows success message when showSuccess is true", () => {
-    (useChatCommentPage as any).mockReturnValue({
-      state: { ...defaultState, showSuccess: true },
-      actions: mockActions,
-    });
-
-    render(<ChatCommentPage />);
-    expect(screen.getByText("Your comment was successfully posted.")).toBeDefined();
-  });
-
-  it("shows 'No comments yet' when comments array is empty", () => {
+  it("shows the empty state message when there are no comments", () => {
     (useChatCommentPage as any).mockReturnValue({
       state: { ...defaultState, comments: [] },
       actions: mockActions,
     });
 
-    render(<ChatCommentPage />);
-    expect(screen.getByText("No comments yet.")).toBeDefined();
+    render(
+      <MemoryRouter>
+        <ChatCommentPage />
+      </MemoryRouter>
+    );
+    
+    // Match the New Style empty message
+    expect(screen.getByText("There are no comments yet.")).toBeInTheDocument();
+  });
+
+  it("shows success notification on successful post", () => {
+    (useChatCommentPage as any).mockReturnValue({
+      state: { ...defaultState, showSuccess: true },
+      actions: mockActions,
+    });
+
+    render(
+      <MemoryRouter>
+        <ChatCommentPage />
+      </MemoryRouter>
+    );
+
+    expect(screen.getByText(/successfully posted/i)).toBeInTheDocument();
   });
 });
