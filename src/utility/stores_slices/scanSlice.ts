@@ -1,12 +1,18 @@
-import type { scansMsg } from "@/pages/ScannerPage/ScannerPage";
 import { createSlice, type AnyAction, type Middleware, type PayloadAction, type UnknownAction } from "@reduxjs/toolkit";
 import api from "../axios";
 import type { RootState } from "../store";
 import { REHYDRATE } from "redux-persist";
 
+export interface ScansMsg {
+    id: string;
+    userId: string;
+    mountainId: string;
+    createdAt: string;
+}
+
 interface ScanItem {
     id: number;
-    data: scansMsg;
+    data: ScansMsg;
 }
 
 interface ScanState {
@@ -21,7 +27,7 @@ const scanSlice = createSlice({
     name: 'scan/offline',
     initialState,
     reducers: {
-        enqueueScan: (state, action: PayloadAction<scansMsg>) => {
+        enqueueScan: (state, action: PayloadAction<ScansMsg>) => {
             state.queue.push({
                 data: action.payload,
                 id: Date.now()
