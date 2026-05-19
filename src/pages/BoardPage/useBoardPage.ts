@@ -41,7 +41,7 @@ export const useBoardPage = () => {
   const [formError, setFormError] = useState("");
 
   useEffect(() => {
-    dispatch(fetchGore());
+    dispatch(fetchGore(false));
     loadBoards();
   }, [dispatch]);
 

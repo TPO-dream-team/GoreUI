@@ -10,7 +10,16 @@ vi.mock('@/utility/axios')
 
 describe('useBoardPage Hook', () => {
   const mockDispatch = vi.fn()
-  const mockGore = [{ id: '1', name: 'Triglav', height: 2864 }]
+  const mockGore = [
+  {
+    id: "1",
+    name: "Triglav",
+    height: 2864,
+    regionId: 1,
+    lat: 46.378,
+    lon: 13.836,
+  },
+];
 
   beforeEach(() => {
     vi.clearAllMocks()

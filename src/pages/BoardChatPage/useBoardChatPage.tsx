@@ -47,7 +47,7 @@ export const useBoardChatPage = () => {
   );
 
   useEffect(() => {
-    dispatch(fetchGore());
+    dispatch(fetchGore(false));
   }, [dispatch]);
 
   const loadBoard = async () => {
