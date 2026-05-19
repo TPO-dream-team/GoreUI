@@ -16,5 +16,6 @@ spec:
       containers:
         - name: gorefrontend
           image: casperjes/peakproof-frontend:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
